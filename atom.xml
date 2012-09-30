@@ -4,7 +4,7 @@
   <title><![CDATA[バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2012-09-30T20:24:07+09:00</updated>
+  <updated>2012-09-30T20:40:27+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[orange version of oct2 octopress theme]]></title>
+    <link href="http://mitsuhirookuno.github.com/blog/2012/09/30/orange-version-of-oct2-octopress-theme/"/>
+    <updated>2012-09-30T20:38:00+09:00</updated>
+    <id>http://mitsuhirookuno.github.com/blog/2012/09/30/orange-version-of-oct2-octopress-theme</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/roberto/oct2-orange">source/_posts/2012-09-30-orange-version-of-oct2-octopress-theme.markdown</a>というテーマを適用させて頂きました。
+何かエンジニアっぽい感じでワクワクします。
+markdownの書き方を覚えないと！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Bloggerと併用予定です]]></title>
