@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[バトルプログラマー＠すま Blog]]></title>
-  <link href="http://mitsuhirookuno.github.com/atom.xml" rel="self"/>
+  <title><![CDATA[Category: blogger | バトルプログラマー＠すま Blog]]></title>
+  <link href="http://mitsuhirookuno.github.com/blog/categories/blogger/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
   <updated>2012-09-30T20:24:07+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
@@ -21,16 +21,6 @@
     <content type="html"><![CDATA[<p>gitの経験値があがるまではと。。。言い訳をして
 暫くはbloggerに住んでいようかと思います。
 <a href='http://blogger.rubyprogrammer.info/'>ココ！</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[こんにちは Octopress]]></title>
-    <link href="http://mitsuhirookuno.github.com/blog/2012/09/30/hello-octopress/"/>
-    <updated>2012-09-30T19:48:00+09:00</updated>
-    <id>http://mitsuhirookuno.github.com/blog/2012/09/30/hello-octopress</id>
-    <content type="html"><![CDATA[<p>テーマを色々変えてたら、作り直しになっちゃった。
- (´；ω；｀)ｳｯ</p>
 ]]></content>
   </entry>
   
