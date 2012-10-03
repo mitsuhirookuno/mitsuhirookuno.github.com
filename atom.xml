@@ -4,7 +4,7 @@
   <title><![CDATA[バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2012-10-03T09:07:19+09:00</updated>
+  <updated>2012-10-03T12:30:43+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -20,12 +20,12 @@
     <id>http://mitsuhirookuno.github.com/blog/2012/10/03/markdown-cheat-sheat</id>
     <content type="html"><![CDATA[<h2>Markdown記法はどうすればいいの？</h2>
 
-<p><em>Octpress</em> を使うとやっぱり知りたい <em>Markdown記法</em>
-<strong>やっぱり</strong> と言うべきか、 <strong>解りやすい解説</strong> を見つけました
-<a href="https://github.com/NeQuissimus/MarkdownByExample/wiki/MarkdownSyntax" title="チートシートはこちら！">Markdown記法チートシート</a>
-<a href="http://yardoc.org/" title="Yard本家サイト">Yard</a>の記法なども覚えて行かないとなりません
-と、言う訳で
-今回は無駄にMarkdown記法を使ってます</p>
+<p><em>Octpress</em> を使うとやっぱり知りたい <em>Markdown記法</em> <br />
+<strong>やっぱり</strong> と言うべきか、 <strong>解りやすい解説</strong> を見つけました <br />
+<a href="https://github.com/NeQuissimus/MarkdownByExample/wiki/MarkdownSyntax" title="チートシートはこちら！">Markdown記法チートシート</a> <br />
+<a href="http://yardoc.org/" title="Yard本家サイト">Yard</a>の記法なども覚えて行かないとなりません <br />
+と、言う訳で <br />
+今回は無駄にMarkdown記法を使ってます <br /></p>
 
 <h3>以下は完全なお試し</h3>
 
