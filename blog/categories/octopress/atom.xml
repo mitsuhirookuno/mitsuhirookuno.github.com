@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2012-10-03T09:00:10+09:00</updated>
+  <updated>2012-10-03T09:01:42+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -28,9 +28,10 @@
 <h3>以下は完全なお試し (H3)</h3>
 
 <ul>
-<li>リスト
-  コードブロックも出来る。
-  syntaxhighlighterも併用できるかなぁ</li>
+<li><p>リスト</p>
+
+<p>  コードブロックも出来る。
+  syntaxhighlighterも併用できるかなぁ</p></li>
 </ul>
 
 ]]></content>
