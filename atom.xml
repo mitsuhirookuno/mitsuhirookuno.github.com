@@ -4,7 +4,7 @@
   <title><![CDATA[バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2012-10-03T12:30:43+09:00</updated>
+  <updated>2012-10-03T12:54:21+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -47,9 +47,10 @@ syntaxhighlighterも併用できるかなぁ
     <link href="http://mitsuhirookuno.github.com/blog/2012/09/30/orange-version-of-oct2-octopress-theme/"/>
     <updated>2012-09-30T20:38:00+09:00</updated>
     <id>http://mitsuhirookuno.github.com/blog/2012/09/30/orange-version-of-oct2-octopress-theme</id>
-    <content type="html"><![CDATA[<p><a href="https://github.com/roberto/oct2-orange">orange version of oct2 octopress theme</a>というテーマを適用させて頂きました。
-何かエンジニアっぽい感じでワクワクします。
-markdownの書き方を覚えないと！</p>
+    <content type="html"><![CDATA[<p><a href="https://github.com/roberto/oct2-orange" title="get theme!">orange version of oct2 octopress theme</a>
+というテーマを適用させて頂きました。<br />
+何かエンジニアっぽい感じでワクワクします。<br />
+<em>markdown</em> の書き方を覚えないと！</p>
 ]]></content>
   </entry>
   
@@ -58,9 +59,9 @@ markdownの書き方を覚えないと！</p>
     <link href="http://mitsuhirookuno.github.com/blog/2012/09/30/blogger/"/>
     <updated>2012-09-30T20:21:00+09:00</updated>
     <id>http://mitsuhirookuno.github.com/blog/2012/09/30/blogger</id>
-    <content type="html"><![CDATA[<p>gitの経験値があがるまではと。。。言い訳をして
-暫くはbloggerに住んでいようかと思います。
-<a href='http://blogger.rubyprogrammer.info/'>ココ！</a></p>
+    <content type="html"><![CDATA[<p><em>git</em> の経験値があがるまではと。。。言い訳をして<br />
+暫くは <em>blogger</em> に住んでいようかと思います。<br />
+<a href="http://blogger.rubyprogrammer.info/" title="ココ！">すま＠blogger</a></p>
 ]]></content>
   </entry>
   
@@ -69,7 +70,7 @@ markdownの書き方を覚えないと！</p>
     <link href="http://mitsuhirookuno.github.com/blog/2012/09/30/hello-octopress/"/>
     <updated>2012-09-30T19:48:00+09:00</updated>
     <id>http://mitsuhirookuno.github.com/blog/2012/09/30/hello-octopress</id>
-    <content type="html"><![CDATA[<p>テーマを色々変えてたら、作り直しになっちゃった。
+    <content type="html"><![CDATA[<p>テーマを色々変えてたら、作り直しになっちゃった。<br />
  (´；ω；｀)ｳｯ</p>
 ]]></content>
   </entry>
