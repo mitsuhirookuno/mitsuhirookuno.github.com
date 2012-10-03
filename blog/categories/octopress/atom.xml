@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Octopress | バトルプログラマー＠すま Blog]]></title>
+  <title><![CDATA[Category: octopress | バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2012-10-02T10:52:12+09:00</updated>
+  <updated>2012-10-03T09:00:10+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -14,12 +14,25 @@
 
   
   <entry>
-    <title type="html"><![CDATA[こんにちは Octopress]]></title>
-    <link href="http://mitsuhirookuno.github.com/blog/2012/09/30/hello-octopress/"/>
-    <updated>2012-09-30T19:48:00+09:00</updated>
-    <id>http://mitsuhirookuno.github.com/blog/2012/09/30/hello-octopress</id>
-    <content type="html"><![CDATA[<p>テーマを色々変えてたら、作り直しになっちゃった。
- (´；ω；｀)ｳｯ</p>
+    <title type="html"><![CDATA[Markdown記法のチートシート]]></title>
+    <link href="http://mitsuhirookuno.github.com/blog/2012/10/03/markdown-cheat-sheat/"/>
+    <updated>2012-10-03T08:45:00+09:00</updated>
+    <id>http://mitsuhirookuno.github.com/blog/2012/10/03/markdown-cheat-sheat</id>
+    <content type="html"><![CDATA[<h2>Markdown記法はどうすればいいの？ (H2)</h2>
+
+<p><em>Octpress</em> を使うとやっぱり知りたい <em>Markdown記法</em>
+<strong>やっぱり</strong> と言うべきか、 <strong>解りやすい解説</strong> を見つけました
+<a href="http://support.mashery.com/docs/customizing_your_portal/Markdown_Cheat_Sheet" title="チートシートはこちら！">Markdown記法チートシート</a>
+<a href="http://yardoc.org/" title="Yard本家サイト">Yard</a>の記法なども覚えて行かないとなりません</p>
+
+<h3>以下は完全なお試し (H3)</h3>
+
+<ul>
+<li>リスト
+  コードブロックも出来る。
+  syntaxhighlighterも併用できるかなぁ</li>
+</ul>
+
 ]]></content>
   </entry>
   
