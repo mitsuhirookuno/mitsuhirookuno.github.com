@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Gundam | バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/blog/categories/gundam/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2012-10-09T00:01:13+09:00</updated>
+  <updated>2012-10-09T00:23:26+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -18,7 +18,17 @@
     <link href="http://mitsuhirookuno.github.com/blog/2012/10/08/zgok-doufu/"/>
     <updated>2012-10-08T22:39:00+09:00</updated>
     <id>http://mitsuhirookuno.github.com/blog/2012/10/08/zgok-doufu</id>
-    <content type="html"><![CDATA[<p><img src="https://dl.dropbox.com/u/15789065/Octopress/20121008/CameraZOOM-20121003210602748.jpg" title="ズゴック豆腐" alt="ズゴック豆腐" /></p>
+    <content type="html"><![CDATA[<p><img src="https://dl.dropbox.com/u/15789065/Octopress/20121008/CameraZOOM-20121003210125142.jpg" title="ズゴック豆腐パッケージ" alt="ズゴック豆腐パッケージ" /></p>
+
+<h3>買いました！ズゴック豆腐（と、デザートザク豆腐）</h3>
+
+<p><a href="http://sagamiya-kk.co.jp/" title="相模屋">相模屋</a>の新商品です<br />
+最早、 <em>技術blog</em> を目指していた事を忘れそうです<br />
+（一応、画像添付を試すという名目ではあります）<br />
+これ、 <em>苦労して発売日に鹵獲しました</em> が、今日普通に <strong>近所のダイエーに山積みされてました</strong>。 <br />
+(´；ω；｀)ブワッ</p>
+
+<p><img src="https://dl.dropbox.com/u/15789065/Octopress/20121008/CameraZOOM-20121003210602748.jpg" title="ズゴック豆腐" alt="ズゴック豆腐" /></p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (svnhook.rb)</span> <a href='/downloads/code/sample/svnhook.rb'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
