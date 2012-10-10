@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[バトルプログラマー＠すま Blog]]></title>
-  <link href="http://mitsuhirookuno.github.com/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Ruby | バトルプログラマー＠すま Blog]]></title>
+  <link href="http://mitsuhirookuno.github.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
   <updated>2012-10-10T10:00:36+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
@@ -32,7 +32,7 @@
 
 <h4>こんな <strong>スクリプト</strong> で、集計した所</h4>
 
-<figure class='code'><figcaption><span> (passwod_failed_check.rb)</span> <a href='http://mitsuhirookuno.github.com/downloads/code/sample/passwod_failed_check.rb'>download</a></figcaption>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (passwod_failed_check.rb)</span> <a href='/downloads/code/sample/passwod_failed_check.rb'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -87,98 +87,15 @@
 </span><span class='line'><span class="p">}</span>
 </span><span class='line'>
 </span><span class='line'><span class="nb">puts</span> <span class="n">deny_host_map</span><span class="o">.</span><span class="n">pretty_inspect</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>なんと13個のホストから、 合計2000回ほど・・・∑(・ω・ﾉ)ﾉ</code></p>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+<code>なんと13個のホストから、 合計2000回ほど・・・∑(・ω・ﾉ)ﾉ</code></p>
 
 <br />
 
 
 <p>これは放置は危険ですし、 /etc/hosts.deny で対応するには数的に骨が折れそうなので<br />
 今回は、Portを49152以降のDYNAMICな領域に移しました。（REGISTEREDの方が良いかな？）<br />
- (；´Д`A &#8220;`<br /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ズゴック豆腐を買いました]]></title>
-    <link href="http://mitsuhirookuno.github.com/blog/2012/10/08/zgok-doufu/"/>
-    <updated>2012-10-08T22:39:00+09:00</updated>
-    <id>http://mitsuhirookuno.github.com/blog/2012/10/08/zgok-doufu</id>
-    <content type="html"><![CDATA[<p><img src="https://dl.dropbox.com/u/15789065/Octopress/20121008/CameraZOOM-20121003210125142.jpg" title="ズゴック豆腐パッケージ" alt="ズゴック豆腐パッケージ" /></p>
-
-<h3>買いました！ズゴック豆腐（と、デザートザク豆腐）</h3>
-
-<p><a href="http://sagamiya-kk.co.jp/" title="相模屋">相模屋</a>の新商品です<br />
-最早、 <em>技術blog</em> を目指していた事を忘れそうです<br />
-（一応、画像添付を試すという名目ではあります）<br />
-これ、 <em>苦労して発売日に鹵獲しました</em> が、今日普通に <strong>近所のダイエーに山積みされてました</strong>。 <br />
-(´；ω；｀)ブワッ</p>
-
-<p><img src="https://dl.dropbox.com/u/15789065/Octopress/20121008/CameraZOOM-20121003210602748.jpg" title="ズゴック豆腐" alt="ズゴック豆腐" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Markdown記法のチートシート]]></title>
-    <link href="http://mitsuhirookuno.github.com/blog/2012/10/03/markdown-cheat-sheat/"/>
-    <updated>2012-10-03T08:45:00+09:00</updated>
-    <id>http://mitsuhirookuno.github.com/blog/2012/10/03/markdown-cheat-sheat</id>
-    <content type="html"><![CDATA[<h2>Markdown記法はどうすればいいの？</h2>
-
-<p><em>Octpress</em> を使うとやっぱり知りたい <em>Markdown記法</em> <br />
-<strong>やっぱり</strong> と言うべきか、 <strong>解りやすい解説</strong> を見つけました <br />
-<a href="https://github.com/NeQuissimus/MarkdownByExample/wiki/MarkdownSyntax" title="チートシートはこちら！">Markdown記法チートシート</a> <br />
-<a href="http://yardoc.org/" title="Yard本家サイト">Yard</a>の記法なども覚えて行かないとなりません <br />
-と、言う訳で <br />
-今回は無駄にMarkdown記法を使ってます <br /></p>
-
-<h3>以下は完全なお試し</h3>
-
-<ul>
-<li>リスト</li>
-</ul>
-
-
-<p><code>コードワンライナー</code></p>
-
-<pre><code>コードブロックも出来る。
-syntaxhighlighterも併用できるかなぁ
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[orange version of oct2 octopress theme]]></title>
-    <link href="http://mitsuhirookuno.github.com/blog/2012/09/30/orange-version-of-oct2-octopress-theme/"/>
-    <updated>2012-09-30T20:38:00+09:00</updated>
-    <id>http://mitsuhirookuno.github.com/blog/2012/09/30/orange-version-of-oct2-octopress-theme</id>
-    <content type="html"><![CDATA[<p><a href="https://github.com/roberto/oct2-orange" title="get theme!">orange version of oct2 octopress theme</a>
-というテーマを適用させて頂きました。<br />
-何かエンジニアっぽい感じでワクワクします。<br />
-<em>markdown</em> の書き方を覚えないと！</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Bloggerと併用予定です]]></title>
-    <link href="http://mitsuhirookuno.github.com/blog/2012/09/30/blogger/"/>
-    <updated>2012-09-30T20:21:00+09:00</updated>
-    <id>http://mitsuhirookuno.github.com/blog/2012/09/30/blogger</id>
-    <content type="html"><![CDATA[<p><em>git</em> の経験値があがるまではと。。。言い訳をして<br />
-暫くは <em>blogger</em> に住んでいようかと思います。<br />
-<a href="http://blogger.rubyprogrammer.info/" title="ココ！">すま＠blogger</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[こんにちは Octopress]]></title>
-    <link href="http://mitsuhirookuno.github.com/blog/2012/09/30/hello-octopress/"/>
-    <updated>2012-09-30T19:48:00+09:00</updated>
-    <id>http://mitsuhirookuno.github.com/blog/2012/09/30/hello-octopress</id>
-    <content type="html"><![CDATA[<p>テーマを色々変えてたら、作り直しになっちゃった。<br />
- (´；ω；｀)ｳｯ</p>
+ (；´Д`A ```<br /></p>
 ]]></content>
   </entry>
   
