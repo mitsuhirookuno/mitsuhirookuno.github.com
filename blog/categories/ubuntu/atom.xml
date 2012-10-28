@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ubuntu | バトルプログラマー＠すま Blog]]></title>
+  <link href="http://mitsuhirookuno.github.com/blog/categories/ubuntu/atom.xml" rel="self"/>
+  <link href="http://mitsuhirookuno.github.com/"/>
+  <updated>2012-10-28T23:32:43+09:00</updated>
+  <id>http://mitsuhirookuno.github.com/</id>
+  <author>
+    <name><![CDATA[Mitsuhiro Okuno]]></name>
+    <email><![CDATA[mitsuhiro.okuno＠gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[VPSのUbuntuを1210へアップデート]]></title>
+    <link href="http://mitsuhirookuno.github.com/blog/2012/10/25/ubuntu1210update/"/>
+    <updated>2012-10-25T08:49:00+09:00</updated>
+    <id>http://mitsuhirookuno.github.com/blog/2012/10/25/ubuntu1210update</id>
+    <content type="html"><![CDATA[<p><a href="http://www.ubuntu.com/" title="ubuntu公式へ飛びます">Ubuntu</a>
+のパッケージ管理は優秀で、<em>1204LTS(Precise Pangolin)</em>では脳天気にパッケージを更新しても問題は一度もありませんでした。<br/>
+ちょっとこれに気を良くして・・・現在最新である<em>1210(Quantal Quetzal)</em>へ、無謀にも挑戦しようと考えました。</p>
+
+<p>今思うと、折角LTS(長期サポート)版を選択したのに何やってるの！とか<br/>
+己の力量を弁えろ等・・・自分の無謀さに乾杯です。</p>
+
+<p>バージョンアップは簡単、パッケージ管理アプリにLTS以外も表示させるだけです。<br/>
+<strong>問題が全く発生せず、楽々バージョンアップ！</strong>しました。<br/>
+って事は流石に無く、<strong>二つの問題があって（内一つは解決していません）</strong></p>
+
+<p>一つ目は、pukiwikiが動かなくなりました。<br/>
+これは、PHPのバージョンが上がった為、pukiwikiで利用しているメソッドが実装されていることが原因 <br/>
+<a href="http://pukiwiki.sourceforge.jp/dev/?BugTrack2%2F349" title="この方法で動きました！">対処方法</a>
+メンテナンスの終わったpukiwikiでは無く、新しいものを探すべき時なのでしょうね～
+<a href="http://pukiwiki.logue.be/" title="PHP5.4も対応しているpukiwiki">Pukiwiki Advance</a>等を、おいおい試してみます。</p>
+
+<p>二つ目は、仮想ビデオデバイスcirrusのドライバーが上手く動いてくれない（対応していない？）事です。<br/>
+こちらは、cirrusでどうしても問題が解決できず、ドライバーを変更する方法で、解決いや回避をしました。</p>
+
+<p>問題はあったもののLinuxでのアップデートも簡単になったものですねぇ</p>
+]]></content>
+  </entry>
+  
+</feed>

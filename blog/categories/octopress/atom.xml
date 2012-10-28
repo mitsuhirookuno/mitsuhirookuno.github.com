@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2012-10-28T16:26:03+09:00</updated>
+  <updated>2012-10-28T23:32:43+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -59,7 +59,7 @@ syntaxhighlighterも併用できるかなぁ
     <link href="http://mitsuhirookuno.github.com/blog/2012/09/30/hello-octopress/"/>
     <updated>2012-09-30T19:48:00+09:00</updated>
     <id>http://mitsuhirookuno.github.com/blog/2012/09/30/hello-octopress</id>
-    <content type="html"><![CDATA[<p>テーマを色々変えてたら、作り直しになっちゃった。<br />
+    <content type="html"><![CDATA[<p>テーマを色々変えてたら、作り直しになっちゃった。<br/>
  (´；ω；｀)ｳｯ</p>
 ]]></content>
   </entry>

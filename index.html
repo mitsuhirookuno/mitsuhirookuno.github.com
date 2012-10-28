@@ -202,6 +202,64 @@ ctrl-b - page up
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2012/10/25/ubuntu1210update/">VPSのUbuntuを1210へアップデート</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-25T08:49:00+09:00" pubdate data-updated="true">2012年 10月 25日</time>
+        
+         | <a href="/blog/2012/10/25/ubuntu1210update/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://www.ubuntu.com/" title="ubuntu公式へ飛びます">Ubuntu</a>
+のパッケージ管理は優秀で、<em>1204LTS(Precise Pangolin)</em>では脳天気にパッケージを更新しても問題は一度もありませんでした。<br/>
+ちょっとこれに気を良くして・・・現在最新である<em>1210(Quantal Quetzal)</em>へ、無謀にも挑戦しようと考えました。</p>
+
+<p>今思うと、折角LTS(長期サポート)版を選択したのに何やってるの！とか<br/>
+己の力量を弁えろ等・・・自分の無謀さに乾杯です。</p>
+
+<p>バージョンアップは簡単、パッケージ管理アプリにLTS以外も表示させるだけです。<br/>
+<strong>問題が全く発生せず、楽々バージョンアップ！</strong>しました。<br/>
+って事は流石に無く、<strong>二つの問題があって（内一つは解決していません）</strong></p>
+
+<p>一つ目は、pukiwikiが動かなくなりました。<br/>
+これは、PHPのバージョンが上がった為、pukiwikiで利用しているメソッドが実装されていることが原因 <br/>
+<a href="http://pukiwiki.sourceforge.jp/dev/?BugTrack2%2F349" title="この方法で動きました！">対処方法</a>
+メンテナンスの終わったpukiwikiでは無く、新しいものを探すべき時なのでしょうね～
+<a href="http://pukiwiki.logue.be/" title="PHP5.4も対応しているpukiwiki">Pukiwiki Advance</a>等を、おいおい試してみます。</p>
+
+<p>二つ目は、仮想ビデオデバイスcirrusのドライバーが上手く動いてくれない（対応していない？）事です。<br/>
+こちらは、cirrusでどうしても問題が解決できず、ドライバーを変更する方法で、解決いや回避をしました。</p>
+
+<p>問題はあったもののLinuxでのアップデートも簡単になったものですねぇ</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2012/10/10/vps-ssh-port/">VPSのssh用Portを変更しました</a></h1>
     
     
@@ -531,7 +589,7 @@ syntaxhighlighterも併用できるかなぁ
   </header>
 
 
-  <div class="entry-content"><p>テーマを色々変えてたら、作り直しになっちゃった。<br />
+  <div class="entry-content"><p>テーマを色々変えてたら、作り直しになっちゃった。<br/>
  (´；ω；｀)ｳｯ</p>
 </div>
   
@@ -572,6 +630,10 @@ syntaxhighlighterも併用できるかなぁ
       </li>
     
       <li class="post">
+        <a href="/blog/2012/10/25/ubuntu1210update/">VPSのUbuntuを1210へアップデート</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/10/10/vps-ssh-port/">VPSのssh用Portを変更しました</a>
       </li>
     
@@ -583,19 +645,15 @@ syntaxhighlighterも併用できるかなぁ
         <a href="/blog/2012/10/03/markdown-cheat-sheat/">Markdown記法のチートシート</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/09/30/orange-version-of-oct2-octopress-theme/">Octopressにテーマを適用しました</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/ruby'>Ruby (2)</a></li><li><a href='/blog/categories/vps'>VPS (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/ruby'>Ruby (2)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/vps'>VPS (2)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/blogger' style='font-size: 120.0%'>blogger(1)</a> <a href='/blog/categories/gem' style='font-size: 120.0%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 120.0%'>Gundam(1)</a> <a href='/blog/categories/markdown' style='font-size: 120.0%'>Markdown(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>Octopress(3)</a> <a href='/blog/categories/ruby' style='font-size: 140.0%'>Ruby(2)</a> <a href='/blog/categories/vps' style='font-size: 120.0%'>VPS(1)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/blogger' style='font-size: 120.0%'>blogger(1)</a> <a href='/blog/categories/gem' style='font-size: 120.0%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 120.0%'>Gundam(1)</a> <a href='/blog/categories/markdown' style='font-size: 120.0%'>Markdown(1)</a> <a href='/blog/categories/octopress' style='font-size: 160.0%'>Octopress(3)</a> <a href='/blog/categories/ruby' style='font-size: 140.0%'>Ruby(2)</a> <a href='/blog/categories/ubuntu' style='font-size: 120.0%'>Ubuntu(1)</a> <a href='/blog/categories/vps' style='font-size: 140.0%'>VPS(2)</a> </span>
 </section>
 
 <section>
