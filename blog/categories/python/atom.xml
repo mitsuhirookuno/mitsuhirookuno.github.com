@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Python | バトルプログラマー＠すま Blog]]></title>
+  <link href="http://mitsuhirookuno.github.com/blog/categories/python/atom.xml" rel="self"/>
+  <link href="http://mitsuhirookuno.github.com/"/>
+  <updated>2012-11-05T00:52:35+09:00</updated>
+  <id>http://mitsuhirookuno.github.com/</id>
+  <author>
+    <name><![CDATA[Mitsuhiro Okuno]]></name>
+    <email><![CDATA[mitsuhiro.okuno＠gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[RubyPython、これはいいものだ]]></title>
+    <link href="http://mitsuhirookuno.github.com/blog/2012/11/04/rubypython/"/>
+    <updated>2012-11-04T23:27:00+09:00</updated>
+    <id>http://mitsuhirookuno.github.com/blog/2012/11/04/rubypython</id>
+    <content type="html"><![CDATA[<p>RubyPython、これはいいものだ</p>
+
+<p>rubyのパッケージ管理に、bundlerを使い始めてから<br/>
+どんなパッケージを利用しているのかに興味を持つようになりました。<br/>
+そんな中、どーにも気になるパッケージ名があったのです。</p>
+
+<p>その名も・・・(ﾟＡﾟ;)ｺﾞｸﾘ<br/>
+<a href="http://rubypython.rubyforge.org/" title="RubyPython公式へ飛びます">RubyPython</a></p>
+
+<p>名前だけで見れば、これは恐らく<br/>
+スマフォに例えれば、iOS&amp;Andoroid。いやiOroid<br/>
+企業に例えれば、Google&amp;Apple。いやGoople<br/>
+食べ物に例えれば、カツカレー</p>
+
+<p>などと、茶番はここまでにして、Let's Try</p>
+
+<p>まずはPython側で、呼び出される簡単なメソッドを実装します。<br/>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (call_python.rb)</span> <a href='/downloads/code/sample/rubypython/20121104/call_python.rb'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1">#!/usr/bin/env ruby</span>
+</span><span class='line'><span class="c1"># -*- encoding: utf-8 -*-</span>
+</span><span class='line'><span class="nb">require</span> <span class="s2">&quot;rubypython&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">RubyPython</span><span class="o">.</span><span class="n">start</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="s1">&#39;Pythonのクラスを呼び出す&#39;</span>
+</span><span class='line'><span class="n">cPickle</span> <span class="o">=</span> <span class="no">RubyPython</span><span class="o">.</span><span class="n">import</span><span class="p">(</span><span class="s2">&quot;cPickle&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="nb">p</span> <span class="n">cPickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s2">&quot;Testing RubyPython.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rubify</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="s1">&#39;Pythonの自作メソッドを呼び出す&#39;</span>
+</span><span class='line'><span class="n">dir</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">)</span>
+</span><span class='line'><span class="n">sys</span> <span class="o">=</span> <span class="no">RubyPython</span><span class="o">.</span><span class="n">import</span> <span class="s1">&#39;sys&#39;</span>
+</span><span class='line'><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">called_ruby</span> <span class="o">=</span> <span class="no">RubyPython</span><span class="o">.</span><span class="n">import</span><span class="p">(</span><span class="s2">&quot;called_ruby&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="n">called_ruby</span><span class="o">.</span><span class="n">print_python</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">puts</span> <span class="n">called_ruby</span><span class="o">.</span><span class="n">print_python_with_argument!</span><span class="p">(</span> <span class="n">arg1</span><span class="p">:</span> <span class="s2">&quot;Ruby String&quot;</span> <span class="p">)</span><span class="o">.</span><span class="n">rubify</span>
+</span><span class='line'><span class="nb">puts</span> <span class="n">called_ruby</span><span class="o">.</span><span class="n">print_python_with_argument!</span><span class="p">(</span> <span class="n">arg1</span><span class="p">:</span> <span class="mi">1234</span> <span class="p">)</span><span class="o">.</span><span class="n">rubify</span>
+</span><span class='line'>
+</span><span class='line'><span class="no">RubyPython</span><span class="o">.</span><span class="n">stop</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>そして、Ruby側で呼び出す処理を記述します。<br/>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (called_ruby.py)</span> <a href='/downloads/code/sample/rubypython/20121104/called_ruby.py'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='py'><span class='line'><span class="k">def</span> <span class="nf">print_python</span><span class="p">():</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;python:&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">print_python_with_argument</span><span class="p">(</span> <span class="n">arg1</span> <span class="p">):</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;python:&quot;</span><span class="p">,</span> <span class="n">arg1</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">arg1</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>これを実行すると</p>
+
+<pre><code>Pythonのクラスを呼び出す
+S'Testing RubyPython.'
+p1
+.
+Pythonの自作メソッドを呼び出す
+python:
+python: Ruby String
+Ruby String
+python: 1234
+1234
+</code></pre>
+
+<p>おぉ！<br/>
+RubyからPythonの呼び出し、簡単な引数の受け渡しが出来る事はあっさり確認出来ました。<br/>
+RubyからPythonを呼び出す需要があるかは解りません。</p>
+
+<p>続く。。。かも？</p>
+]]></content>
+  </entry>
+  
+</feed>

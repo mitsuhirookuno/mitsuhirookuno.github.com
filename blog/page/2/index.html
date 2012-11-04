@@ -5,12 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>こんにちは Octopress - バトルプログラマー＠すま Blog</title>
+  <title>バトルプログラマー＠すま Blog</title>
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="テーマを色々変えてたら、作り直しになっちゃった。 (´；ω；｀)ｳｯ
-">
+  <meta name="description" content="夜中にmochaでのテストの書き方が解らね～とネットを徘徊していると。。。 便利なサイトを発見しました。 mochaチートシート
+のページです。
+チートシート（カンニングペーパー）の言葉のイメージは悪いものの、先駆者が作ってくれた技術Tipsメモって事です。 どうやら、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/2012/09/30/hello-octopress/">
+  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/page/2/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -100,12 +101,15 @@
 </nav> -->
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">こんにちは Octopress</h1>
+      <h1 class="entry-title"><a href="/blog/2012/10/26/cheat-sheets/">チートしようぜ！(ruby Cheat Sheets)</a></h1>
     
     
       <p class="meta">
@@ -121,81 +125,88 @@
   
 
 
-<time datetime="2012-09-30T19:48:00+09:00" pubdate data-updated="true">2012年 09月 30日</time>
+<time datetime="2012-10-26T09:13:00+09:00" pubdate data-updated="true">2012年 10月 26日</time>
         
-         | <a href="#disqus_thread">Comments</a>
+         | <a href="/blog/2012/10/26/cheat-sheets/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>テーマを色々変えてたら、作り直しになっちゃった。<br/>
- (´；ω；｀)ｳｯ</p>
+  <div class="entry-content"><p>夜中に<em>mocha</em>でのテストの書き方が解らね～とネットを徘徊していると。。。</p>
+
+<h4>便利なサイトを発見しました。</h4>
+
+<p><a href="http://cheat.errtheblog.com/s/mocha/" title="チートシートサイト(mocha)へ飛びます">mochaチートシート</a>
+のページです。<br/>
+<strong>チートシート</strong>（カンニングペーパー）の言葉のイメージは悪いものの、先駆者が作ってくれた技術Tipsメモって事です。</p>
+
+<p>どうやら、他にも沢山のチートシートがあるらしく<br/>
+<a href="http://cheat.errtheblog.com/" title="チートシートサイトへ飛びます">トップページ</a>を見て見ることに<br/>
+あれ・・・？<br/>
+gemコマンドの説明がある、と言う事は、、、<strong>「こいつ・・・動くぞ！」</strong></p>
+
+<h2>コマンドとしてインストール可能</h2>
+
+<pre><code>$ gem install cheat
+Fetching: cheat-1.3.0.gem (100%)
+Successfully installed cheat-1.3.0
+1 gem installed
+Installing ri documentation for cheat-1.3.0...
+Installing RDoc documentation for cheat-1.3.0...
+</code></pre>
+
+<p>なんと、<em>アプリとしてインストール</em>が出来ちゃいます。</p>
+
+<h3>使い方は</h3>
+
+<ul>
+<li>cheatコマンドの使い方<br/>
+<code>cheat cheat</code></li>
+<li>チートシート一覧を見る<br/>
+<code>cheat sheets</code></li>
+<li>チートシート一覧からrspecを探す場合<br/>
+<code>cheat sheets | grep rspec</code></li>
+<li>cheatコマンドの使い方<br/>
+<code>cheat sheets | grep rspec</code></li>
+<li>mochaのチートシート<br/>
+<code>cheat mocha</code></li>
+<li><p>vimのチートシートと出力例を一部<br/>
+<code>cheat vim</code></p>
+
+<pre><code>Cursor movement
+
+h - move left
+j - move down
+k - move up
+l - move right
+ctrl-b - page up
+以下、割愛
+</code></pre></li>
+</ul>
+
+
+<p>コピーペーストの文化は、<strong>技術的負債</strong>に繋がりますが<br/>
+使い方次第では、とっても便利なものです。 <br/>
+これ日本語化を誰かしてくれないかな～(cheatjみたいな）</p>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Mitsuhiro Okuno</span></span>
-
-      
-
-
-
-
-
-
-
-
   
 
 
-<time datetime="2012-09-30T19:48:00+09:00" pubdate data-updated="true">2012年 09月 30日</time>
-      
-
-<span class="categories">
+    </article>
   
-    <a class='category' href='/blog/categories/octopress/'>Octopress</a>
-  
-</span>
-
-
-    </p>
+  <div class="pagination">
     
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mitsuhirookuno.github.com/blog/2012/09/30/hello-octopress/" data-via="bugslife" data-counturl="http://mitsuhirookuno.github.com/blog/2012/09/30/hello-octopress/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
     
-    <p class="meta">
-      
-      
-        <a class="basic-alignment right" href="/blog/2012/09/30/blogger/" title="Next Post: Bloggerと併用予定です">Bloggerと併用予定です &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
 </div>
-  </section>
-
-</div>
-
 <aside class="sidebar">
   
     <section>
@@ -251,7 +262,7 @@
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -268,7 +279,7 @@
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   
   <a href="https://github.com/mitsuhirookuno">@mitsuhirookuno</a> on GitHub
@@ -310,7 +321,6 @@
   
 </aside>
 
-
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -325,10 +335,7 @@
       var disqus_shortname = 'rubyprogrammer';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://mitsuhirookuno.github.com/blog/2012/09/30/hello-octopress/';
-        var disqus_url = 'http://mitsuhirookuno.github.com/blog/2012/09/30/hello-octopress/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
