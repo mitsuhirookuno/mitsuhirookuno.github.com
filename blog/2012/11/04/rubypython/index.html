@@ -11,8 +11,7 @@
   
   <meta name="description" content="rubyのパッケージ管理に、bundlerを使い始めてから
 どんなパッケージを利用しているのかに興味を持つようになりました。
-そんな中、どーにも気になるパッケージ名があったのです。 その名も・・・(ﾟＡﾟ;)ｺﾞｸﾘ
-RubyPython 名前だけで見れば、これは恐らく
+そんな中、どーにも気になるパッケージ名があったのです。 その名も・・・(ﾟＡﾟ;)ｺﾞｸﾘ RubyPython 名前だけで見れば、これは恐らく
 スマフォに例えれば、iOS &hellip;">
   
 
@@ -133,21 +132,30 @@ RubyPython 名前だけで見れば、これは恐らく
   </header>
 
 
-<div class="entry-content"><p>rubyのパッケージ管理に、bundlerを使い始めてから<br/>
+<div class="entry-content"><p>rubyのパッケージ管理に、<em>bundler</em>を使い始めてから<br/>
 どんなパッケージを利用しているのかに興味を持つようになりました。<br/>
 そんな中、どーにも気になるパッケージ名があったのです。</p>
 
-<p>その名も・・・(ﾟＡﾟ;)ｺﾞｸﾘ<br/>
-<a href="http://rubypython.rubyforge.org/" title="RubyPython公式へ飛びます">RubyPython</a></p>
+<h3>その名も・・・(ﾟＡﾟ;)ｺﾞｸﾘ</h3>
+
+<p><a href="http://rubypython.rubyforge.org/" title="RubyPython公式へ飛びます">RubyPython</a></p>
 
 <p>名前だけで見れば、これは恐らく<br/>
-スマフォに例えれば、iOS&amp;Andoroid。いやiOroid<br/>
-企業に例えれば、Google&amp;Apple。いやGoople<br/>
-食べ物に例えれば、カツカレー</p>
+<em>スマフォ</em>に例えれば、<strong>iOS&amp;Andoroid</strong>。いや<strong>iOroid</strong><br/>
+<em>企業</em>に例えれば、<strong>Google&amp;Apple</strong>。いや<strong>Goople</strong><br/>
+<em>食べ物</em>に例えれば、<strong>カツカレー</strong></p>
 
 <p>などと、茶番はここまでにして、<strong>Let&#8217;s Try</strong></p>
 
-<p>まずはPython側で、呼び出される簡単なメソッドを実装します。</p>
+<h2>まずはPython側で、呼び出される簡単なメソッドを実装します。</h2>
+
+<ul>
+<li>ただのprint文</li>
+<li>引数と戻り値を持ったprint文</li>
+</ul>
+
+
+<p>を、関数として定義します</p>
 
 <figure class='code'><figcaption><span> (called_ruby.py)</span> <a href='/downloads/code/sample/rubypython/20121104/called_ruby.py'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -165,7 +173,17 @@ RubyPython 名前だけで見れば、これは恐らく
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>そして、Ruby側で呼び出す処理を記述します。</p>
+<h2>そして、Ruby側で呼び出す処理を記述します。</h2>
+
+<ul>
+<li>Pythonのクラス(cPickle)の呼び出し、とメソッド実行</li>
+<li>自作したPythonモジュールの読み込み</li>
+<li>&#8220;ただのprint文&#8221;の呼び出し</li>
+<li>&#8220;引数と戻り値を持ったprint文&#8221;の呼び出し</li>
+</ul>
+
+
+<p>を、定義します</p>
 
 <figure class='code'><figcaption><span> (call_python.rb)</span> <a href='/downloads/code/sample/rubypython/20121104/call_python.rb'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -213,7 +231,7 @@ RubyPython 名前だけで見れば、これは恐らく
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>これを実行すると</p>
+<h2>これを実行すると</h2>
 
 <pre><code>Pythonのクラスを呼び出す
 S'Testing RubyPython.'
@@ -227,9 +245,13 @@ python: 1234
 1234
 </code></pre>
 
-<p>おぉ！<br/>
-RubyからPythonの呼び出し、簡単な引数の受け渡しが出来る事はあっさり確認出来ました。<br/>
-RubyからPythonを呼び出す需要があるかは解りません。</p>
+<p>おぉ！</p>
+
+<p><strong>RubyからPythonの呼び出し、簡単な引数の受け渡しが出来る事</strong>は<br/>
+あっさり確認出来ました。</p>
+
+<p>流石に、Rubyのコード中にPyhotnが記述できる訳ではないみたいです。<br/>
+<em>RubyからPythonを呼び出す需要</em>があるかは解りません。</p>
 
 <p>続く。。。かも？</p>
 </div>
