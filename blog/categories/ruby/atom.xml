@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2012-11-05T00:52:35+09:00</updated>
+  <updated>2012-11-05T08:05:09+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -18,9 +18,7 @@
     <link href="http://mitsuhirookuno.github.com/blog/2012/11/04/rubypython/"/>
     <updated>2012-11-04T23:27:00+09:00</updated>
     <id>http://mitsuhirookuno.github.com/blog/2012/11/04/rubypython</id>
-    <content type="html"><![CDATA[<p>RubyPython、これはいいものだ</p>
-
-<p>rubyのパッケージ管理に、bundlerを使い始めてから<br/>
+    <content type="html"><![CDATA[<p>rubyのパッケージ管理に、bundlerを使い始めてから<br/>
 どんなパッケージを利用しているのかに興味を持つようになりました。<br/>
 そんな中、どーにも気になるパッケージ名があったのです。</p>
 
@@ -32,9 +30,25 @@
 企業に例えれば、Google&amp;Apple。いやGoople<br/>
 食べ物に例えれば、カツカレー</p>
 
-<p>などと、茶番はここまでにして、Let's Try</p>
+<p>などと、茶番はここまでにして、<strong>Let's Try</strong></p>
 
 <p>まずはPython側で、呼び出される簡単なメソッドを実装します。<br/>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (called_ruby.py)</span> <a href='/downloads/code/sample/rubypython/20121104/called_ruby.py'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='py'><span class='line'><span class="k">def</span> <span class="nf">print_python</span><span class="p">():</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;python:&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">print_python_with_argument</span><span class="p">(</span> <span class="n">arg1</span> <span class="p">):</span>
+</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;python:&quot;</span><span class="p">,</span> <span class="n">arg1</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">arg1</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>そして、Ruby側で呼び出す処理を記述します。<br/>
 <div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (call_python.rb)</span> <a href='/downloads/code/sample/rubypython/20121104/call_python.rb'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -78,22 +92,6 @@
 </span><span class='line'><span class="nb">puts</span> <span class="n">called_ruby</span><span class="o">.</span><span class="n">print_python_with_argument!</span><span class="p">(</span> <span class="n">arg1</span><span class="p">:</span> <span class="mi">1234</span> <span class="p">)</span><span class="o">.</span><span class="n">rubify</span>
 </span><span class='line'>
 </span><span class='line'><span class="no">RubyPython</span><span class="o">.</span><span class="n">stop</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>そして、Ruby側で呼び出す処理を記述します。<br/>
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (called_ruby.py)</span> <a href='/downloads/code/sample/rubypython/20121104/called_ruby.py'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='py'><span class='line'><span class="k">def</span> <span class="nf">print_python</span><span class="p">():</span>
-</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;python:&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">print_python_with_argument</span><span class="p">(</span> <span class="n">arg1</span> <span class="p">):</span>
-</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;python:&quot;</span><span class="p">,</span> <span class="n">arg1</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">arg1</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>これを実行すると</p>
