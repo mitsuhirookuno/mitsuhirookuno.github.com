@@ -4,7 +4,7 @@
   <title><![CDATA[バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2012-11-05T08:21:32+09:00</updated>
+  <updated>2012-12-24T10:10:51+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -137,9 +137,11 @@ python: 1234
 あっさり確認出来ました。</p>
 
 <p>流石に、Rubyのコード中にPyhotnが記述できる訳ではないみたいです。<br/>
-<em>RubyからPythonを呼び出す需要</em>があるかは解りません。</p>
+<em>RubyからPythonを呼び出す需要</em>があるかは解りません。<br/>
+が、競うより共存の方に時間を使うほうが価値があるかも？と思います。</p>
 
-<p>続く。。。かも？</p>
+<p>RubyPythonは、PythonからRubyを実行したり、例外をRubyで処理したり等沢山の機能があるようです。  <br/>
+続く。。。かも？</p>
 ]]></content>
   </entry>
   
