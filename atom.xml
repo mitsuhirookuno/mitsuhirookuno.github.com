@@ -4,7 +4,7 @@
   <title><![CDATA[バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2012-12-24T10:10:51+09:00</updated>
+  <updated>2012-12-31T00:19:20+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -12,6 +12,40 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Kindle-Paperwhite(Wifi)買いました！]]></title>
+    <link href="http://mitsuhirookuno.github.com/blog/2012/12/30/kindle-paperwhite/"/>
+    <updated>2012-12-30T23:47:00+09:00</updated>
+    <id>http://mitsuhirookuno.github.com/blog/2012/12/30/kindle-paperwhite</id>
+    <content type="html"><![CDATA[<p><a href="http://www.amazon.co.jp/Kindle-Paperwhite/dp/B007OZO03M" title="Amazon商品ページへ飛びます">Kindle-Paperwhite</a>を買いました。<br/>
+<img src="https://dl.dropbox.com/u/15789065/Octopress/20121230/DSC02414.JPG" title="kindleホーム画面" alt="kindleホーム画面" /></p>
+
+<h2>読書</h2>
+
+<p><em>読書</em> は、<strong>とっても快適</strong> です。<br/>
+白黒の読みやすさと、画面書き換えの遅さがあまり気にならないからでしょう、、<br/>
+<img src="https://dl.dropbox.com/u/15789065/Octopress/20121230/DSC02415.JPG" title="kindleホーム画面" alt="kindleホーム画面" /></p>
+
+<h2>コミック</h2>
+
+<p><em>コミック</em>を読む場合は、<strong>少し待たないといけない時がある</strong>ので人を選びます。<br/>
+ゆっくりと読む人は気にならないし、画面はとても綺麗です。<br/>
+<img src="https://dl.dropbox.com/u/15789065/Octopress/20121230/DSC02418.JPG" title="kindleホーム画面" alt="kindleホーム画面" /></p>
+
+<h2>インターネット</h2>
+
+<p>実は、<em>インターネット</em>も試用版という体で<strong>多少利用</strong>できます。<br/>
+（twitter,facebook,gmail,hotmail等は使えそうです）<br/>
+流石に、書き換えのゆったりしたE-inkでは、オマケ程度の機能ではありますが<br/>
+あれば使うかもしれません。<br/>
+<img src="https://dl.dropbox.com/u/15789065/Octopress/20121230/DSC02416.JPG" title="kindleホーム画面" alt="kindleホーム画面" /></p>
+
+<p>※3G版では、書籍のダウンロードとwikipediaは無料で利用できるそうです。</p>
+
+<p><a href="http://ameblo.jp/nakagawa-shoko/entry-11438146900.html" title="しょこたんblogへ飛びます">中川翔子さんのblog</a> でもとりあげられており、胸熱です。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[RubyPython、これはいいものだ]]></title>
