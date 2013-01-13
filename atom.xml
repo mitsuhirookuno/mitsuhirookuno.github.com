@@ -4,7 +4,7 @@
   <title><![CDATA[バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2013-01-13T17:00:03+09:00</updated>
+  <updated>2013-01-14T00:32:48+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -12,6 +12,26 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[githubとjenkins、始めの一歩]]></title>
+    <link href="http://mitsuhirookuno.github.com/blog/2013/01/14/start-github-and-jenkins/"/>
+    <updated>2013-01-14T00:04:00+09:00</updated>
+    <id>http://mitsuhirookuno.github.com/blog/2013/01/14/start-github-and-jenkins</id>
+    <content type="html"><![CDATA[<p>こつこつと<a href="http://github.com/" title="github公式へ飛びます">github</a>と<a href="http://jenkins-ci.org/" title="jenkins公式へ飛びます">jenkins</a>の練習をしています。  <br/>
+<strong>職場でもjenkinsは導入している</strong>のですが、スケジュールを理由に<em>満足のいく状態を保てません</em>。</p>
+
+<p>仕事は仕事として、個人的なVPS上で<strong>どんな事が出来そうなのか？</strong>試しています。<br/>
+現在の進捗は、<a href="http://github.com/mitsuhirookuno" title="私のgithubです">俺々github</a>と<a href="http://jenkins.rubyprogrammer.info/" title="私のVPS上のjenkinsです">俺々jenkins</a>を連携させ、テストやコード解析を行う手順のみが完成<br/>
+<em>アプリケーション自体は、ハローワールド的</em>なありさまです。</p>
+
+<p>何か課題をつくり、この構成でどの程度やっていけるのか？が</p>
+
+<h1>今年の課題です。</h1>
+
+<p><a href="http://jenkins.rubyprogrammer.info/job/Rails3Tutorial/" title="こんな感じです">jenkinsで視覚化</a>するとモチベーションあがりますね～！</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[こんにちは、赤ちゃん]]></title>
