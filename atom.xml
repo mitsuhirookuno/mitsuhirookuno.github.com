@@ -4,7 +4,7 @@
   <title><![CDATA[バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2013-01-03T00:27:12+09:00</updated>
+  <updated>2013-01-13T17:00:03+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[こんにちは、赤ちゃん]]></title>
+    <link href="http://mitsuhirookuno.github.com/blog/2013/01/13/hello-baby/"/>
+    <updated>2013-01-13T16:46:00+09:00</updated>
+    <id>http://mitsuhirookuno.github.com/blog/2013/01/13/hello-baby</id>
+    <content type="html"><![CDATA[<h1>娘が生まれました</h1>
+
+<p><strong>2013年1月4日</strong> に、<em>娘</em>が生まれました。<br/>
+これからは、育児エンジニアになります。<br/>
+正直自信はありませんが、赤ちゃんの世話は結構嬉しいものです。
+また、「赤ちゃんが親を育てる」とも聞きます。</p>
+
+<p>これを無理やりにコードにすると</p>
+
+<h2>今、父親として求められているお仕事</h2>
+
+<figure class='code'><figcaption><span> (helloworld.rb)</span> <a href='http://mitsuhirookuno.github.com/downloads/code/sample/baby/helloworld.rb'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">if</span> <span class="err">赤ちゃん</span><span class="o">.</span><span class="err">泣いている？</span>
+</span><span class='line'><span class="err">　</span><span class="k">if</span> <span class="err">赤ちゃん</span><span class="o">.</span><span class="err">オシメ</span><span class="o">.</span><span class="err">汚れている？</span>
+</span><span class='line'><span class="err">　　赤ちゃん</span><span class="o">.</span><span class="err">オシメ</span> <span class="o">&lt;&lt;</span> <span class="err">オシメ</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'><span class="err">　</span><span class="k">elsif</span> <span class="err">赤ちゃん</span><span class="o">.</span><span class="err">空腹？</span>
+</span><span class='line'><span class="err">　　赤ちゃん</span> <span class="o">&lt;&lt;</span> <span class="err">ミルク</span>
+</span><span class='line'>  <span class="k">elsif</span> <span class="err">赤ちゃん</span><span class="o">.</span><span class="err">不機嫌</span>
+</span><span class='line'><span class="err">　　抱っこする</span><span class="p">(</span><span class="err">赤ちゃん</span><span class="p">)</span>
+</span><span class='line'><span class="err">　</span><span class="k">else</span>
+</span><span class='line'><span class="err">　　</span><span class="k">raise</span> <span class="err">俺には解決できない</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;ギブです&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="err">　</span><span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>っていう感じです。</p>
+
+<p>娘には、自分とは違い本当の天才エンジニアなって貰いたいなぁと妄想しておきます。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Kindle-Paperwhite(Wifi)買いました！]]></title>
