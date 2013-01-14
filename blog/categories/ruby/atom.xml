@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2013-01-14T00:32:48+09:00</updated>
+  <updated>2013-01-14T14:58:22+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -21,9 +21,20 @@
     <content type="html"><![CDATA[<p>こつこつと<a href="http://github.com/" title="github公式へ飛びます">github</a>と<a href="http://jenkins-ci.org/" title="jenkins公式へ飛びます">jenkins</a>の練習をしています。  <br/>
 <strong>職場でもjenkinsは導入している</strong>のですが、スケジュールを理由に<em>満足のいく状態を保てません</em>。</p>
 
-<p>仕事は仕事として、個人的なVPS上で<strong>どんな事が出来そうなのか？</strong>試しています。<br/>
+<p>仕事は仕事として、個人的なVPS上で<strong>どんな事が出来そうなのか？</strong>を、試しています。<br/>
 現在の進捗は、<a href="http://github.com/mitsuhirookuno" title="私のgithubです">俺々github</a>と<a href="http://jenkins.rubyprogrammer.info/" title="私のVPS上のjenkinsです">俺々jenkins</a>を連携させ、テストやコード解析を行う手順のみが完成<br/>
 <em>アプリケーション自体は、ハローワールド的</em>なありさまです。</p>
+
+<h3>尚、現在動作している筈の解析ツールは・・・</h3>
+
+<ul>
+<li><a href="http://ruby.sadi.st/Flog.html" title="flogのページへ飛びます">flog</a>でコードの複雑さ</li>
+<li><a href="http://github.com/seattlerb/flay" title="flayのページへ飛びます">flay</a>で類似性</li>
+<li><a href="http://roodi.rubyforge.org/" title="roodiのページへ飛びます">roodi</a>でコードの匂い</li>
+<li><a href="http://brakemanscanner.org/" title="brakemanのページへ飛びます">brakeman</a> でセキュリティ
+をチェック出来る筈です。</li>
+</ul>
+
 
 <p>何か課題をつくり、この構成でどの程度やっていけるのか？が</p>
 
