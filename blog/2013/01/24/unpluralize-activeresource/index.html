@@ -5,15 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Octopressにテーマを適用しました - バトルプログラマー＠すま Blog</title>
+  <title>ActiveResourceで、複数形のルールを無効にする - バトルプログラマー＠すま Blog</title>
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="orange version of oct2 octopress theme
-というテーマを適用させて頂きました。
-何かエンジニアっぽい感じでワクワクします。
-markdown の書き方を覚えないと！
-">
+  <meta name="description" content="ActiveResource でも、 ActiveRecord と同じく複数形ルールを無効にしてみました 既存のテーブルを已む無く利用する為(?) pluralize_table_names が設定出来るActiveRecordと違って
+ActiveResouceは、そんな設定が出来ません &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -22,7 +19,7 @@ markdown の書き方を覚えないと！
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/2012/09/30/orange-version-of-oct2-octopress-theme/">
+  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/2013/01/24/unpluralize-activeresource/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -108,7 +105,7 @@ markdown の書き方を覚えないと！
   
   <header>
     
-      <h1 class="entry-title">Octopressにテーマを適用しました</h1>
+      <h1 class="entry-title">ActiveResourceで、複数形のルールを無効にする</h1>
     
     
       <p class="meta">
@@ -124,7 +121,7 @@ markdown の書き方を覚えないと！
   
 
 
-<time datetime="2012-09-30T20:38:00+09:00" pubdate data-updated="true">2012年 09月 30日</time>
+<time datetime="2013-01-24T09:20:00+09:00" pubdate data-updated="true">2013年 01月 24日</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -133,10 +130,41 @@ markdown の書き方を覚えないと！
   </header>
 
 
-<div class="entry-content"><p><a href="https://github.com/roberto/oct2-orange" title="get theme!">orange version of oct2 octopress theme</a>
-というテーマを適用させて頂きました。<br />
-何かエンジニアっぽい感じでワクワクします。<br />
-<em>markdown</em> の書き方を覚えないと！</p>
+<div class="entry-content"><p><em>ActiveResource</em> でも、 <em>ActiveRecord</em> と同じく<strong>複数形ルール</strong>を無効にしてみました</p>
+
+<p>既存のテーブルを已む無く利用する為(?) <strong>pluralize_table_names</strong> が設定出来る<em>ActiveRecord</em>と違って<br/>
+<em>ActiveResouce</em>は、<strong>そんな設定が出来ません</strong></p>
+
+<p>そもそも、そんな状況で複数形ルールを無視すんなよ！<strong>(#ﾟДﾟ)ｺﾞﾙｧ!! </strong><br/>
+って、お話もあるでしょうが、大人の事情もありまして</p>
+
+<p><strong>environment.rb</strong> に追記してみました。</p>
+
+<figure class='code'><figcaption><span> (environment.rb)</span> <a href='/downloads/code/sample/unpluralize-activeresource/20130104/environment.rb'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1"># 複数形のルールを無効化</span>
+</span><span class='line'><span class="k">module</span> <span class="nn">ActiveResource</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">UnPluralizeBase</span> <span class="o">&lt;</span> <span class="no">ActiveResource</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>    <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
+</span><span class='line'>      <span class="k">def</span> <span class="nf">collection_name</span>
+</span><span class='line'>        <span class="vi">@collection_name</span> <span class="o">||=</span> <span class="n">element_name</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>多分、もっとcoolな方法があるとは思います。</p>
 </div>
 
 
@@ -159,12 +187,12 @@ markdown の書き方を覚えないと！
   
 
 
-<time datetime="2012-09-30T20:38:00+09:00" pubdate data-updated="true">2012年 09月 30日</time>
+<time datetime="2013-01-24T09:20:00+09:00" pubdate data-updated="true">2013年 01月 24日</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/octopress/'>Octopress</a>
+    <a class='category' href='/blog/categories/ruby/'>Ruby</a>
   
 </span>
 
@@ -173,7 +201,7 @@ markdown の書き方を覚えないと！
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mitsuhirookuno.github.com/blog/2012/09/30/orange-version-of-oct2-octopress-theme/" data-via="bugslife" data-counturl="http://mitsuhirookuno.github.com/blog/2012/09/30/orange-version-of-oct2-octopress-theme/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mitsuhirookuno.github.com/blog/2013/01/24/unpluralize-activeresource/" data-via="bugslife" data-counturl="http://mitsuhirookuno.github.com/blog/2013/01/24/unpluralize-activeresource/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -186,10 +214,8 @@ markdown の書き方を覚えないと！
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/09/30/blogger/" title="Previous Post: Bloggerと併用予定です">&laquo; Bloggerと併用予定です</a>
+        <a class="basic-alignment left" href="/blog/2013/01/14/start-github-and-jenkins/" title="Previous Post: githubとjenkins、始めの一歩">&laquo; githubとjenkins、始めの一歩</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/10/03/markdown-cheat-sheat/" title="Next Post: Markdown記法のチートシート">Markdown記法のチートシート &raquo;</a>
       
     </p>
   </footer>
@@ -333,8 +359,8 @@ markdown の書き方を覚えないと！
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://mitsuhirookuno.github.com/blog/2012/09/30/orange-version-of-oct2-octopress-theme/';
-        var disqus_url = 'http://mitsuhirookuno.github.com/blog/2012/09/30/orange-version-of-oct2-octopress-theme/';
+        var disqus_identifier = 'http://mitsuhirookuno.github.com/blog/2013/01/24/unpluralize-activeresource/';
+        var disqus_url = 'http://mitsuhirookuno.github.com/blog/2013/01/24/unpluralize-activeresource/';
         var disqus_script = 'embed.js';
       
     (function () {

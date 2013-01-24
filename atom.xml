@@ -4,7 +4,7 @@
   <title><![CDATA[バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2013-01-14T14:58:22+09:00</updated>
+  <updated>2013-01-24T09:37:00+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -12,6 +12,49 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ActiveResourceで、複数形のルールを無効にする]]></title>
+    <link href="http://mitsuhirookuno.github.com/blog/2013/01/24/unpluralize-activeresource/"/>
+    <updated>2013-01-24T09:20:00+09:00</updated>
+    <id>http://mitsuhirookuno.github.com/blog/2013/01/24/unpluralize-activeresource</id>
+    <content type="html"><![CDATA[<p><em>ActiveResource</em> でも、 <em>ActiveRecord</em> と同じく<strong>複数形ルール</strong>を無効にしてみました</p>
+
+<p>既存のテーブルを已む無く利用する為(?) <strong>pluralize_table_names</strong> が設定出来る<em>ActiveRecord</em>と違って<br/>
+<em>ActiveResouce</em>は、<strong>そんな設定が出来ません</strong></p>
+
+<p>そもそも、そんな状況で複数形ルールを無視すんなよ！<strong>(#ﾟДﾟ)ｺﾞﾙｧ!! </strong><br/>
+って、お話もあるでしょうが、大人の事情もありまして</p>
+
+<p><strong>environment.rb</strong> に追記してみました。</p>
+
+<figure class='code'><figcaption><span> (environment.rb)</span> <a href='http://mitsuhirookuno.github.com/downloads/code/sample/unpluralize-activeresource/20130104/environment.rb'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1"># 複数形のルールを無効化</span>
+</span><span class='line'><span class="k">module</span> <span class="nn">ActiveResource</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">UnPluralizeBase</span> <span class="o">&lt;</span> <span class="no">ActiveResource</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>    <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
+</span><span class='line'>      <span class="k">def</span> <span class="nf">collection_name</span>
+</span><span class='line'>        <span class="vi">@collection_name</span> <span class="o">||=</span> <span class="n">element_name</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>多分、もっとcoolな方法があるとは思います。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[githubとjenkins、始めの一歩]]></title>
