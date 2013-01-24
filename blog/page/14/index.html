@@ -9,8 +9,8 @@
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="ActiveResource でも、 ActiveRecord と同じく複数形ルールを無効にしてみました 既存のテーブルを已む無く利用する為(?) pluralize_table_names が設定出来るActiveRecordと違って
-ActiveResouceは、そんな設定が出来ません &hellip;">
+  <meta name="description" content="テーマを色々変えてたら、作り直しになっちゃった。 (´；ω；｀)ｳｯ
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@ ActiveResouceは、そんな設定が出来ません &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/page/2/">
+  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/page/14/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -108,7 +108,7 @@ ActiveResouceは、そんな設定が出来ません &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/01/24/unpluralize-activeresource/">ActiveResourceで、複数形のルールを無効にする</a></h1>
+      <h1 class="entry-title"><a href="/blog/2012/09/30/hello-octopress/">こんにちは Octopress</a></h1>
     
     
       <p class="meta">
@@ -124,50 +124,17 @@ ActiveResouceは、そんな設定が出来ません &hellip;">
   
 
 
-<time datetime="2013-01-24T09:20:00+09:00" pubdate data-updated="true">2013年 01月 24日</time>
+<time datetime="2012-09-30T19:48:00+09:00" pubdate data-updated="true">2012年 09月 30日</time>
         
-         | <a href="/blog/2013/01/24/unpluralize-activeresource/#disqus_thread">Comments</a>
+         | <a href="/blog/2012/09/30/hello-octopress/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><em>ActiveResource</em> でも、 <em>ActiveRecord</em> と同じく<strong>複数形ルール</strong>を無効にしてみました</p>
-
-<p>既存のテーブルを已む無く利用する為(?) <strong>pluralize_table_names</strong> が設定出来る<em>ActiveRecord</em>と違って<br/>
-<em>ActiveResouce</em>は、<strong>そんな設定が出来ません</strong></p>
-
-<p>そもそも、そんな状況で複数形ルールを無視すんなよ！<strong>(#ﾟДﾟ)ｺﾞﾙｧ!! </strong><br/>
-って、お話もあるでしょうが、大人の事情もありまして</p>
-
-<p><strong>environment.rb</strong> に追記してみました。</p>
-
-<figure class='code'><figcaption><span> (environment.rb)</span> <a href='/downloads/code/sample/unpluralize-activeresource/20130104/environment.rb'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1"># 複数形のルールを無効化</span>
-</span><span class='line'><span class="k">module</span> <span class="nn">ActiveResource</span>
-</span><span class='line'>  <span class="k">class</span> <span class="nc">UnPluralizeBase</span> <span class="o">&lt;</span> <span class="no">ActiveResource</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>    <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
-</span><span class='line'>      <span class="k">def</span> <span class="nf">collection_name</span>
-</span><span class='line'>        <span class="vi">@collection_name</span> <span class="o">||=</span> <span class="n">element_name</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>多分、もっとcoolな方法があるとは思います。</p>
+  <div class="entry-content"><p>テーマを色々変えてたら、作り直しになっちゃった。<br/>
+ (´；ω；｀)ｳｯ</p>
 </div>
   
   
@@ -177,11 +144,9 @@ ActiveResouceは、そんな設定が出来ません &hellip;">
   
   <div class="pagination">
     
-      <a class="prev" href="/blog/page/3/">&larr; Older</a>
-    
     <a href="archives">Blog Archives</a>
     
-    <a class="next" href="/">Newer &rarr;</a>
+    <a class="next" href="/blog/page/13/">Newer &rarr;</a>
     
   </div>
 </div>

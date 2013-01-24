@@ -4,7 +4,7 @@
   <title><![CDATA[バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2013-01-24T09:37:00+09:00</updated>
+  <updated>2013-01-24T10:27:45+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -12,6 +12,46 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ActiveRecordは、Threadを分けたら自分でコネクションを閉じないと駄目だった]]></title>
+    <link href="http://mitsuhirookuno.github.com/blog/2013/01/24/activerecord-database-connections-will-not-be-closed/"/>
+    <updated>2013-01-24T10:05:00+09:00</updated>
+    <id>http://mitsuhirookuno.github.com/blog/2013/01/24/activerecord-database-connections-will-not-be-closed</id>
+    <content type="html"><![CDATA[<p>ある日から、作成中のアプリが</p>
+
+<pre><code>DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
+DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
+DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
+DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
+DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
+</code></pre>
+
+<p>等と、定期的にワーニングを出力するようになっていました。<br/>
+また、その際にコネクションを全部リフレッシュするのか <em>とっても遅くなる</em> のです。</p>
+
+<p>ぐぐってみても解らず、<strong>(´ε｀；)ｳｰﾝ…</strong> と、悩んでいましたが  <br/>
+ワーニングを見てみると、<strong>『スレッドを実行したら自分でコネクションを閉じてね。』</strong>
+とまんまの答えが・・・</p>
+
+<p>はい、閉じます。</p>
+
+<pre><code>Thread.new {
+  begin
+    block.call
+  rescue =&gt; ex
+    logger.info ex
+  ensure
+    ActiveRecord::Base.connection.close
+  end
+}
+</code></pre>
+
+<p>これは、恥ずかしい(；・∀・)   <br/>
+同じようなうっかりさんが、居ないことを願って・・・<br/>
+余談ですが、<strong>ruby</strong>で<strong>ensure</strong>を使うのって余り無いのでトキメキました</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ActiveResourceで、複数形のルールを無効にする]]></title>

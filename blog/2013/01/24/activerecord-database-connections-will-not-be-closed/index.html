@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>バトルプログラマー＠すま Blog</title>
+  <title>ActiveRecordは、Threadを分けたら自分でコネクションを閉じないと駄目だった - バトルプログラマー＠すま Blog</title>
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="ActiveResource でも、 ActiveRecord と同じく複数形ルールを無効にしてみました 既存のテーブルを已む無く利用する為(?) pluralize_table_names が設定出来るActiveRecordと違って
-ActiveResouceは、そんな設定が出来ません &hellip;">
+  <meta name="description" content="ある日から、作成中のアプリが DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ ActiveResouceは、そんな設定が出来ません &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/page/2/">
+  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/2013/01/24/activerecord-database-connections-will-not-be-closed/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -100,15 +99,12 @@ ActiveResouceは、そんな設定が出来ません &hellip;">
 </nav> -->
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/01/24/unpluralize-activeresource/">ActiveResourceで、複数形のルールを無効にする</a></h1>
+      <h1 class="entry-title">ActiveRecordは、Threadを分けたら自分でコネクションを閉じないと駄目だった</h1>
     
     
       <p class="meta">
@@ -124,67 +120,111 @@ ActiveResouceは、そんな設定が出来ません &hellip;">
   
 
 
-<time datetime="2013-01-24T09:20:00+09:00" pubdate data-updated="true">2013年 01月 24日</time>
+<time datetime="2013-01-24T10:05:00+09:00" pubdate data-updated="true">2013年 01月 24日</time>
         
-         | <a href="/blog/2013/01/24/unpluralize-activeresource/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><em>ActiveResource</em> でも、 <em>ActiveRecord</em> と同じく<strong>複数形ルール</strong>を無効にしてみました</p>
+<div class="entry-content"><p>ある日から、作成中のアプリが</p>
 
-<p>既存のテーブルを已む無く利用する為(?) <strong>pluralize_table_names</strong> が設定出来る<em>ActiveRecord</em>と違って<br/>
-<em>ActiveResouce</em>は、<strong>そんな設定が出来ません</strong></p>
+<pre><code>DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
+DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
+DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
+DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
+DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
+</code></pre>
 
-<p>そもそも、そんな状況で複数形ルールを無視すんなよ！<strong>(#ﾟДﾟ)ｺﾞﾙｧ!! </strong><br/>
-って、お話もあるでしょうが、大人の事情もありまして</p>
+<p>等と、定期的にワーニングを出力するようになっていました。<br/>
+また、その際にコネクションを全部リフレッシュするのか <em>とっても遅くなる</em> のです。</p>
 
-<p><strong>environment.rb</strong> に追記してみました。</p>
+<p>ぐぐってみても解らず、<strong>(´ε｀；)ｳｰﾝ…</strong> と、悩んでいましたが  <br/>
+ワーニングを見てみると、<strong>『スレッドを実行したら自分でコネクションを閉じてね。』</strong>
+とまんまの答えが・・・</p>
 
-<figure class='code'><figcaption><span> (environment.rb)</span> <a href='/downloads/code/sample/unpluralize-activeresource/20130104/environment.rb'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1"># 複数形のルールを無効化</span>
-</span><span class='line'><span class="k">module</span> <span class="nn">ActiveResource</span>
-</span><span class='line'>  <span class="k">class</span> <span class="nc">UnPluralizeBase</span> <span class="o">&lt;</span> <span class="no">ActiveResource</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>    <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
-</span><span class='line'>      <span class="k">def</span> <span class="nf">collection_name</span>
-</span><span class='line'>        <span class="vi">@collection_name</span> <span class="o">||=</span> <span class="n">element_name</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>はい、閉じます。</p>
 
+<pre><code>Thread.new {
+  begin
+    block.call
+  rescue =&gt; ex
+    logger.info ex
+  ensure
+    ActiveRecord::Base.connection.close
+  end
+}
+</code></pre>
 
-<p>多分、もっとcoolな方法があるとは思います。</p>
+<p>これは、恥ずかしい(；・∀・)   <br/>
+同じようなうっかりさんが、居ないことを願って・・・<br/>
+余談ですが、<strong>ruby</strong>で<strong>ensure</strong>を使うのって余り無いのでトキメキました</p>
 </div>
+
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Mitsuhiro Okuno</span></span>
+
+      
+
+
+
+
+
+
+
+
   
 
 
-    </article>
+<time datetime="2013-01-24T10:05:00+09:00" pubdate data-updated="true">2013年 01月 24日</time>
+      
+
+<span class="categories">
   
-  <div class="pagination">
+    <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+  
+</span>
+
+
+    </p>
     
-      <a class="prev" href="/blog/page/3/">&larr; Older</a>
-    
-    <a href="archives">Blog Archives</a>
-    
-    <a class="next" href="/">Newer &rarr;</a>
-    
-  </div>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mitsuhirookuno.github.com/blog/2013/01/24/activerecord-database-connections-will-not-be-closed/" data-via="bugslife" data-counturl="http://mitsuhirookuno.github.com/blog/2013/01/24/activerecord-database-connections-will-not-be-closed/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
 </div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/01/24/unpluralize-activeresource/" title="Previous Post: ActiveResourceで、複数形のルールを無効にする">&laquo; ActiveResourceで、複数形のルールを無効にする</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -240,7 +280,7 @@ ActiveResouceは、そんな設定が出来ません &hellip;">
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -257,7 +297,7 @@ ActiveResouceは、そんな設定が出来ません &hellip;">
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/mitsuhirookuno">@mitsuhirookuno</a> on GitHub
@@ -299,6 +339,7 @@ ActiveResouceは、そんな設定が出来ません &hellip;">
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -313,7 +354,10 @@ ActiveResouceは、そんな設定が出来ません &hellip;">
       var disqus_shortname = 'rubyprogrammer';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://mitsuhirookuno.github.com/blog/2013/01/24/activerecord-database-connections-will-not-be-closed/';
+        var disqus_url = 'http://mitsuhirookuno.github.com/blog/2013/01/24/activerecord-database-connections-will-not-be-closed/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
