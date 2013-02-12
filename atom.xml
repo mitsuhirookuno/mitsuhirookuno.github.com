@@ -4,7 +4,7 @@
   <title><![CDATA[バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2013-01-24T10:27:45+09:00</updated>
+  <updated>2013-02-12T14:52:44+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SVNのhookスクリプト]]></title>
+    <link href="http://mitsuhirookuno.github.com/blog/2013/02/12/svnhook/"/>
+    <updated>2013-02-12T13:49:00+09:00</updated>
+    <id>http://mitsuhirookuno.github.com/blog/2013/02/12/svnhook</id>
+    <content type="html"><![CDATA[<p>SVNにcommitが行われた際に、
+<em>jenkinsのJOBを起動するスクリプト</em><br/>
+を作成しました<br/>
+はい、あまり人に自慢出来る物ではないです・・・<br/>
+( ・´ｰ・｀)ﾄﾞﾔｧ</p>
+
+<p><strong> hookスクリプト（本体) </strong></p>
+
+<figure class='code'><figcaption><span> (svnhook.rb)</span> <a href='http://mitsuhirookuno.github.com/downloads/code/sample/svnhook/svnhook.rb'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1">#!/usr/bin/env ruby</span>
+</span><span class='line'><span class="nb">require</span> <span class="s2">&quot;yaml&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">repository</span> <span class="o">=</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+</span><span class='line'><span class="n">revision</span>   <span class="o">=</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'><span class="no">SETTING</span>    <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="no">ARGV</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">changed_output</span> <span class="o">=</span> <span class="sb">`</span><span class="si">#{</span><span class="no">SETTING</span><span class="o">[</span><span class="s1">&#39;PATH_TO_SVNLOOK&#39;</span><span class="o">]</span><span class="si">}</span><span class="sb"> changed </span><span class="si">#{</span><span class="n">repository</span><span class="si">}</span><span class="sb"> -r </span><span class="si">#{</span><span class="n">revision</span><span class="si">}</span><span class="sb">`</span>
+</span><span class='line'><span class="no">SETTING</span><span class="o">[</span><span class="s1">&#39;PATH_AND_URL_PAIR&#39;</span><span class="o">].</span><span class="n">each</span><span class="p">{</span> <span class="o">|</span> <span class="n">match</span><span class="p">,</span> <span class="n">url</span> <span class="o">|</span>
+</span><span class='line'>  <span class="sb">`curl </span><span class="si">#{</span><span class="n">url</span><span class="si">}</span><span class="sb">`</span> <span class="k">if</span> <span class="n">changed_output</span><span class="o">.</span><span class="n">match</span><span class="p">(</span> <span class="n">match</span> <span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong> hookスクリプト（設定ファイル） </strong></p>
+
+<figure class='code'><figcaption><span> (svnhook.yaml)</span> <a href='http://mitsuhirookuno.github.com/downloads/code/sample/svnhook/svnhook.yaml'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">PATH_TO_SVNLOOK</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">/usr/local/subversion-1.6.11/bin/svnlook</span>
+</span><span class='line'><span class="l-Scalar-Plain">PATH_AND_URL_PAIR</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">trunk/YourProject/app</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">http://jenkins/job/YourProject/build?delay=0sec</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong> post-commit導入例 </strong><br/>
+もしこのスクリプトを利用する酔狂な人が居た場合は、post-commitへ<br/>
+こーんな感じで追記してみてください</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>${SVN_ROOT}/hooks/jenkins_hook.rb $REPOS $REV ${SVN_ROOT}/hooks/jenkins_hook.yaml </span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ActiveRecordは、Threadを分けたら自分でコネクションを閉じないと駄目だった]]></title>
@@ -460,7 +527,7 @@ ctrl-b - page up
 
 <h4>こんな <strong>スクリプト</strong> で、集計した所</h4>
 
-<figure class='code'><figcaption><span> (passwod_failed_check.rb)</span> <a href='http://mitsuhirookuno.github.com/downloads/code/sample/passwod_failed_check.rb'>download</a></figcaption>
+<figure class='code'><figcaption><span> (password_failed_check.rb)</span> <a href='http://mitsuhirookuno.github.com/downloads/code/sample/password_failed_check.rb'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>

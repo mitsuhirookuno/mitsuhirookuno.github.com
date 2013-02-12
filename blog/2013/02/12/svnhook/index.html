@@ -5,11 +5,26 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Markdown - バトルプログラマー＠すま Blog</title>
+  <title>SVNのhookスクリプト - バトルプログラマー＠すま Blog</title>
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="Category: Markdown">
+  <meta name="description" content="SVNにcommitが行われた際に、
+jenkinsのJOBを起動するスクリプト
+を作成しました
+はい、あまり人に自慢出来る物ではないです・・・
+( ・´ｰ・｀)ﾄﾞﾔｧ hookスクリプト（本体) (svnhook.rb) download 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+#!/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +33,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://mitsuhirookuno.github.comblog/categories/markdown/">
+  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/2013/02/12/svnhook/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -100,36 +115,155 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Markdown</h1>
+    
+      <h1 class="entry-title">SVNのhookスクリプト</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-12T13:49:00+09:00" pubdate data-updated="true">2013年 02月 12日</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>SVNにcommitが行われた際に、
+<em>jenkinsのJOBを起動するスクリプト</em><br/>
+を作成しました<br/>
+はい、あまり人に自慢出来る物ではないです・・・<br/>
+( ・´ｰ・｀)ﾄﾞﾔｧ</p>
 
-  
-  <h2>2012</h2>
+<p><strong> hookスクリプト（本体) </strong></p>
 
-<article>
-  
-<h1><a href="/blog/2012/10/03/markdown-cheat-sheat/">Markdown記法のチートシート</a></h1>
-<time datetime="2012-10-03T08:45:00+09:00" pubdate><span class='month'>Oct</span> <span class='day'>03</span> <span class='year'>2012</span></time>
+<figure class='code'><figcaption><span> (svnhook.rb)</span> <a href='/downloads/code/sample/svnhook/svnhook.rb'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1">#!/usr/bin/env ruby</span>
+</span><span class='line'><span class="nb">require</span> <span class="s2">&quot;yaml&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">repository</span> <span class="o">=</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+</span><span class='line'><span class="n">revision</span>   <span class="o">=</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'><span class="no">SETTING</span>    <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="no">ARGV</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">changed_output</span> <span class="o">=</span> <span class="sb">`</span><span class="si">#{</span><span class="no">SETTING</span><span class="o">[</span><span class="s1">&#39;PATH_TO_SVNLOOK&#39;</span><span class="o">]</span><span class="si">}</span><span class="sb"> changed </span><span class="si">#{</span><span class="n">repository</span><span class="si">}</span><span class="sb"> -r </span><span class="si">#{</span><span class="n">revision</span><span class="si">}</span><span class="sb">`</span>
+</span><span class='line'><span class="no">SETTING</span><span class="o">[</span><span class="s1">&#39;PATH_AND_URL_PAIR&#39;</span><span class="o">].</span><span class="n">each</span><span class="p">{</span> <span class="o">|</span> <span class="n">match</span><span class="p">,</span> <span class="n">url</span> <span class="o">|</span>
+</span><span class='line'>  <span class="sb">`curl </span><span class="si">#{</span><span class="n">url</span><span class="si">}</span><span class="sb">`</span> <span class="k">if</span> <span class="n">changed_output</span><span class="o">.</span><span class="n">match</span><span class="p">(</span> <span class="n">match</span> <span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/markdown/'>Markdown</a>, <a class='category' href='/blog/categories/octopress/'>Octopress</a></span>
-</footer>
+
+<p><strong> hookスクリプト（設定ファイル） </strong></p>
+
+<figure class='code'><figcaption><span> (svnhook.yaml)</span> <a href='/downloads/code/sample/svnhook/svnhook.yaml'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">PATH_TO_SVNLOOK</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">/usr/local/subversion-1.6.11/bin/svnlook</span>
+</span><span class='line'><span class="l-Scalar-Plain">PATH_AND_URL_PAIR</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">trunk/YourProject/app</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">http://jenkins/job/YourProject/build?delay=0sec</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<p><strong> post-commit導入例 </strong><br/>
+もしこのスクリプトを利用する酔狂な人が居た場合は、post-commitへ<br/>
+こーんな感じで追記してみてください</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>${SVN_ROOT}/hooks/jenkins_hook.rb $REPOS $REV ${SVN_ROOT}/hooks/jenkins_hook.yaml </span></code></pre></td></tr></table></div></figure>
+
+
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Mitsuhiro Okuno</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-12T13:49:00+09:00" pubdate data-updated="true">2013年 02月 12日</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/jenkins/'>Jenkins</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mitsuhirookuno.github.com/blog/2013/02/12/svnhook/" data-via="bugslife" data-counturl="http://mitsuhirookuno.github.com/blog/2013/02/12/svnhook/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/01/24/activerecord-database-connections-will-not-be-closed/" title="Previous Post: ActiveRecordは、Threadを分けたら自分でコネクションを閉じないと駄目だった">&laquo; ActiveRecordは、Threadを分けたら自分でコネクションを閉じないと駄目だった</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -262,7 +396,10 @@
       var disqus_shortname = 'rubyprogrammer';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://mitsuhirookuno.github.com/blog/2013/02/12/svnhook/';
+        var disqus_url = 'http://mitsuhirookuno.github.com/blog/2013/02/12/svnhook/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

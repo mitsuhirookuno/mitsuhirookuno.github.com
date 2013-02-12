@@ -1,0 +1,6 @@
+PATH_TO_SVNLOOK:
+  /usr/local/subversion-1.6.11/bin/svnlook
+PATH_AND_URL_PAIR:
+  - - trunk/YourProject/app
+    - http://jenkins/job/YourProject/build?delay=0sec
+
