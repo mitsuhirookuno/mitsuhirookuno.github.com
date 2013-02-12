@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Jenkins | バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/blog/categories/jenkins/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2013-02-12T14:52:44+09:00</updated>
+  <updated>2013-02-12T15:59:02+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -68,7 +68,7 @@
 もしこのスクリプトを利用する酔狂な人が居た場合は、post-commitへ<br/>
 こーんな感じで追記してみてください
 <code>
-${SVN_ROOT}/hooks/jenkins_hook.rb $REPOS $REV ${SVN_ROOT}/hooks/jenkins_hook.yaml
+${SVN_ROOT}/hooks/svnhook.rb $REPOS $REV ${SVN_ROOT}/hooks/svnhook.yaml
 </code></p>
 ]]></content>
   </entry>

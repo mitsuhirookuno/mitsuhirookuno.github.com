@@ -4,7 +4,7 @@
   <title><![CDATA[バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2013-02-12T14:52:44+09:00</updated>
+  <updated>2013-02-12T15:59:02+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -73,7 +73,7 @@
 こーんな感じで追記してみてください</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>${SVN_ROOT}/hooks/jenkins_hook.rb $REPOS $REV ${SVN_ROOT}/hooks/jenkins_hook.yaml </span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>${SVN_ROOT}/hooks/svnhook.rb $REPOS $REV ${SVN_ROOT}/hooks/svnhook.yaml </span></code></pre></td></tr></table></div></figure>
 
 
 
