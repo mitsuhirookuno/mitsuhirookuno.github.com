@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2013-02-12T15:59:02+09:00</updated>
+  <updated>2013-02-12T16:32:02+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -37,6 +37,10 @@
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
 </pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1">#!/usr/bin/env ruby</span>
 </span><span class='line'><span class="nb">require</span> <span class="s2">&quot;yaml&quot;</span>
 </span><span class='line'>
@@ -46,21 +50,30 @@
 </span><span class='line'>
 </span><span class='line'><span class="n">changed_output</span> <span class="o">=</span> <span class="sb">`</span><span class="si">#{</span><span class="no">SETTING</span><span class="o">[</span><span class="s1">&#39;PATH_TO_SVNLOOK&#39;</span><span class="o">]</span><span class="si">}</span><span class="sb"> changed </span><span class="si">#{</span><span class="n">repository</span><span class="si">}</span><span class="sb"> -r </span><span class="si">#{</span><span class="n">revision</span><span class="si">}</span><span class="sb">`</span>
 </span><span class='line'><span class="no">SETTING</span><span class="o">[</span><span class="s1">&#39;PATH_AND_URL_PAIR&#39;</span><span class="o">].</span><span class="n">each</span><span class="p">{</span> <span class="o">|</span> <span class="n">match</span><span class="p">,</span> <span class="n">url</span> <span class="o">|</span>
-</span><span class='line'>  <span class="sb">`curl </span><span class="si">#{</span><span class="n">url</span><span class="si">}</span><span class="sb">`</span> <span class="k">if</span> <span class="n">changed_output</span><span class="o">.</span><span class="n">match</span><span class="p">(</span> <span class="n">match</span> <span class="p">)</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">match</span><span class="o">.</span><span class="n">instance_of?</span><span class="p">(</span><span class="no">Regexp</span><span class="p">)</span>
+</span><span class='line'>    <span class="sb">`curl </span><span class="si">#{</span><span class="n">url</span><span class="si">}</span><span class="sb">`</span> <span class="k">if</span> <span class="n">changed_output</span><span class="o">.</span><span class="n">match</span><span class="p">(</span> <span class="n">match</span> <span class="p">)</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="sb">`curl </span><span class="si">#{</span><span class="n">url</span><span class="si">}</span><span class="sb">`</span> <span class="k">if</span> <span class="n">changed_output</span><span class="o">.</span><span class="n">match</span><span class="p">(</span> <span class="no">Regexp</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span> <span class="n">match</span> <span class="p">)</span> <span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p><strong> hookスクリプト（設定ファイル） </strong>
+正規表現も利用可能です<br/>
 <div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span> (svnhook.yaml)</span> <a href='/downloads/code/sample/svnhook/svnhook.yaml'>download</a></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
 </pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">PATH_TO_SVNLOOK</span><span class="p-Indicator">:</span>
 </span><span class='line'>  <span class="l-Scalar-Plain">/usr/local/subversion-1.6.11/bin/svnlook</span>
 </span><span class='line'><span class="l-Scalar-Plain">PATH_AND_URL_PAIR</span><span class="p-Indicator">:</span>
 </span><span class='line'>  <span class="p-Indicator">-</span> <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">trunk/YourProject/app</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">http://jenkins/job/YourProject/build?delay=0sec</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="p-Indicator">-</span> <span class="kt">!ruby</span><span class="l-Scalar-Plain">/regexp /trunk\/YourProject\/(app|spec|lib)/</span>
 </span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">http://jenkins/job/YourProject/build?delay=0sec</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
