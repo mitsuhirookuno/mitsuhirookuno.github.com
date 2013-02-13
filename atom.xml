@@ -4,7 +4,7 @@
   <title><![CDATA[バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2013-02-12T16:32:02+09:00</updated>
+  <updated>2013-02-13T09:10:15+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -20,9 +20,10 @@
     <id>http://mitsuhirookuno.github.com/blog/2013/02/12/svnhook</id>
     <content type="html"><![CDATA[<p>SVNにcommitが行われた際に、
 <em>jenkinsのJOBを起動するスクリプト</em><br/>
-を作成しました<br/>
+を作成しました。<br/>
 はい、あまり人に自慢出来る物ではないです・・・<br/>
-( ・´ｰ・｀)ﾄﾞﾔｧ</p>
+( ・´ｰ・｀)ﾄﾞﾔｧ <br/>
+svnサーバーのrubyが極めて古い場合などに有効です</p>
 
 <p><strong> hookスクリプト（本体) </strong></p>
 
@@ -60,7 +61,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong> hookスクリプト（設定ファイル） </strong>
+<p><strong> hookスクリプト（設定ファイル） </strong><br/>
 正規表現も利用可能です</p>
 
 <figure class='code'><figcaption><span> (svnhook.yaml)</span> <a href='http://mitsuhirookuno.github.com/downloads/code/sample/svnhook/svnhook.yaml'>download</a></figcaption>
