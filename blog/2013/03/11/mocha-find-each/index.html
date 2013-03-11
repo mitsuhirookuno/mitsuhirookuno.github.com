@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - バトルプログラマー＠すま Blog</title>
+  <title>Rspecでblockを置き換える(mocha)の場合 - バトルプログラマー＠すま Blog</title>
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="Blog Archive 2013 Rspecでblockを置き換える(mocha)の場合
-Mar 11 2013 posted in Ruby SVNのhookスクリプト
-Feb 12 2013 posted in Jenkins, Ruby ActiveRecordは、 &hellip;">
+  <meta name="description" content="Rspecでテストを作成中、find_eachを置き換えてテストを実行したい欲求が。。。
+で、ブロックをstubにする方法は、手持ちの参考書では見つからないので、調べてみました。
+利用しているmochのライブラリによって、書き方が異なる様です。が・・・ yieldsを使えって事みたい &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@ Feb 12 2013 posted in Jenkins, Ruby ActiveRecordは、 &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/archives/">
+  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/2013/03/11/mocha-find-each/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -102,249 +102,116 @@ Feb 12 2013 posted in Jenkins, Ruby ActiveRecordは、 &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">Rspecでblockを置き換える(mocha)の場合</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-11T12:53:00+09:00" pubdate data-updated="true">2013年 03月 11日</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p>Rspecでテストを作成中、find_eachを置き換えてテストを実行したい欲求が。。。<br/>
+で、ブロックをstubにする方法は、手持ちの参考書では見つからないので、調べてみました。<br/>
+利用しているmochのライブラリによって、書き方が異なる様です。が・・・</p>
 
-  
-  <h2>2013</h2>
+<h2>yieldsを使えって事みたい</h2>
 
-<article>
-  
-<h1><a href="/blog/2013/03/11/mocha-find-each/">Rspecでblockを置き換える(mocha)の場合</a></h1>
-<time datetime="2013-03-11T12:53:00+09:00" pubdate><span class='month'>Mar</span> <span class='day'>11</span> <span class='year'>2013</span></time>
+<p>私が利用している<strong>mocha</strong>の場合、<strong>yields</strong>で置き換える事が出来ます。</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ruby/'>Ruby</a></span>
-</footer>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>User.stubs(:find_each).yields( User.new( :name 'neko' ) )</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<p>メソッドチェーンで複数指定すると・・・<br/>
+一回目の呼び出し、二回目の呼び出しと（二回目以降は後勝ち）内容を変えることが出来ます。</p>
 
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>User.stubs(:find_each).yields( User.new( :name 'neko' ) ).then.yields( User.new( :name 'inu' ) )</span></code></pre></td></tr></table></div></figure>
 
 
-<article>
-  
-<h1><a href="/blog/2013/02/12/svnhook/">SVNのhookスクリプト</a></h1>
-<time datetime="2013-02-12T13:49:00+09:00" pubdate><span class='month'>Feb</span> <span class='day'>12</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/jenkins/'>Jenkins</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/01/24/activerecord-database-connections-will-not-be-closed/">ActiveRecordは、Threadを分けたら自分でコネクションを閉じないと駄目だった</a></h1>
-<time datetime="2013-01-24T10:05:00+09:00" pubdate><span class='month'>Jan</span> <span class='day'>24</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ruby/'>Ruby</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/01/24/unpluralize-activeresource/">ActiveResourceで、複数形のルールを無効にする</a></h1>
-<time datetime="2013-01-24T09:20:00+09:00" pubdate><span class='month'>Jan</span> <span class='day'>24</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ruby/'>Ruby</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/01/14/start-github-and-jenkins/">githubとjenkins、始めの一歩</a></h1>
-<time datetime="2013-01-14T00:04:00+09:00" pubdate><span class='month'>Jan</span> <span class='day'>14</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/vps/'>VPS</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/01/13/hello-baby/">こんにちは、赤ちゃん</a></h1>
-<time datetime="2013-01-13T16:46:00+09:00" pubdate><span class='month'>Jan</span> <span class='day'>13</span> <span class='year'>2013</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/baby/'>Baby</a></span>
-</footer>
-
-
-</article>
-
-
-
-  
-  <h2>2012</h2>
-
-<article>
-  
-<h1><a href="/blog/2012/12/30/kindle-paperwhite/">Kindle-Paperwhite(Wifi)買いました！</a></h1>
-<time datetime="2012-12-30T23:47:00+09:00" pubdate><span class='month'>Dec</span> <span class='day'>30</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/kindle/'>kindle</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/11/04/rubypython/">RubyPython、これはいいものだ</a></h1>
-<time datetime="2012-11-04T23:27:00+09:00" pubdate><span class='month'>Nov</span> <span class='day'>04</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/python/'>Python</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/10/26/cheat-sheets/">チートしようぜ！(ruby cheat sheets)</a></h1>
-<time datetime="2012-10-26T09:13:00+09:00" pubdate><span class='month'>Oct</span> <span class='day'>26</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/gem/'>Gem</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/10/25/ubuntu1210update/">VPSのUbuntuを1210へアップデート</a></h1>
-<time datetime="2012-10-25T08:49:00+09:00" pubdate><span class='month'>Oct</span> <span class='day'>25</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ubuntu/'>Ubuntu</a>, <a class='category' href='/blog/categories/vps/'>VPS</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/10/10/vps-ssh-port/">VPSのssh用Portを変更しました</a></h1>
-<time datetime="2012-10-10T09:27:00+09:00" pubdate><span class='month'>Oct</span> <span class='day'>10</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/vps/'>VPS</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/10/08/zgok-doufu/">ズゴック豆腐を買いました</a></h1>
-<time datetime="2012-10-08T22:39:00+09:00" pubdate><span class='month'>Oct</span> <span class='day'>08</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/gundam/'>Gundam</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/10/03/markdown-cheat-sheat/">Markdown記法のチートシート</a></h1>
-<time datetime="2012-10-03T08:45:00+09:00" pubdate><span class='month'>Oct</span> <span class='day'>03</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/markdown/'>Markdown</a>, <a class='category' href='/blog/categories/octopress/'>Octopress</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/09/30/orange-version-of-oct2-octopress-theme/">Octopressにテーマを適用しました</a></h1>
-<time datetime="2012-09-30T20:38:00+09:00" pubdate><span class='month'>Sep</span> <span class='day'>30</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/octopress/'>Octopress</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/09/30/blogger/">Bloggerと併用予定です</a></h1>
-<time datetime="2012-09-30T20:21:00+09:00" pubdate><span class='month'>Sep</span> <span class='day'>30</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/blogger/'>blogger</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/09/30/hello-octopress/">こんにちは Octopress</a></h1>
-<time datetime="2012-09-30T19:48:00+09:00" pubdate><span class='month'>Sep</span> <span class='day'>30</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/octopress/'>Octopress</a></span>
-</footer>
-
-
-</article>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Mitsuhiro Okuno</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-11T12:53:00+09:00" pubdate data-updated="true">2013年 03月 11日</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mitsuhirookuno.github.com/blog/2013/03/11/mocha-find-each/" data-via="bugslife" data-counturl="http://mitsuhirookuno.github.com/blog/2013/03/11/mocha-find-each/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/02/12/svnhook/" title="Previous Post: SVNのhookスクリプト">&laquo; SVNのhookスクリプト</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -477,7 +344,10 @@ Feb 12 2013 posted in Jenkins, Ruby ActiveRecordは、 &hellip;">
       var disqus_shortname = 'rubyprogrammer';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://mitsuhirookuno.github.com/blog/2013/03/11/mocha-find-each/';
+        var disqus_url = 'http://mitsuhirookuno.github.com/blog/2013/03/11/mocha-find-each/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
