@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Etc | バトルプログラマー＠すま Blog]]></title>
+  <link href="http://mitsuhirookuno.github.com/blog/categories/etc/atom.xml" rel="self"/>
+  <link href="http://mitsuhirookuno.github.com/"/>
+  <updated>2013-03-21T02:05:24+09:00</updated>
+  <id>http://mitsuhirookuno.github.com/</id>
+  <author>
+    <name><![CDATA[Mitsuhiro Okuno]]></name>
+    <email><![CDATA[mitsuhiro.okuno＠gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[2013年の桜]]></title>
+    <link href="http://mitsuhirookuno.github.com/blog/2013/03/21/cherryblossom2013/"/>
+    <updated>2013-03-21T01:49:00+09:00</updated>
+    <id>http://mitsuhirookuno.github.com/blog/2013/03/21/cherryblossom2013</id>
+    <content type="html"><![CDATA[<h2>2013年は例年よりやや早く、桜が咲いています</h2>
+
+<p><img src="https://dl.dropbox.com/u/15789065/Octopress/20130320/DSC02524.JPG" title="今年の桜" alt="今年の桜" /></p>
+
+<p>家族三人でのお花見は<strong>初めてです</strong>。<br/>
+赤羽と言えば、<em>エレカシ</em>・・・そして<strong>桜</strong>ですな。</p>
+
+<p>我が家の定番は荒川の川原の桜ですが、川の風で寒いせいか開花はやや遅れます。</p>
+]]></content>
+  </entry>
+  
+</feed>

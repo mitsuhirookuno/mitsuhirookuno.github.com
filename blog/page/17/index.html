@@ -9,9 +9,8 @@
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="VPS にドメインを割り当ててから、一ヶ月が経過した所です。
-今の所はアクセスも無く、そんなに攻撃にさらされることもあるまいと思いました。 が・・・
-sshのログ (/var/log/auth.log)を見たら、かなりの攻撃の後がありました。 こんな スクリプト で、集計した所 ( &hellip;">
+  <meta name="description" content="テーマを色々変えてたら、作り直しになっちゃった。 (´；ω；｀)ｳｯ
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@ sshのログ (/var/log/auth.log)を見たら、かなりの攻撃の後があり
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/page/12/">
+  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/page/17/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -109,7 +108,7 @@ sshのログ (/var/log/auth.log)を見たら、かなりの攻撃の後があり
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/10/10/vps-ssh-port/">VPSのssh用Portを変更しました</a></h1>
+      <h1 class="entry-title"><a href="/blog/2012/09/30/hello-octopress/">こんにちは Octopress</a></h1>
     
     
       <p class="meta">
@@ -125,95 +124,17 @@ sshのログ (/var/log/auth.log)を見たら、かなりの攻撃の後があり
   
 
 
-<time datetime="2012-10-10T09:27:00+09:00" pubdate data-updated="true">2012年 10月 10日</time>
+<time datetime="2012-09-30T19:48:00+09:00" pubdate data-updated="true">2012年 09月 30日</time>
         
-         | <a href="/blog/2012/10/10/vps-ssh-port/#disqus_thread">Comments</a>
+         | <a href="/blog/2012/09/30/hello-octopress/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><em>VPS</em> にドメインを割り当ててから、一ヶ月が経過した所です。<br />
-今の所はアクセスも無く、そんなに攻撃にさらされることもあるまいと思いました。<br /></p>
-
-<br />
-
-
-<p>が・・・<br />
-<em>sshのログ</em> (/var/log/auth.log)を見たら、かなりの攻撃の後がありました。<br /></p>
-
-<br />
-
-
-<h4>こんな <strong>スクリプト</strong> で、集計した所</h4>
-
-<figure class='code'><figcaption><span> (password_failed_check.rb)</span> <a href='/downloads/code/sample/password_failed_check.rb'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1">#!/usr/bin/env ruby</span>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;pp&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">REGEXP_AUTH_FAILED</span><span class="o">=</span><span class="sr">/Failed password for (root|invalid user ([^ ]+)) from (\d+\.\d+\.\d+\.\d+) port \d+ ssh2$/</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">setDenyHostMap</span><span class="p">(</span> <span class="n">map</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">ip_address</span> <span class="p">)</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">map</span><span class="o">.</span><span class="n">key?</span><span class="p">(</span><span class="n">ip_address</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">user_map</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="n">fetch</span> <span class="n">ip_address</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="n">user_map</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">user_map</span><span class="o">.</span><span class="n">key?</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">user_map</span><span class="o">.</span><span class="n">store</span><span class="p">(</span> <span class="n">user</span><span class="p">,</span> <span class="p">(</span><span class="n">user_map</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">user</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="n">user_map</span><span class="o">.</span><span class="n">store</span><span class="p">(</span> <span class="n">user</span><span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>    <span class="n">map</span><span class="o">.</span><span class="n">store</span><span class="p">(</span> <span class="n">ip_address</span><span class="p">,</span> <span class="n">user_map</span> <span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">deny_host_map</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/var/log/auth.log&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sr">/\n/</span><span class="p">)</span><span class="o">.</span><span class="n">each</span><span class="p">{</span><span class="o">|</span><span class="n">line</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">line</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span><span class="no">REGEXP_AUTH_FAILED</span><span class="p">){</span><span class="o">|</span> <span class="n">root</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">ip_address</span> <span class="o">|</span>
-</span><span class='line'>    <span class="n">setDenyHostMap</span><span class="p">(</span> <span class="n">deny_host_map</span><span class="p">,</span> <span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">nil?</span><span class="p">)?</span> <span class="n">root</span><span class="ss">:user</span><span class="p">,</span> <span class="n">ip_address</span> <span class="p">)</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="n">deny_host_map</span><span class="o">.</span><span class="n">pretty_inspect</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>なんと13個のホストから、 合計2000回ほど・・・∑(・ω・ﾉ)ﾉ</code></p>
-
-<br />
-
-
-<p>これは放置は危険ですし、 /etc/hosts.deny で対応するには数的に骨が折れそうなので<br />
-今回は、Portを49152以降のDYNAMICな領域に移しました。（REGISTEREDの方が良いかな？）<br />
- (；´Д`A &#8220;`<br /></p>
+  <div class="entry-content"><p>テーマを色々変えてたら、作り直しになっちゃった。<br/>
+ (´；ω；｀)ｳｯ</p>
 </div>
   
   
@@ -223,11 +144,9 @@ sshのログ (/var/log/auth.log)を見たら、かなりの攻撃の後があり
   
   <div class="pagination">
     
-      <a class="prev" href="/blog/page/13/">&larr; Older</a>
-    
     <a href="archives">Blog Archives</a>
     
-    <a class="next" href="/blog/page/11/">Newer &rarr;</a>
+    <a class="next" href="/blog/page/16/">Newer &rarr;</a>
     
   </div>
 </div>
