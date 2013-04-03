@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2013-03-21T02:05:24+09:00</updated>
+  <updated>2013-04-03T14:38:14+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -12,6 +12,70 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ActiveRecord経由でMySQLのプロシジャーを実行]]></title>
+    <link href="http://mitsuhirookuno.github.com/blog/2013/04/03/active-record-use-mysql-procedure/"/>
+    <updated>2013-04-03T14:10:00+09:00</updated>
+    <id>http://mitsuhirookuno.github.com/blog/2013/04/03/active-record-use-mysql-procedure</id>
+    <content type="html"><![CDATA[<h2>世の中、綺麗事では生きていけません。</h2>
+
+<p>Railsを使ったからといって、既存の資産を無視しては生きられない事が多い<br/>
+<strong>世知辛い世の中</strong>です。</p>
+
+<p>今回はプロシジャーをRails3から利用する必要があったので<br/>
+ActiveRecordから、接続を頂いて・・・( ´∀｀)bｸﾞｯ!  <br/>
+と、機能を追加しました。
+```
+class ActiveRecord::Base
+  def self.use_connection( &amp;block )</p>
+
+<pre><code>block.call(self.connection)
+</code></pre>
+
+<p>  end
+end
+<code>
+メソッドを追加して、ホイホイっと実行してみましたが。。。  
+一応動くのですが、一度プロシジャーを実行すると他のクエリーが実行出来なくなってしまいます。
+</code>
+Mysql2::Error: Commands out of sync; you can't run this command now: call dummyProc();
+ActiveRecord::StatementInvalid: Mysql2::Error: Commands out of sync; you can't run this command now: call dummyProc();
+from /home/okuno/workspace/QRapi/vendor/bundler/ruby/1.9.1/gems/activerecord-3.2.9/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:245:
+```</p>
+
+<h3>もう、駄目ぽ  　</h3>
+
+<p>　  <br/>
+　  <br/>
+　  <br/>
+　  <br/>
+　  <br/>
+　</p>
+
+<h2>で、対応</h2>
+
+<p>どうやら、プロシジャーの場合は問い合わせの終了が終わってない扱いになってしまっている、と思われます。<br/>
+このメソッドでは、ブロックを抜けたらクエリーは終了（という前提）で、以下の様にして対応しました。<br/>
+```
+class ActiveRecord::Base
+  def self.use_connection( &amp;block )</p>
+
+<pre><code>begin
+  block.call(self.connection)
+ensure
+  self.connection.reconnect! unless connection.active?
+end
+</code></pre>
+
+<p>  end
+end
+```
+どやぁ！(￣ー￣)<br/>
+と、したい所ですが、下記のサイトを参考にさせて頂きました。m(__)m <br/>
+<a href="http://ursdiganta.blogspot.jp/2011/07/mysql2-and-stored-procedures-in-rails-3.html" title="参考にさせて頂いたページへ飛びます">参考にさせて頂いたページ</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Rspecでblockを置き換える(mocha)の場合]]></title>
@@ -188,37 +252,6 @@ DEPRECATION WARNING: Database connections will not be closed automatically, plea
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 多分、もっとcoolな方法があるとは思います。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[githubとjenkins、始めの一歩]]></title>
-    <link href="http://mitsuhirookuno.github.com/blog/2013/01/14/start-github-and-jenkins/"/>
-    <updated>2013-01-14T00:04:00+09:00</updated>
-    <id>http://mitsuhirookuno.github.com/blog/2013/01/14/start-github-and-jenkins</id>
-    <content type="html"><![CDATA[<p>こつこつと<a href="http://github.com/" title="github公式へ飛びます">github</a>と<a href="http://jenkins-ci.org/" title="jenkins公式へ飛びます">jenkins</a>の練習をしています。  <br/>
-<strong>職場でもjenkinsは導入している</strong>のですが、スケジュールを理由に<em>満足のいく状態を保てません</em>。</p>
-
-<p>仕事は仕事として、個人的なVPS上で<strong>どんな事が出来そうなのか？</strong>を、試しています。<br/>
-現在の進捗は、<a href="http://github.com/mitsuhirookuno" title="私のgithubです">俺々github</a>と<a href="http://jenkins.rubyprogrammer.info/" title="私のVPS上のjenkinsです">俺々jenkins</a>を連携させ、テストやコード解析を行う手順のみが完成<br/>
-<em>アプリケーション自体は、ハローワールド的</em>なありさまです。</p>
-
-<h3>尚、現在動作している筈の解析ツールは・・・</h3>
-
-<ul>
-<li><a href="http://ruby.sadi.st/Flog.html" title="flogのページへ飛びます">flog</a>でコードの複雑さ</li>
-<li><a href="http://github.com/seattlerb/flay" title="flayのページへ飛びます">flay</a>で類似性</li>
-<li><a href="http://roodi.rubyforge.org/" title="roodiのページへ飛びます">roodi</a>でコードの匂い</li>
-<li><a href="http://brakemanscanner.org/" title="brakemanのページへ飛びます">brakeman</a> でセキュリティ
-をチェック出来る筈です。</li>
-</ul>
-
-
-<p>何か課題をつくり、この構成でどの程度やっていけるのか？が</p>
-
-<h1>今年の課題です。</h1>
-
-<p><a href="http://jenkins.rubyprogrammer.info/job/Rails3Tutorial/" title="こんな感じです">jenkinsで視覚化</a>するとモチベーションあがりますね～！</p>
 ]]></content>
   </entry>
   

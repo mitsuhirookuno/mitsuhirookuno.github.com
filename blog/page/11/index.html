@@ -9,9 +9,9 @@
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="Ubuntu
-のパッケージ管理は優秀で、1204LTS(Precise Pangolin)では脳天気にパッケージを更新しても問題は一度もありませんでした。
-ちょっとこれに気を良くして・・・現在最新である1210(Quantal Quetzal)へ、無謀にも挑戦しようと考えました。 今思うと、 &hellip;">
+  <meta name="description" content="夜中にmochaでのテストの書き方が解らね～とネットを徘徊していると。。。 便利なサイトを発見しました。 mochaチートシート
+のページです。
+チートシート（カンニングペーパー）の言葉のイメージは悪いものの、先駆者が作ってくれた技術Tipsメモって事です。 どうやら、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,7 +109,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/10/25/ubuntu1210update/">VPSのUbuntuを1210へアップデート</a></h1>
+      <h1 class="entry-title"><a href="/blog/2012/10/26/cheat-sheets/">チートしようぜ！(ruby Cheat Sheets)</a></h1>
     
     
       <p class="meta">
@@ -125,36 +125,71 @@
   
 
 
-<time datetime="2012-10-25T08:49:00+09:00" pubdate data-updated="true">2012年 10月 25日</time>
+<time datetime="2012-10-26T09:13:00+09:00" pubdate data-updated="true">2012年 10月 26日</time>
         
-         | <a href="/blog/2012/10/25/ubuntu1210update/#disqus_thread">Comments</a>
+         | <a href="/blog/2012/10/26/cheat-sheets/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><a href="http://www.ubuntu.com/" title="ubuntu公式へ飛びます">Ubuntu</a>
-のパッケージ管理は優秀で、<em>1204LTS(Precise Pangolin)</em>では脳天気にパッケージを更新しても問題は一度もありませんでした。<br/>
-ちょっとこれに気を良くして・・・現在最新である<em>1210(Quantal Quetzal)</em>へ、無謀にも挑戦しようと考えました。</p>
+  <div class="entry-content"><p>夜中に<em>mocha</em>でのテストの書き方が解らね～とネットを徘徊していると。。。</p>
 
-<p>今思うと、折角LTS(長期サポート)版を選択したのに何やってるの！とか<br/>
-己の力量を弁えろ等・・・自分の無謀さに乾杯です。</p>
+<h4>便利なサイトを発見しました。</h4>
 
-<p>バージョンアップは簡単、パッケージ管理アプリにLTS以外も表示させるだけです。<br/>
-<strong>問題が全く発生せず、楽々バージョンアップ！</strong>しました。<br/>
-って事は流石に無く、<strong>二つの問題があって（内一つは解決していません）</strong></p>
+<p><a href="http://cheat.errtheblog.com/s/mocha/" title="チートシートサイト(mocha)へ飛びます">mochaチートシート</a>
+のページです。<br/>
+<strong>チートシート</strong>（カンニングペーパー）の言葉のイメージは悪いものの、先駆者が作ってくれた技術Tipsメモって事です。</p>
 
-<p>一つ目は、pukiwikiが動かなくなりました。<br/>
-これは、PHPのバージョンが上がった為、pukiwikiで利用しているメソッドが実装されていることが原因 <br/>
-<a href="http://pukiwiki.sourceforge.jp/dev/?BugTrack2%2F349" title="この方法で動きました！">対処方法</a>
-メンテナンスの終わったpukiwikiでは無く、新しいものを探すべき時なのでしょうね～
-<a href="http://pukiwiki.logue.be/" title="PHP5.4も対応しているpukiwiki">Pukiwiki Advance</a>等を、おいおい試してみます。</p>
+<p>どうやら、他にも沢山のチートシートがあるらしく<br/>
+<a href="http://cheat.errtheblog.com/" title="チートシートサイトへ飛びます">トップページ</a>を見て見ることに<br/>
+あれ・・・？<br/>
+gemコマンドの説明がある、と言う事は、、、<strong>「こいつ・・・動くぞ！」</strong></p>
 
-<p>二つ目は、仮想ビデオデバイスcirrusのドライバーが上手く動いてくれない（対応していない？）事です。<br/>
-こちらは、cirrusでどうしても問題が解決できず、ドライバーを変更する方法で、解決いや回避をしました。</p>
+<h2>コマンドとしてインストール可能</h2>
 
-<p>問題はあったもののLinuxでのアップデートも簡単になったものですねぇ</p>
+<pre><code>$ gem install cheat
+Fetching: cheat-1.3.0.gem (100%)
+Successfully installed cheat-1.3.0
+1 gem installed
+Installing ri documentation for cheat-1.3.0...
+Installing RDoc documentation for cheat-1.3.0...
+</code></pre>
+
+<p>なんと、<em>アプリとしてインストール</em>が出来ちゃいます。</p>
+
+<h3>使い方は</h3>
+
+<ul>
+<li>cheatコマンドの使い方<br/>
+<code>cheat cheat</code></li>
+<li>チートシート一覧を見る<br/>
+<code>cheat sheets</code></li>
+<li>チートシート一覧からrspecを探す場合<br/>
+<code>cheat sheets | grep rspec</code></li>
+<li>cheatコマンドの使い方<br/>
+<code>cheat sheets | grep rspec</code></li>
+<li>mochaのチートシート<br/>
+<code>cheat mocha</code></li>
+<li><p>vimのチートシートと出力例を一部<br/>
+<code>cheat vim</code></p>
+
+<pre><code>Cursor movement
+
+h - move left
+j - move down
+k - move up
+l - move right
+ctrl-b - page up
+以下、割愛
+</code></pre></li>
+</ul>
+
+
+<p>コピーペーストの文化は、<strong>技術的負債</strong>に繋がりますが<br/>
+使い方次第では、とっても便利なものです。 <br/>
+これ日本語化を誰かしてくれないかな～(cheatjみたいな）</p>
 </div>
   
   
@@ -194,6 +229,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/04/03/active-record-use-mysql-procedure/">ActiveRecord経由でMySQLのプロシジャーを実行</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/03/21/cherryblossom2013/">2013年の桜</a>
       </li>
     
@@ -209,19 +248,15 @@
         <a href="/blog/2013/01/24/activerecord-database-connections-will-not-be-closed/">ActiveRecordは、Threadを分けたら自分でコネクションを閉じないと駄目だった</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/01/24/unpluralize-activeresource/">ActiveResourceで、複数形のルールを無効にする</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/baby'>Baby (1)</a></li><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/etc'>Etc (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/jenkins'>Jenkins (1)</a></li><li><a href='/blog/categories/kindle'>kindle (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/ruby'>Ruby (8)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/vps'>VPS (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/baby'>Baby (1)</a></li><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/etc'>Etc (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/jenkins'>Jenkins (1)</a></li><li><a href='/blog/categories/kindle'>kindle (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/ruby'>Ruby (9)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/vps'>VPS (3)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/baby' style='font-size: 107.5%'>Baby(1)</a> <a href='/blog/categories/blogger' style='font-size: 107.5%'>blogger(1)</a> <a href='/blog/categories/etc' style='font-size: 107.5%'>Etc(1)</a> <a href='/blog/categories/gem' style='font-size: 107.5%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 107.5%'>Gundam(1)</a> <a href='/blog/categories/jenkins' style='font-size: 107.5%'>Jenkins(1)</a> <a href='/blog/categories/kindle' style='font-size: 107.5%'>kindle(1)</a> <a href='/blog/categories/markdown' style='font-size: 107.5%'>Markdown(1)</a> <a href='/blog/categories/octopress' style='font-size: 122.5%'>Octopress(3)</a> <a href='/blog/categories/python' style='font-size: 107.5%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(8)</a> <a href='/blog/categories/ubuntu' style='font-size: 107.5%'>Ubuntu(1)</a> <a href='/blog/categories/vps' style='font-size: 122.5%'>VPS(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/baby' style='font-size: 106.66666666666667%'>Baby(1)</a> <a href='/blog/categories/blogger' style='font-size: 106.66666666666667%'>blogger(1)</a> <a href='/blog/categories/etc' style='font-size: 106.66666666666667%'>Etc(1)</a> <a href='/blog/categories/gem' style='font-size: 106.66666666666667%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 106.66666666666667%'>Gundam(1)</a> <a href='/blog/categories/jenkins' style='font-size: 106.66666666666667%'>Jenkins(1)</a> <a href='/blog/categories/kindle' style='font-size: 106.66666666666667%'>kindle(1)</a> <a href='/blog/categories/markdown' style='font-size: 106.66666666666667%'>Markdown(1)</a> <a href='/blog/categories/octopress' style='font-size: 120.0%'>Octopress(3)</a> <a href='/blog/categories/python' style='font-size: 106.66666666666667%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(9)</a> <a href='/blog/categories/ubuntu' style='font-size: 106.66666666666667%'>Ubuntu(1)</a> <a href='/blog/categories/vps' style='font-size: 120.0%'>VPS(3)</a> </span>
 </section>
 
 <section>

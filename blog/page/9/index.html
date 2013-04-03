@@ -9,10 +9,9 @@
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="rubyのパッケージ管理に、bundlerを使い始めてから
-どんなパッケージを利用しているのかに興味を持つようになりました。
-そんな中、どーにも気になるパッケージ名があったのです。 その名も・・・(ﾟＡﾟ;)ｺﾞｸﾘ RubyPython 名前だけで見れば、これは恐らく
-スマフォに例えれば、iOS &hellip;">
+  <meta name="description" content="Kindle-Paperwhiteを買いました。 読書 読書 は、とっても快適 です。
+白黒の読みやすさと、画面書き換えの遅さがあまり気にならないからでしょう、、 コミック コミックを読む場合は、少し待たないといけない時があるので人を選びます。
+ゆっくりと読む人は気にならないし、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,7 +109,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/11/04/rubypython/">RubyPython、これはいいものだ</a></h1>
+      <h1 class="entry-title"><a href="/blog/2012/12/30/kindle-paperwhite/">Kindle-Paperwhite(Wifi)買いました！</a></h1>
     
     
       <p class="meta">
@@ -126,139 +125,48 @@
   
 
 
-<time datetime="2012-11-04T23:27:00+09:00" pubdate data-updated="true">2012年 11月 04日</time>
+<time datetime="2012-12-30T23:47:00+09:00" pubdate data-updated="true">2012年 12月 30日</time>
         
-         | <a href="/blog/2012/11/04/rubypython/#disqus_thread">Comments</a>
+         | <a href="/blog/2012/12/30/kindle-paperwhite/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>rubyのパッケージ管理に、<em>bundler</em>を使い始めてから<br/>
-どんなパッケージを利用しているのかに興味を持つようになりました。<br/>
-そんな中、どーにも気になるパッケージ名があったのです。</p>
+  <div class="entry-content"><p><a href="http://www.amazon.co.jp/Kindle-Paperwhite/dp/B007OZO03M" title="Amazon商品ページへ飛びます">Kindle-Paperwhite</a>を買いました。<br/>
+<img src="https://dl.dropbox.com/u/15789065/Octopress/20121230/DSC02414.JPG" title="kindleホーム画面" alt="kindleホーム画面" /></p>
 
-<h3>その名も・・・(ﾟＡﾟ;)ｺﾞｸﾘ</h3>
+<h2>読書</h2>
 
-<p><a href="http://rubypython.rubyforge.org/" title="RubyPython公式へ飛びます">RubyPython</a></p>
+<p><em>読書</em> は、<strong>とっても快適</strong> です。<br/>
+白黒の読みやすさと、画面書き換えの遅さがあまり気にならないからでしょう、、<br/>
+<img src="https://dl.dropbox.com/u/15789065/Octopress/20121230/DSC02415.JPG" title="読書画面" alt="読書画面" /></p>
 
-<p>名前だけで見れば、これは恐らく<br/>
-<em>スマフォ</em>に例えれば、<strong>iOS&amp;Andoroid</strong>。いや<strong>iOroid</strong><br/>
-<em>企業</em>に例えれば、<strong>Google&amp;Apple</strong>。いや<strong>Goople</strong><br/>
-<em>食べ物</em>に例えれば、<strong>カツカレー</strong></p>
+<h2>コミック</h2>
 
-<p>などと、茶番はここまでにして、<strong>Let&#8217;s Try</strong></p>
+<p><em>コミック</em>を読む場合は、<strong>少し待たないといけない時がある</strong>ので人を選びます。<br/>
+ゆっくりと読む人は気にならないし、画面はとても綺麗です。<br/>
+<img src="https://dl.dropbox.com/u/15789065/Octopress/20121230/DSC02418.JPG" title="コミック画面" alt="コミック画面" /></p>
 
-<h2>まずはPython側で、呼び出される簡単なメソッドを実装します。</h2>
+<h2>インターネット</h2>
 
-<ul>
-<li>ただのprint文</li>
-<li>引数と戻り値を持ったprint文</li>
-</ul>
+<p>実は、<em>インターネット</em>も試用版という体で<strong>多少利用</strong>できます。<br/>
+（twitter,facebook,gmail,hotmail等は使えそうです）<br/>
+流石に、書き換えのゆったりしたE-inkでは、オマケ程度の機能ではありますが<br/>
+あれば使うかもしれません。<br/>
+<img src="https://dl.dropbox.com/u/15789065/Octopress/20121230/DSC02416.JPG" title="ブックマーク画面" alt="ブックマーク画面" /></p>
 
+<p>※3G版では、書籍のダウンロードとwikipediaは無料で利用できるそうです。</p>
 
-<p>を、関数として定義します</p>
+<p>画面はスリープ状態でも、壁紙が表示されていたりパッケージを開けたときにも画面に&#8221;Hello&#8221;が表示されているのがとっても印象的です。 <br/>
+<a href="http://ameblo.jp/nakagawa-shoko/entry-11438146900.html" title="しょこたんblogへ飛びます">中川翔子さんのblog</a> でもとりあげられており、胸熱です。</p>
 
-<figure class='code'><figcaption><span> (called_ruby.py)</span> <a href='/downloads/code/sample/rubypython/20121104/called_ruby.py'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='py'><span class='line'><span class="k">def</span> <span class="nf">print_python</span><span class="p">():</span>
-</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;python:&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">print_python_with_argument</span><span class="p">(</span> <span class="n">arg1</span> <span class="p">):</span>
-</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;python:&quot;</span><span class="p">,</span> <span class="n">arg1</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">arg1</span>
-</span></code></pre></td></tr></table></div></figure>
+<h3>※2013/01/02追記</h3>
 
-
-<h2>そして、Ruby側で呼び出す処理を記述します。</h2>
-
-<ul>
-<li>Pythonのクラス(cPickle)の呼び出し、とメソッド実行</li>
-<li>自作したPythonモジュールの読み込み</li>
-<li>&#8220;ただのprint文&#8221;の呼び出し</li>
-<li>&#8220;引数と戻り値を持ったprint文&#8221;の呼び出し</li>
-</ul>
-
-
-<p>を、定義します</p>
-
-<figure class='code'><figcaption><span> (call_python.rb)</span> <a href='/downloads/code/sample/rubypython/20121104/call_python.rb'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1">#!/usr/bin/env ruby</span>
-</span><span class='line'><span class="c1"># -*- encoding: utf-8 -*-</span>
-</span><span class='line'><span class="nb">require</span> <span class="s2">&quot;rubypython&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">RubyPython</span><span class="o">.</span><span class="n">start</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="s1">&#39;Pythonのクラスを呼び出す&#39;</span>
-</span><span class='line'><span class="n">cPickle</span> <span class="o">=</span> <span class="no">RubyPython</span><span class="o">.</span><span class="n">import</span><span class="p">(</span><span class="s2">&quot;cPickle&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="nb">p</span> <span class="n">cPickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s2">&quot;Testing RubyPython.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rubify</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="s1">&#39;Pythonの自作メソッドを呼び出す&#39;</span>
-</span><span class='line'><span class="n">dir</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">)</span>
-</span><span class='line'><span class="n">sys</span> <span class="o">=</span> <span class="no">RubyPython</span><span class="o">.</span><span class="n">import</span> <span class="s1">&#39;sys&#39;</span>
-</span><span class='line'><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">called_ruby</span> <span class="o">=</span> <span class="no">RubyPython</span><span class="o">.</span><span class="n">import</span><span class="p">(</span><span class="s2">&quot;called_ruby&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="n">called_ruby</span><span class="o">.</span><span class="n">print_python</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="n">called_ruby</span><span class="o">.</span><span class="n">print_python_with_argument!</span><span class="p">(</span> <span class="n">arg1</span><span class="p">:</span> <span class="s2">&quot;Ruby String&quot;</span> <span class="p">)</span><span class="o">.</span><span class="n">rubify</span>
-</span><span class='line'><span class="nb">puts</span> <span class="n">called_ruby</span><span class="o">.</span><span class="n">print_python_with_argument!</span><span class="p">(</span> <span class="n">arg1</span><span class="p">:</span> <span class="mi">1234</span> <span class="p">)</span><span class="o">.</span><span class="n">rubify</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">RubyPython</span><span class="o">.</span><span class="n">stop</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>これを実行すると</h2>
-
-<pre><code>Pythonのクラスを呼び出す
-S'Testing RubyPython.'
-p1
-.
-Pythonの自作メソッドを呼び出す
-python:
-python: Ruby String
-Ruby String
-python: 1234
-1234
-</code></pre>
-
-<p>おぉ！</p>
-
-<p><strong>RubyからPythonの呼び出し、簡単な引数の受け渡しが出来る事</strong>は<br/>
-あっさり確認出来ました。</p>
-
-<p>流石に、Rubyのコード中にPyhotnが記述できる訳ではないみたいです。<br/>
-<em>RubyからPythonを呼び出す需要</em>があるかは解りません。<br/>
-が、競うより共存の方に時間を使うほうが価値があるかも？と思います。</p>
-
-<p>RubyPythonは、PythonからRubyを実行したり、例外をRubyで処理したり等沢山の機能があるようです。  <br/>
-続く。。。かも？</p>
+<p>カバーとケースは100円均一の品を利用しました。<br/>
+kindleは安いので、ケースもリーズナブルに乗り切りたいと思います。<br/>
+<img src="https://dl.dropbox.com/u/15789065/Octopress/20121230/DSC02422.JPG" title="kindleホーム画面" alt="kindleホーム画面" /></p>
 </div>
   
   
@@ -298,6 +206,10 @@ python: 1234
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/04/03/active-record-use-mysql-procedure/">ActiveRecord経由でMySQLのプロシジャーを実行</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/03/21/cherryblossom2013/">2013年の桜</a>
       </li>
     
@@ -313,19 +225,15 @@ python: 1234
         <a href="/blog/2013/01/24/activerecord-database-connections-will-not-be-closed/">ActiveRecordは、Threadを分けたら自分でコネクションを閉じないと駄目だった</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/01/24/unpluralize-activeresource/">ActiveResourceで、複数形のルールを無効にする</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/baby'>Baby (1)</a></li><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/etc'>Etc (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/jenkins'>Jenkins (1)</a></li><li><a href='/blog/categories/kindle'>kindle (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/ruby'>Ruby (8)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/vps'>VPS (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/baby'>Baby (1)</a></li><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/etc'>Etc (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/jenkins'>Jenkins (1)</a></li><li><a href='/blog/categories/kindle'>kindle (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/ruby'>Ruby (9)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/vps'>VPS (3)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/baby' style='font-size: 107.5%'>Baby(1)</a> <a href='/blog/categories/blogger' style='font-size: 107.5%'>blogger(1)</a> <a href='/blog/categories/etc' style='font-size: 107.5%'>Etc(1)</a> <a href='/blog/categories/gem' style='font-size: 107.5%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 107.5%'>Gundam(1)</a> <a href='/blog/categories/jenkins' style='font-size: 107.5%'>Jenkins(1)</a> <a href='/blog/categories/kindle' style='font-size: 107.5%'>kindle(1)</a> <a href='/blog/categories/markdown' style='font-size: 107.5%'>Markdown(1)</a> <a href='/blog/categories/octopress' style='font-size: 122.5%'>Octopress(3)</a> <a href='/blog/categories/python' style='font-size: 107.5%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(8)</a> <a href='/blog/categories/ubuntu' style='font-size: 107.5%'>Ubuntu(1)</a> <a href='/blog/categories/vps' style='font-size: 122.5%'>VPS(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/baby' style='font-size: 106.66666666666667%'>Baby(1)</a> <a href='/blog/categories/blogger' style='font-size: 106.66666666666667%'>blogger(1)</a> <a href='/blog/categories/etc' style='font-size: 106.66666666666667%'>Etc(1)</a> <a href='/blog/categories/gem' style='font-size: 106.66666666666667%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 106.66666666666667%'>Gundam(1)</a> <a href='/blog/categories/jenkins' style='font-size: 106.66666666666667%'>Jenkins(1)</a> <a href='/blog/categories/kindle' style='font-size: 106.66666666666667%'>kindle(1)</a> <a href='/blog/categories/markdown' style='font-size: 106.66666666666667%'>Markdown(1)</a> <a href='/blog/categories/octopress' style='font-size: 120.0%'>Octopress(3)</a> <a href='/blog/categories/python' style='font-size: 106.66666666666667%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(9)</a> <a href='/blog/categories/ubuntu' style='font-size: 106.66666666666667%'>Ubuntu(1)</a> <a href='/blog/categories/vps' style='font-size: 120.0%'>VPS(3)</a> </span>
 </section>
 
 <section>
