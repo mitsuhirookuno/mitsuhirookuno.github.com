@@ -9,7 +9,11 @@
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="ある日から、作成中のアプリが DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the &hellip;">
+  <meta name="description" content="SVNにcommitが行われた際に、
+jenkinsのJOBを起動するスクリプト
+を作成しました。
+はい、あまり人に自慢出来る物ではないです・・・
+( ・´ｰ・｀)ﾄﾞﾔｧ svnサーバーのrubyが極めて古い場合などに有効です hookスクリプト（本体) (svnhook.rb) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -107,7 +111,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/01/24/activerecord-database-connections-will-not-be-closed/">ActiveRecordは、Threadを分けたら自分でコネクションを閉じないと駄目だった</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/02/12/svnhook/">SVNのhookスクリプト</a></h1>
     
     
       <p class="meta">
@@ -123,47 +127,88 @@
   
 
 
-<time datetime="2013-01-24T10:05:00+09:00" pubdate data-updated="true">2013年 01月 24日</time>
+<time datetime="2013-02-12T13:49:00+09:00" pubdate data-updated="true">2013年 02月 12日</time>
         
-         | <a href="/blog/2013/01/24/activerecord-database-connections-will-not-be-closed/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/02/12/svnhook/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>ある日から、作成中のアプリが</p>
+  <div class="entry-content"><p>SVNにcommitが行われた際に、
+<em>jenkinsのJOBを起動するスクリプト</em><br/>
+を作成しました。<br/>
+はい、あまり人に自慢出来る物ではないです・・・<br/>
+( ・´ｰ・｀)ﾄﾞﾔｧ <br/>
+svnサーバーのrubyが極めて古い場合などに有効です</p>
 
-<pre><code>DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
-DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
-DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
-DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
-DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
-</code></pre>
+<p><strong> hookスクリプト（本体) </strong></p>
 
-<p>等と、定期的にワーニングを出力するようになっていました。<br/>
-また、その際にコネクションを全部リフレッシュするのか <em>とっても遅くなる</em> のです。</p>
+<figure class='code'><figcaption><span> (svnhook.rb)</span> <a href='/downloads/code/sample/svnhook/svnhook.rb'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1">#!/usr/bin/env ruby</span>
+</span><span class='line'><span class="nb">require</span> <span class="s2">&quot;yaml&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">repository</span> <span class="o">=</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span>
+</span><span class='line'><span class="n">revision</span>   <span class="o">=</span> <span class="no">ARGV</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+</span><span class='line'><span class="no">SETTING</span>    <span class="o">=</span> <span class="no">YAML</span><span class="o">.</span><span class="n">load_file</span><span class="p">(</span><span class="no">ARGV</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">changed_output</span> <span class="o">=</span> <span class="sb">`</span><span class="si">#{</span><span class="no">SETTING</span><span class="o">[</span><span class="s1">&#39;PATH_TO_SVNLOOK&#39;</span><span class="o">]</span><span class="si">}</span><span class="sb"> changed </span><span class="si">#{</span><span class="n">repository</span><span class="si">}</span><span class="sb"> -r </span><span class="si">#{</span><span class="n">revision</span><span class="si">}</span><span class="sb">`</span>
+</span><span class='line'><span class="no">SETTING</span><span class="o">[</span><span class="s1">&#39;PATH_AND_URL_PAIR&#39;</span><span class="o">].</span><span class="n">each</span><span class="p">{</span> <span class="o">|</span> <span class="n">match</span><span class="p">,</span> <span class="n">url</span> <span class="o">|</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">match</span><span class="o">.</span><span class="n">instance_of?</span><span class="p">(</span><span class="no">Regexp</span><span class="p">)</span>
+</span><span class='line'>    <span class="sb">`curl </span><span class="si">#{</span><span class="n">url</span><span class="si">}</span><span class="sb">`</span> <span class="k">if</span> <span class="n">changed_output</span><span class="o">.</span><span class="n">match</span><span class="p">(</span> <span class="n">match</span> <span class="p">)</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="sb">`curl </span><span class="si">#{</span><span class="n">url</span><span class="si">}</span><span class="sb">`</span> <span class="k">if</span> <span class="n">changed_output</span><span class="o">.</span><span class="n">match</span><span class="p">(</span> <span class="no">Regexp</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span> <span class="n">match</span> <span class="p">)</span> <span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>ぐぐってみても解らず、<strong>(´ε｀；)ｳｰﾝ…</strong> と、悩んでいましたが  <br/>
-ワーニングを見てみると、<strong>『スレッドを実行したら自分でコネクションを閉じてね。』</strong>
-とまんまの答えが・・・</p>
 
-<p>はい、閉じます。</p>
+<p><strong> hookスクリプト（設定ファイル） </strong><br/>
+正規表現も利用可能です</p>
 
-<pre><code>Thread.new {
-  begin
-    block.call
-  rescue =&gt; ex
-    logger.info ex
-  ensure
-    ActiveRecord::Base.connection.close
-  end
-}
-</code></pre>
+<figure class='code'><figcaption><span> (svnhook.yaml)</span> <a href='/downloads/code/sample/svnhook/svnhook.yaml'>download</a></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">PATH_TO_SVNLOOK</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="l-Scalar-Plain">/usr/local/subversion-1.6.11/bin/svnlook</span>
+</span><span class='line'><span class="l-Scalar-Plain">PATH_AND_URL_PAIR</span><span class="p-Indicator">:</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">trunk/YourProject/app</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">http://jenkins/job/YourProject/build?delay=0sec</span>
+</span><span class='line'>  <span class="p-Indicator">-</span> <span class="p-Indicator">-</span> <span class="kt">!ruby</span><span class="l-Scalar-Plain">/regexp /trunk\/YourProject\/(app|spec|lib)/</span>
+</span><span class='line'>    <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">http://jenkins/job/YourProject/build?delay=0sec</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>これは、恥ずかしい(；・∀・)   <br/>
-同じようなうっかりさんが、居ないことを願って・・・<br/>
-余談ですが、<strong>ruby</strong>で<strong>ensure</strong>を使うのって余り無いのでトキメキました</p>
+
+<p><strong> post-commit導入例 </strong><br/>
+もしこのスクリプトを利用する酔狂な人が居た場合は、post-commitへ<br/>
+こーんな感じで追記してみてください</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>${SVN_ROOT}/hooks/svnhook.rb $REPOS $REV ${SVN_ROOT}/hooks/svnhook.yaml </span></code></pre></td></tr></table></div></figure>
+
+
+
 </div>
   
   
@@ -203,6 +248,10 @@ DEPRECATION WARNING: Database connections will not be closed automatically, plea
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/04/30/activesupport-datetime/">activesupportの日付の最初と最後</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/04/03/active-record-use-mysql-procedure/">ActiveRecord経由でMySQLのプロシジャーを実行</a>
       </li>
     
@@ -218,19 +267,15 @@ DEPRECATION WARNING: Database connections will not be closed automatically, plea
         <a href="/blog/2013/02/12/svnhook/">SVNのhookスクリプト</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/01/24/activerecord-database-connections-will-not-be-closed/">ActiveRecordは、Threadを分けたら自分でコネクションを閉じないと駄目だった</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/baby'>Baby (1)</a></li><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/etc'>Etc (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/jenkins'>Jenkins (1)</a></li><li><a href='/blog/categories/kindle'>kindle (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/ruby'>Ruby (9)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/vps'>VPS (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/baby'>Baby (1)</a></li><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/etc'>Etc (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/jenkins'>Jenkins (1)</a></li><li><a href='/blog/categories/kindle'>kindle (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/ruby'>Ruby (10)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/vps'>VPS (3)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/baby' style='font-size: 106.66666666666667%'>Baby(1)</a> <a href='/blog/categories/blogger' style='font-size: 106.66666666666667%'>blogger(1)</a> <a href='/blog/categories/etc' style='font-size: 106.66666666666667%'>Etc(1)</a> <a href='/blog/categories/gem' style='font-size: 106.66666666666667%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 106.66666666666667%'>Gundam(1)</a> <a href='/blog/categories/jenkins' style='font-size: 106.66666666666667%'>Jenkins(1)</a> <a href='/blog/categories/kindle' style='font-size: 106.66666666666667%'>kindle(1)</a> <a href='/blog/categories/markdown' style='font-size: 106.66666666666667%'>Markdown(1)</a> <a href='/blog/categories/octopress' style='font-size: 120.0%'>Octopress(3)</a> <a href='/blog/categories/python' style='font-size: 106.66666666666667%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(9)</a> <a href='/blog/categories/ubuntu' style='font-size: 106.66666666666667%'>Ubuntu(1)</a> <a href='/blog/categories/vps' style='font-size: 120.0%'>VPS(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/baby' style='font-size: 106.0%'>Baby(1)</a> <a href='/blog/categories/blogger' style='font-size: 106.0%'>blogger(1)</a> <a href='/blog/categories/etc' style='font-size: 106.0%'>Etc(1)</a> <a href='/blog/categories/gem' style='font-size: 106.0%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 106.0%'>Gundam(1)</a> <a href='/blog/categories/jenkins' style='font-size: 106.0%'>Jenkins(1)</a> <a href='/blog/categories/kindle' style='font-size: 106.0%'>kindle(1)</a> <a href='/blog/categories/markdown' style='font-size: 106.0%'>Markdown(1)</a> <a href='/blog/categories/octopress' style='font-size: 118.0%'>Octopress(3)</a> <a href='/blog/categories/python' style='font-size: 106.0%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(10)</a> <a href='/blog/categories/ubuntu' style='font-size: 106.0%'>Ubuntu(1)</a> <a href='/blog/categories/vps' style='font-size: 118.0%'>VPS(3)</a> </span>
 </section>
 
 <section>

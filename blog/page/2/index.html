@@ -9,9 +9,9 @@
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="2013年は例年よりやや早く、桜が咲いています 家族三人でのお花見は初めてです。
-赤羽と言えば、エレカシ・・・そして桜ですな。 我が家の定番は荒川の川原の桜ですが、川の風で寒いせいか開花はやや遅れます。
-">
+  <meta name="description" content="世の中、綺麗事では生きていけません。 Railsを使ったからといって、既存の資産を無視しては生きられない事が多い
+世知辛い世の中です。 今回はプロシジャーをRails3から利用する必要があったので
+ActiveRecordから、接続を頂いて・・・( ´∀｀)bｸﾞｯ! と、機能を追加しました。 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,7 +109,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/03/21/cherryblossom2013/">2013年の桜</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/04/03/active-record-use-mysql-procedure/">ActiveRecord経由でMySQLのプロシジャーを実行</a></h1>
     
     
       <p class="meta">
@@ -125,23 +125,84 @@
   
 
 
-<time datetime="2013-03-21T01:49:00+09:00" pubdate data-updated="true">2013年 03月 21日</time>
+<time datetime="2013-04-03T14:10:00+09:00" pubdate data-updated="true">2013年 04月 03日</time>
         
-         | <a href="/blog/2013/03/21/cherryblossom2013/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/04/03/active-record-use-mysql-procedure/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2>2013年は例年よりやや早く、桜が咲いています</h2>
+  <div class="entry-content"><h2>世の中、綺麗事では生きていけません。</h2>
 
-<p><img src="https://dl.dropbox.com/u/15789065/Octopress/20130320/DSC02524.JPG" title="今年の桜" alt="今年の桜" /></p>
+<p>Railsを使ったからといって、既存の資産を無視しては生きられない事が多い<br/>
+<strong>世知辛い世の中</strong>です。</p>
 
-<p>家族三人でのお花見は<strong>初めてです</strong>。<br/>
-赤羽と言えば、<em>エレカシ</em>・・・そして<strong>桜</strong>ですな。</p>
+<p>今回はプロシジャーをRails3から利用する必要があったので<br/>
+ActiveRecordから、接続を頂いて・・・( ´∀｀)bｸﾞｯ!  <br/>
+と、機能を追加しました。</p>
 
-<p>我が家の定番は荒川の川原の桜ですが、川の風で寒いせいか開花はやや遅れます。</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class ActiveRecord::Base
+</span><span class='line'>  def self.use_connection( &block )
+</span><span class='line'>    block.call(self.connection)
+</span><span class='line'>  end
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>メソッドを追加して、ホイホイっと実行してみましたが。。。<br/>
+一応動くのですが、一度プロシジャーを実行すると他のクエリーが実行出来なくなってしまいます。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Mysql2::Error: Commands out of sync; you can't run this command now: call dummyProc();
+</span><span class='line'>ActiveRecord::StatementInvalid: Mysql2::Error: Commands out of sync; you can't run this command now: call dummyProc();
+</span><span class='line'>from /home/okuno/workspace/QRapi/vendor/bundler/ruby/1.9.1/gems/activerecord-3.2.9/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:245:</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>もう、駄目ぽ  　</h3>
+
+<p>　  <br/>
+　  <br/>
+　  <br/>
+　  <br/>
+　  <br/>
+　</p>
+
+<h2>で、対応</h2>
+
+<p>どうやら、プロシジャーの場合は問い合わせの終了が終わってない扱いになってしまっている、と思われます。<br/>
+このメソッドでは、ブロックを抜けたらクエリーは終了（という前提）で、以下の様にして対応しました。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class ActiveRecord::Base
+</span><span class='line'>  def self.use_connection( &block )
+</span><span class='line'>    begin
+</span><span class='line'>      block.call(self.connection)
+</span><span class='line'>    ensure
+</span><span class='line'>      self.connection.reconnect! unless connection.active?
+</span><span class='line'>    end
+</span><span class='line'>  end
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>どやぁ！(￣ー￣)<br/>
+と、したい所ですが、下記のサイトを参考にさせて頂きました。m(__)m <br/>
+<a href="http://ursdiganta.blogspot.jp/2011/07/mysql2-and-stored-procedures-in-rails-3.html" title="参考にさせて頂いたページへ飛びます">参考にさせて頂いたページ</a></p>
 </div>
   
   
@@ -181,6 +242,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/04/30/activesupport-datetime/">activesupportの日付の最初と最後</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/04/03/active-record-use-mysql-procedure/">ActiveRecord経由でMySQLのプロシジャーを実行</a>
       </li>
     
@@ -196,19 +261,15 @@
         <a href="/blog/2013/02/12/svnhook/">SVNのhookスクリプト</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/01/24/activerecord-database-connections-will-not-be-closed/">ActiveRecordは、Threadを分けたら自分でコネクションを閉じないと駄目だった</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/baby'>Baby (1)</a></li><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/etc'>Etc (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/jenkins'>Jenkins (1)</a></li><li><a href='/blog/categories/kindle'>kindle (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/ruby'>Ruby (9)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/vps'>VPS (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/baby'>Baby (1)</a></li><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/etc'>Etc (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/jenkins'>Jenkins (1)</a></li><li><a href='/blog/categories/kindle'>kindle (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/ruby'>Ruby (10)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/vps'>VPS (3)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/baby' style='font-size: 106.66666666666667%'>Baby(1)</a> <a href='/blog/categories/blogger' style='font-size: 106.66666666666667%'>blogger(1)</a> <a href='/blog/categories/etc' style='font-size: 106.66666666666667%'>Etc(1)</a> <a href='/blog/categories/gem' style='font-size: 106.66666666666667%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 106.66666666666667%'>Gundam(1)</a> <a href='/blog/categories/jenkins' style='font-size: 106.66666666666667%'>Jenkins(1)</a> <a href='/blog/categories/kindle' style='font-size: 106.66666666666667%'>kindle(1)</a> <a href='/blog/categories/markdown' style='font-size: 106.66666666666667%'>Markdown(1)</a> <a href='/blog/categories/octopress' style='font-size: 120.0%'>Octopress(3)</a> <a href='/blog/categories/python' style='font-size: 106.66666666666667%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(9)</a> <a href='/blog/categories/ubuntu' style='font-size: 106.66666666666667%'>Ubuntu(1)</a> <a href='/blog/categories/vps' style='font-size: 120.0%'>VPS(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/baby' style='font-size: 106.0%'>Baby(1)</a> <a href='/blog/categories/blogger' style='font-size: 106.0%'>blogger(1)</a> <a href='/blog/categories/etc' style='font-size: 106.0%'>Etc(1)</a> <a href='/blog/categories/gem' style='font-size: 106.0%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 106.0%'>Gundam(1)</a> <a href='/blog/categories/jenkins' style='font-size: 106.0%'>Jenkins(1)</a> <a href='/blog/categories/kindle' style='font-size: 106.0%'>kindle(1)</a> <a href='/blog/categories/markdown' style='font-size: 106.0%'>Markdown(1)</a> <a href='/blog/categories/octopress' style='font-size: 118.0%'>Octopress(3)</a> <a href='/blog/categories/python' style='font-size: 106.0%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(10)</a> <a href='/blog/categories/ubuntu' style='font-size: 106.0%'>Ubuntu(1)</a> <a href='/blog/categories/vps' style='font-size: 118.0%'>VPS(3)</a> </span>
 </section>
 
 <section>

@@ -76,18 +76,22 @@
         <loc>
             http://mitsuhirookuno.github.com/blog/2013/04/03/active-record-use-mysql-procedure/
         </loc>
-        <lastmod>2013-04-03T14:37:58+09:00</lastmod>
+        <lastmod>2013-04-30T13:09:50+09:00</lastmod>
+    </url>
+    <url>
+        <loc>http://mitsuhirookuno.github.com/blog/2013/04/30/activesupport-datetime/</loc>
+        <lastmod>2013-04-30T13:20:50+09:00</lastmod>
     </url>
     <url>
         <loc>http://mitsuhirookuno.github.com/</loc>
-        <lastmod>2013-04-03T14:37:58+09:00</lastmod>
+        <lastmod>2013-04-30T13:20:50+09:00</lastmod>
     </url>
     <url>
         <loc>http://mitsuhirookuno.github.com/blog/archives/</loc>
-        <lastmod>2013-04-03T14:37:58+09:00</lastmod>
+        <lastmod>2013-04-30T13:20:50+09:00</lastmod>
     </url>
     <url>
         <loc>http://mitsuhirookuno.github.com/archives/</loc>
-        <lastmod>2013-04-03T14:37:58+09:00</lastmod>
+        <lastmod>2013-04-30T13:20:50+09:00</lastmod>
     </url>
 </urlset>

@@ -4,7 +4,7 @@
   <title><![CDATA[バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2013-04-03T14:38:14+09:00</updated>
+  <updated>2013-04-30T13:21:04+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -12,6 +12,57 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[activesupportの日付の最初と最後]]></title>
+    <link href="http://mitsuhirookuno.github.com/blog/2013/04/30/activesupport-datetime/"/>
+    <updated>2013-04-30T10:42:00+09:00</updated>
+    <id>http://mitsuhirookuno.github.com/blog/2013/04/30/activesupport-datetime</id>
+    <content type="html"><![CDATA[<h2>activesupportの日付計算は、とっても便利です。</h2>
+
+<p>とは言え、どんなメソッドが実装されているかは全部把握していません。（私は）</p>
+
+<p>今回は、仕事で色々な期間を選択する必要が合ったのですが <br/>
+そこで役に立ったのは
+<code>beginning_of_xxx (end_of_xxx)</code>
+です。</p>
+
+<p>これらは、与えられた日付から適切な最初(最後)に補正してくれます。<br/>
+例えば、今週の月曜日なら</p>
+
+<figure class='code'><figcaption><span>今週の月曜日 - beginning_of_this_week.rb </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">beginning_of_week</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>という具合です。</p>
+
+<p>応用すると『ある日付の含まれる週に、この日が含まれるか？』も一行で（読みやすく？）出来ます。
+みたいな事が書けちゃいます。</p>
+
+<figure class='code'><figcaption><span>ある日付の含まれる週に、この日が含まれるか？ - in_this_week.rb </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="p">(</span><span class="no">Date</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;4/30&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">beginning_of_week</span> <span class="o">.</span><span class="n">.</span> <span class="no">Date</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;4/30&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">end_of_week</span> <span class="p">)</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span> <span class="no">Date</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;5/1&#39;</span><span class="p">)</span> <span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>この
+<code>beginning_of_xxx (end_of_xxx)</code>
+には</p>
+
+<ul>
+<li>day</li>
+<li>week</li>
+<li>month</li>
+<li>year</li>
+<li>quarter</li>
+</ul>
+
+
+<p>が使えるみたいです。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[ActiveRecord経由でMySQLのプロシジャーを実行]]></title>

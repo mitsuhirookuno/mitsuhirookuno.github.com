@@ -9,9 +9,9 @@
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="VPS にドメインを割り当ててから、一ヶ月が経過した所です。
-今の所はアクセスも無く、そんなに攻撃にさらされることもあるまいと思いました。 が・・・
-sshのログ (/var/log/auth.log)を見たら、かなりの攻撃の後がありました。 こんな スクリプト で、集計した所 ( &hellip;">
+  <meta name="description" content="Ubuntu
+のパッケージ管理は優秀で、1204LTS(Precise Pangolin)では脳天気にパッケージを更新しても問題は一度もありませんでした。
+ちょっとこれに気を良くして・・・現在最新である1210(Quantal Quetzal)へ、無謀にも挑戦しようと考えました。 今思うと、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,7 +109,7 @@ sshのログ (/var/log/auth.log)を見たら、かなりの攻撃の後があり
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/10/10/vps-ssh-port/">VPSのssh用Portを変更しました</a></h1>
+      <h1 class="entry-title"><a href="/blog/2012/10/25/ubuntu1210update/">VPSのUbuntuを1210へアップデート</a></h1>
     
     
       <p class="meta">
@@ -125,95 +125,36 @@ sshのログ (/var/log/auth.log)を見たら、かなりの攻撃の後があり
   
 
 
-<time datetime="2012-10-10T09:27:00+09:00" pubdate data-updated="true">2012年 10月 10日</time>
+<time datetime="2012-10-25T08:49:00+09:00" pubdate data-updated="true">2012年 10月 25日</time>
         
-         | <a href="/blog/2012/10/10/vps-ssh-port/#disqus_thread">Comments</a>
+         | <a href="/blog/2012/10/25/ubuntu1210update/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><em>VPS</em> にドメインを割り当ててから、一ヶ月が経過した所です。<br />
-今の所はアクセスも無く、そんなに攻撃にさらされることもあるまいと思いました。<br /></p>
+  <div class="entry-content"><p><a href="http://www.ubuntu.com/" title="ubuntu公式へ飛びます">Ubuntu</a>
+のパッケージ管理は優秀で、<em>1204LTS(Precise Pangolin)</em>では脳天気にパッケージを更新しても問題は一度もありませんでした。<br/>
+ちょっとこれに気を良くして・・・現在最新である<em>1210(Quantal Quetzal)</em>へ、無謀にも挑戦しようと考えました。</p>
 
-<br />
+<p>今思うと、折角LTS(長期サポート)版を選択したのに何やってるの！とか<br/>
+己の力量を弁えろ等・・・自分の無謀さに乾杯です。</p>
 
+<p>バージョンアップは簡単、パッケージ管理アプリにLTS以外も表示させるだけです。<br/>
+<strong>問題が全く発生せず、楽々バージョンアップ！</strong>しました。<br/>
+って事は流石に無く、<strong>二つの問題があって（内一つは解決していません）</strong></p>
 
-<p>が・・・<br />
-<em>sshのログ</em> (/var/log/auth.log)を見たら、かなりの攻撃の後がありました。<br /></p>
+<p>一つ目は、pukiwikiが動かなくなりました。<br/>
+これは、PHPのバージョンが上がった為、pukiwikiで利用しているメソッドが実装されていることが原因 <br/>
+<a href="http://pukiwiki.sourceforge.jp/dev/?BugTrack2%2F349" title="この方法で動きました！">対処方法</a>
+メンテナンスの終わったpukiwikiでは無く、新しいものを探すべき時なのでしょうね～
+<a href="http://pukiwiki.logue.be/" title="PHP5.4も対応しているpukiwiki">Pukiwiki Advance</a>等を、おいおい試してみます。</p>
 
-<br />
+<p>二つ目は、仮想ビデオデバイスcirrusのドライバーが上手く動いてくれない（対応していない？）事です。<br/>
+こちらは、cirrusでどうしても問題が解決できず、ドライバーを変更する方法で、解決いや回避をしました。</p>
 
-
-<h4>こんな <strong>スクリプト</strong> で、集計した所</h4>
-
-<figure class='code'><figcaption><span> (password_failed_check.rb)</span> <a href='/downloads/code/sample/password_failed_check.rb'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1">#!/usr/bin/env ruby</span>
-</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;pp&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">REGEXP_AUTH_FAILED</span><span class="o">=</span><span class="sr">/Failed password for (root|invalid user ([^ ]+)) from (\d+\.\d+\.\d+\.\d+) port \d+ ssh2$/</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">setDenyHostMap</span><span class="p">(</span> <span class="n">map</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">ip_address</span> <span class="p">)</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">map</span><span class="o">.</span><span class="n">key?</span><span class="p">(</span><span class="n">ip_address</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">user_map</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="n">fetch</span> <span class="n">ip_address</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="n">user_map</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>    <span class="k">if</span> <span class="n">user_map</span><span class="o">.</span><span class="n">key?</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">user_map</span><span class="o">.</span><span class="n">store</span><span class="p">(</span> <span class="n">user</span><span class="p">,</span> <span class="p">(</span><span class="n">user_map</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="n">user</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
-</span><span class='line'>    <span class="k">else</span>
-</span><span class='line'>      <span class="n">user_map</span><span class="o">.</span><span class="n">store</span><span class="p">(</span> <span class="n">user</span><span class="p">,</span> <span class="mi">1</span> <span class="p">)</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>    <span class="n">map</span><span class="o">.</span><span class="n">store</span><span class="p">(</span> <span class="n">ip_address</span><span class="p">,</span> <span class="n">user_map</span> <span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">deny_host_map</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/var/log/auth.log&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sr">/\n/</span><span class="p">)</span><span class="o">.</span><span class="n">each</span><span class="p">{</span><span class="o">|</span><span class="n">line</span><span class="o">|</span>
-</span><span class='line'>  <span class="n">line</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span><span class="no">REGEXP_AUTH_FAILED</span><span class="p">){</span><span class="o">|</span> <span class="n">root</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">ip_address</span> <span class="o">|</span>
-</span><span class='line'>    <span class="n">setDenyHostMap</span><span class="p">(</span> <span class="n">deny_host_map</span><span class="p">,</span> <span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">nil?</span><span class="p">)?</span> <span class="n">root</span><span class="ss">:user</span><span class="p">,</span> <span class="n">ip_address</span> <span class="p">)</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="n">deny_host_map</span><span class="o">.</span><span class="n">pretty_inspect</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>なんと13個のホストから、 合計2000回ほど・・・∑(・ω・ﾉ)ﾉ</code></p>
-
-<br />
-
-
-<p>これは放置は危険ですし、 /etc/hosts.deny で対応するには数的に骨が折れそうなので<br />
-今回は、Portを49152以降のDYNAMICな領域に移しました。（REGISTEREDの方が良いかな？）<br />
- (；´Д`A &#8220;`<br /></p>
+<p>問題はあったもののLinuxでのアップデートも簡単になったものですねぇ</p>
 </div>
   
   
@@ -253,6 +194,10 @@ sshのログ (/var/log/auth.log)を見たら、かなりの攻撃の後があり
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/04/30/activesupport-datetime/">activesupportの日付の最初と最後</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/04/03/active-record-use-mysql-procedure/">ActiveRecord経由でMySQLのプロシジャーを実行</a>
       </li>
     
@@ -268,19 +213,15 @@ sshのログ (/var/log/auth.log)を見たら、かなりの攻撃の後があり
         <a href="/blog/2013/02/12/svnhook/">SVNのhookスクリプト</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/01/24/activerecord-database-connections-will-not-be-closed/">ActiveRecordは、Threadを分けたら自分でコネクションを閉じないと駄目だった</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/baby'>Baby (1)</a></li><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/etc'>Etc (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/jenkins'>Jenkins (1)</a></li><li><a href='/blog/categories/kindle'>kindle (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/ruby'>Ruby (9)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/vps'>VPS (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/baby'>Baby (1)</a></li><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/etc'>Etc (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/jenkins'>Jenkins (1)</a></li><li><a href='/blog/categories/kindle'>kindle (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/ruby'>Ruby (10)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/vps'>VPS (3)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/baby' style='font-size: 106.66666666666667%'>Baby(1)</a> <a href='/blog/categories/blogger' style='font-size: 106.66666666666667%'>blogger(1)</a> <a href='/blog/categories/etc' style='font-size: 106.66666666666667%'>Etc(1)</a> <a href='/blog/categories/gem' style='font-size: 106.66666666666667%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 106.66666666666667%'>Gundam(1)</a> <a href='/blog/categories/jenkins' style='font-size: 106.66666666666667%'>Jenkins(1)</a> <a href='/blog/categories/kindle' style='font-size: 106.66666666666667%'>kindle(1)</a> <a href='/blog/categories/markdown' style='font-size: 106.66666666666667%'>Markdown(1)</a> <a href='/blog/categories/octopress' style='font-size: 120.0%'>Octopress(3)</a> <a href='/blog/categories/python' style='font-size: 106.66666666666667%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(9)</a> <a href='/blog/categories/ubuntu' style='font-size: 106.66666666666667%'>Ubuntu(1)</a> <a href='/blog/categories/vps' style='font-size: 120.0%'>VPS(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/baby' style='font-size: 106.0%'>Baby(1)</a> <a href='/blog/categories/blogger' style='font-size: 106.0%'>blogger(1)</a> <a href='/blog/categories/etc' style='font-size: 106.0%'>Etc(1)</a> <a href='/blog/categories/gem' style='font-size: 106.0%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 106.0%'>Gundam(1)</a> <a href='/blog/categories/jenkins' style='font-size: 106.0%'>Jenkins(1)</a> <a href='/blog/categories/kindle' style='font-size: 106.0%'>kindle(1)</a> <a href='/blog/categories/markdown' style='font-size: 106.0%'>Markdown(1)</a> <a href='/blog/categories/octopress' style='font-size: 118.0%'>Octopress(3)</a> <a href='/blog/categories/python' style='font-size: 106.0%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(10)</a> <a href='/blog/categories/ubuntu' style='font-size: 106.0%'>Ubuntu(1)</a> <a href='/blog/categories/vps' style='font-size: 118.0%'>VPS(3)</a> </span>
 </section>
 
 <section>

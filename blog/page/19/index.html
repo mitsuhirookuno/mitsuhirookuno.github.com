@@ -5,14 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>RubyPython、これはいいものだ - バトルプログラマー＠すま Blog</title>
+  <title>バトルプログラマー＠すま Blog</title>
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="rubyのパッケージ管理に、bundlerを使い始めてから
-どんなパッケージを利用しているのかに興味を持つようになりました。
-そんな中、どーにも気になるパッケージ名があったのです。 その名も・・・(ﾟＡﾟ;)ｺﾞｸﾘ RubyPython 名前だけで見れば、これは恐らく
-スマフォに例えれば、iOS &hellip;">
+  <meta name="description" content="テーマを色々変えてたら、作り直しになっちゃった。 (´；ω；｀)ｳｯ
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/2012/11/04/rubypython/">
+  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/page/19/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -102,12 +100,15 @@
 </nav> -->
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">RubyPython、これはいいものだ</h1>
+      <h1 class="entry-title"><a href="/blog/2012/09/30/hello-octopress/">こんにちは Octopress</a></h1>
     
     
       <p class="meta">
@@ -123,205 +124,32 @@
   
 
 
-<time datetime="2012-11-04T23:27:00+09:00" pubdate data-updated="true">2012年 11月 04日</time>
+<time datetime="2012-09-30T19:48:00+09:00" pubdate data-updated="true">2012年 09月 30日</time>
         
-         | <a href="#disqus_thread">Comments</a>
+         | <a href="/blog/2012/09/30/hello-octopress/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>rubyのパッケージ管理に、<em>bundler</em>を使い始めてから<br/>
-どんなパッケージを利用しているのかに興味を持つようになりました。<br/>
-そんな中、どーにも気になるパッケージ名があったのです。</p>
-
-<h3>その名も・・・(ﾟＡﾟ;)ｺﾞｸﾘ</h3>
-
-<p><a href="http://rubypython.rubyforge.org/" title="RubyPython公式へ飛びます">RubyPython</a></p>
-
-<p>名前だけで見れば、これは恐らく<br/>
-<em>スマフォ</em>に例えれば、<strong>iOS&amp;Andoroid</strong>。いや<strong>iOroid</strong><br/>
-<em>企業</em>に例えれば、<strong>Google&amp;Apple</strong>。いや<strong>Goople</strong><br/>
-<em>食べ物</em>に例えれば、<strong>カツカレー</strong></p>
-
-<p>などと、茶番はここまでにして、<strong>Let&#8217;s Try</strong></p>
-
-<h2>まずはPython側で、呼び出される簡単なメソッドを実装します。</h2>
-
-<ul>
-<li>ただのprint文</li>
-<li>引数と戻り値を持ったprint文</li>
-</ul>
-
-
-<p>を、関数として定義します</p>
-
-<figure class='code'><figcaption><span> (called_ruby.py)</span> <a href='/downloads/code/sample/rubypython/20121104/called_ruby.py'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='py'><span class='line'><span class="k">def</span> <span class="nf">print_python</span><span class="p">():</span>
-</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;python:&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">def</span> <span class="nf">print_python_with_argument</span><span class="p">(</span> <span class="n">arg1</span> <span class="p">):</span>
-</span><span class='line'>    <span class="k">print</span> <span class="s">&quot;python:&quot;</span><span class="p">,</span> <span class="n">arg1</span>
-</span><span class='line'>    <span class="k">return</span> <span class="n">arg1</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>そして、Ruby側で呼び出す処理を記述します。</h2>
-
-<ul>
-<li>Pythonのクラス(cPickle)の呼び出し、とメソッド実行</li>
-<li>自作したPythonモジュールの読み込み</li>
-<li>&#8220;ただのprint文&#8221;の呼び出し</li>
-<li>&#8220;引数と戻り値を持ったprint文&#8221;の呼び出し</li>
-</ul>
-
-
-<p>を、定義します</p>
-
-<figure class='code'><figcaption><span> (call_python.rb)</span> <a href='/downloads/code/sample/rubypython/20121104/call_python.rb'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1">#!/usr/bin/env ruby</span>
-</span><span class='line'><span class="c1"># -*- encoding: utf-8 -*-</span>
-</span><span class='line'><span class="nb">require</span> <span class="s2">&quot;rubypython&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">RubyPython</span><span class="o">.</span><span class="n">start</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="s1">&#39;Pythonのクラスを呼び出す&#39;</span>
-</span><span class='line'><span class="n">cPickle</span> <span class="o">=</span> <span class="no">RubyPython</span><span class="o">.</span><span class="n">import</span><span class="p">(</span><span class="s2">&quot;cPickle&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="nb">p</span> <span class="n">cPickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="s2">&quot;Testing RubyPython.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rubify</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="s1">&#39;Pythonの自作メソッドを呼び出す&#39;</span>
-</span><span class='line'><span class="n">dir</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">__FILE__</span><span class="p">)</span>
-</span><span class='line'><span class="n">sys</span> <span class="o">=</span> <span class="no">RubyPython</span><span class="o">.</span><span class="n">import</span> <span class="s1">&#39;sys&#39;</span>
-</span><span class='line'><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="n">called_ruby</span> <span class="o">=</span> <span class="no">RubyPython</span><span class="o">.</span><span class="n">import</span><span class="p">(</span><span class="s2">&quot;called_ruby&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="n">called_ruby</span><span class="o">.</span><span class="n">print_python</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">puts</span> <span class="n">called_ruby</span><span class="o">.</span><span class="n">print_python_with_argument!</span><span class="p">(</span> <span class="n">arg1</span><span class="p">:</span> <span class="s2">&quot;Ruby String&quot;</span> <span class="p">)</span><span class="o">.</span><span class="n">rubify</span>
-</span><span class='line'><span class="nb">puts</span> <span class="n">called_ruby</span><span class="o">.</span><span class="n">print_python_with_argument!</span><span class="p">(</span> <span class="n">arg1</span><span class="p">:</span> <span class="mi">1234</span> <span class="p">)</span><span class="o">.</span><span class="n">rubify</span>
-</span><span class='line'>
-</span><span class='line'><span class="no">RubyPython</span><span class="o">.</span><span class="n">stop</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>これを実行すると</h2>
-
-<pre><code>Pythonのクラスを呼び出す
-S'Testing RubyPython.'
-p1
-.
-Pythonの自作メソッドを呼び出す
-python:
-python: Ruby String
-Ruby String
-python: 1234
-1234
-</code></pre>
-
-<p>おぉ！</p>
-
-<p><strong>RubyからPythonの呼び出し、簡単な引数の受け渡しが出来る事</strong>は<br/>
-あっさり確認出来ました。</p>
-
-<p>流石に、Rubyのコード中にPyhotnが記述できる訳ではないみたいです。<br/>
-<em>RubyからPythonを呼び出す需要</em>があるかは解りません。<br/>
-が、競うより共存の方に時間を使うほうが価値があるかも？と思います。</p>
-
-<p>RubyPythonは、PythonからRubyを実行したり、例外をRubyで処理したり等沢山の機能があるようです。  <br/>
-続く。。。かも？</p>
+  <div class="entry-content"><p>テーマを色々変えてたら、作り直しになっちゃった。<br/>
+ (´；ω；｀)ｳｯ</p>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Mitsuhiro Okuno</span></span>
-
-      
-
-
-
-
-
-
-
-
   
 
 
-<time datetime="2012-11-04T23:27:00+09:00" pubdate data-updated="true">2012年 11月 04日</time>
-      
-
-<span class="categories">
+    </article>
   
-    <a class='category' href='/blog/categories/python/'>Python</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
-  
-</span>
-
-
-    </p>
+  <div class="pagination">
     
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mitsuhirookuno.github.com/blog/2012/11/04/rubypython/" data-via="bugslife" data-counturl="http://mitsuhirookuno.github.com/blog/2012/11/04/rubypython/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
+    <a href="archives">Blog Archives</a>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2012/10/26/cheat-sheets/" title="Previous Post: チートしようぜ！(ruby cheat sheets)">&laquo; チートしようぜ！(ruby cheat sheets)</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2012/12/30/kindle-paperwhite/" title="Next Post: Kindle-Paperwhite(Wifi)買いました！">Kindle-Paperwhite(Wifi)買いました！ &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a class="next" href="/blog/page/18/">Newer &rarr;</a>
+    
+  </div>
 </div>
-  </section>
-
-</div>
-
 <aside class="sidebar">
   
     <section>
@@ -377,7 +205,7 @@ python: 1234
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -394,7 +222,7 @@ python: 1234
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   
   <a href="https://github.com/mitsuhirookuno">@mitsuhirookuno</a> on GitHub
@@ -436,7 +264,6 @@ python: 1234
   
 </aside>
 
-
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -451,10 +278,7 @@ python: 1234
       var disqus_shortname = 'rubyprogrammer';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://mitsuhirookuno.github.com/blog/2012/11/04/rubypython/';
-        var disqus_url = 'http://mitsuhirookuno.github.com/blog/2012/11/04/rubypython/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
