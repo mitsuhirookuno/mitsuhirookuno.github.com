@@ -9,9 +9,8 @@
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="世の中、綺麗事では生きていけません。 Railsを使ったからといって、既存の資産を無視しては生きられない事が多い
-世知辛い世の中です。 今回はプロシジャーをRails3から利用する必要があったので
-ActiveRecordから、接続を頂いて・・・( ´∀｀)bｸﾞｯ! と、機能を追加しました。 1 &hellip;">
+  <meta name="description" content="テーマを色々変えてたら、作り直しになっちゃった。 (´；ω；｀)ｳｯ
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@ ActiveRecordから、接続を頂いて・・・( ´∀｀)bｸﾞｯ! と、機
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/page/3/">
+  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/page/20/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -109,7 +108,7 @@ ActiveRecordから、接続を頂いて・・・( ´∀｀)bｸﾞｯ! と、機
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/04/03/active-record-use-mysql-procedure/">ActiveRecord経由でMySQLのプロシジャーを実行</a></h1>
+      <h1 class="entry-title"><a href="/blog/2012/09/30/hello-octopress/">こんにちは Octopress</a></h1>
     
     
       <p class="meta">
@@ -125,84 +124,17 @@ ActiveRecordから、接続を頂いて・・・( ´∀｀)bｸﾞｯ! と、機
   
 
 
-<time datetime="2013-04-03T14:10:00+09:00" pubdate data-updated="true">2013年 04月 03日</time>
+<time datetime="2012-09-30T19:48:00+09:00" pubdate data-updated="true">2012年 09月 30日</time>
         
-         | <a href="/blog/2013/04/03/active-record-use-mysql-procedure/#disqus_thread">Comments</a>
+         | <a href="/blog/2012/09/30/hello-octopress/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2>世の中、綺麗事では生きていけません。</h2>
-
-<p>Railsを使ったからといって、既存の資産を無視しては生きられない事が多い<br/>
-<strong>世知辛い世の中</strong>です。</p>
-
-<p>今回はプロシジャーをRails3から利用する必要があったので<br/>
-ActiveRecordから、接続を頂いて・・・( ´∀｀)bｸﾞｯ!  <br/>
-と、機能を追加しました。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class ActiveRecord::Base
-</span><span class='line'>  def self.use_connection( &block )
-</span><span class='line'>    block.call(self.connection)
-</span><span class='line'>  end
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
-
-
-<p>メソッドを追加して、ホイホイっと実行してみましたが。。。<br/>
-一応動くのですが、一度プロシジャーを実行すると他のクエリーが実行出来なくなってしまいます。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Mysql2::Error: Commands out of sync; you can't run this command now: call dummyProc();
-</span><span class='line'>ActiveRecord::StatementInvalid: Mysql2::Error: Commands out of sync; you can't run this command now: call dummyProc();
-</span><span class='line'>from /home/okuno/workspace/QRapi/vendor/bundler/ruby/1.9.1/gems/activerecord-3.2.9/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:245:</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>もう、駄目ぽ  　</h3>
-
-<p>　  <br/>
-　  <br/>
-　  <br/>
-　  <br/>
-　  <br/>
-　</p>
-
-<h2>で、対応</h2>
-
-<p>どうやら、プロシジャーの場合は問い合わせの終了が終わってない扱いになってしまっている、と思われます。<br/>
-このメソッドでは、ブロックを抜けたらクエリーは終了（という前提）で、以下の様にして対応しました。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class ActiveRecord::Base
-</span><span class='line'>  def self.use_connection( &block )
-</span><span class='line'>    begin
-</span><span class='line'>      block.call(self.connection)
-</span><span class='line'>    ensure
-</span><span class='line'>      self.connection.reconnect! unless connection.active?
-</span><span class='line'>    end
-</span><span class='line'>  end
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
-
-
-<p>どやぁ！(￣ー￣)<br/>
-と、したい所ですが、下記のサイトを参考にさせて頂きました。m(__)m <br/>
-<a href="http://ursdiganta.blogspot.jp/2011/07/mysql2-and-stored-procedures-in-rails-3.html" title="参考にさせて頂いたページへ飛びます">参考にさせて頂いたページ</a></p>
+  <div class="entry-content"><p>テーマを色々変えてたら、作り直しになっちゃった。<br/>
+ (´；ω；｀)ｳｯ</p>
 </div>
   
   
@@ -212,11 +144,9 @@ ActiveRecordから、接続を頂いて・・・( ´∀｀)bｸﾞｯ!  <br/>
   
   <div class="pagination">
     
-      <a class="prev" href="/blog/page/4/">&larr; Older</a>
-    
     <a href="archives">Blog Archives</a>
     
-    <a class="next" href="/blog/page/2/">Newer &rarr;</a>
+    <a class="next" href="/blog/page/19/">Newer &rarr;</a>
     
   </div>
 </div>

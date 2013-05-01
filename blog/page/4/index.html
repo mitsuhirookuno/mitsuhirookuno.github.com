@@ -9,9 +9,9 @@
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="Rspecでテストを作成中、find_eachを置き換えてテストを実行したい欲求が。。。
-で、ブロックをstubにする方法は、手持ちの参考書では見つからないので、調べてみました。
-利用しているmochのライブラリによって、書き方が異なる様です。が・・・ yieldsを使えって事みたい &hellip;">
+  <meta name="description" content="2013年は例年よりやや早く、桜が咲いています 家族三人でのお花見は初めてです。
+赤羽と言えば、エレカシ・・・そして桜ですな。 我が家の定番は荒川の川原の桜ですが、川の風で寒いせいか開花はやや遅れます。
+">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,7 +109,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/03/11/mocha-find-each/">Rspecでblockを置き換える(mocha)の場合</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/03/21/cherryblossom2013/">2013年の桜</a></h1>
     
     
       <p class="meta">
@@ -125,35 +125,23 @@
   
 
 
-<time datetime="2013-03-11T12:53:00+09:00" pubdate data-updated="true">2013年 03月 11日</time>
+<time datetime="2013-03-21T01:49:00+09:00" pubdate data-updated="true">2013年 03月 21日</time>
         
-         | <a href="/blog/2013/03/11/mocha-find-each/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/03/21/cherryblossom2013/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Rspecでテストを作成中、find_eachを置き換えてテストを実行したい欲求が。。。<br/>
-で、ブロックをstubにする方法は、手持ちの参考書では見つからないので、調べてみました。<br/>
-利用しているmochのライブラリによって、書き方が異なる様です。が・・・</p>
+  <div class="entry-content"><h2>2013年は例年よりやや早く、桜が咲いています</h2>
 
-<h2>yieldsを使えって事みたい</h2>
+<p><img src="https://dl.dropbox.com/u/15789065/Octopress/20130320/DSC02524.JPG" title="今年の桜" alt="今年の桜" /></p>
 
-<p>私が利用している<strong>mocha</strong>の場合、<strong>yields</strong>で置き換える事が出来ます。</p>
+<p>家族三人でのお花見は<strong>初めてです</strong>。<br/>
+赤羽と言えば、<em>エレカシ</em>・・・そして<strong>桜</strong>ですな。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>User.stubs(:find_each).yields( User.new( :name 'neko' ) )</span></code></pre></td></tr></table></div></figure>
-
-
-<p>メソッドチェーンで複数指定すると・・・<br/>
-一回目の呼び出し、二回目の呼び出しと（二回目以降は後勝ち）内容を変えることが出来ます。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>User.stubs(:find_each).yields( User.new( :name 'neko' ) ).then.yields( User.new( :name 'inu' ) )</span></code></pre></td></tr></table></div></figure>
-
-
-
+<p>我が家の定番は荒川の川原の桜ですが、川の風で寒いせいか開花はやや遅れます。</p>
 </div>
   
   
@@ -193,6 +181,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/05/01/mysql-proxy-cache/">mysql-proxy-cacheを使ってみました</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/04/30/activesupport-datetime/">activesupportの日付の最初と最後</a>
       </li>
     
@@ -208,19 +200,15 @@
         <a href="/blog/2013/03/11/mocha-find-each/">Rspecでblockを置き換える(mocha)の場合</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/02/12/svnhook/">SVNのhookスクリプト</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/baby'>Baby (1)</a></li><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/etc'>Etc (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/jenkins'>Jenkins (1)</a></li><li><a href='/blog/categories/kindle'>kindle (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/ruby'>Ruby (10)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/vps'>VPS (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/baby'>Baby (1)</a></li><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/etc'>Etc (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/jenkins'>Jenkins (1)</a></li><li><a href='/blog/categories/kindle'>kindle (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/mysql'>MySQL (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/ruby'>Ruby (10)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/vps'>VPS (3)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/baby' style='font-size: 106.0%'>Baby(1)</a> <a href='/blog/categories/blogger' style='font-size: 106.0%'>blogger(1)</a> <a href='/blog/categories/etc' style='font-size: 106.0%'>Etc(1)</a> <a href='/blog/categories/gem' style='font-size: 106.0%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 106.0%'>Gundam(1)</a> <a href='/blog/categories/jenkins' style='font-size: 106.0%'>Jenkins(1)</a> <a href='/blog/categories/kindle' style='font-size: 106.0%'>kindle(1)</a> <a href='/blog/categories/markdown' style='font-size: 106.0%'>Markdown(1)</a> <a href='/blog/categories/octopress' style='font-size: 118.0%'>Octopress(3)</a> <a href='/blog/categories/python' style='font-size: 106.0%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(10)</a> <a href='/blog/categories/ubuntu' style='font-size: 106.0%'>Ubuntu(1)</a> <a href='/blog/categories/vps' style='font-size: 118.0%'>VPS(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/baby' style='font-size: 106.0%'>Baby(1)</a> <a href='/blog/categories/blogger' style='font-size: 106.0%'>blogger(1)</a> <a href='/blog/categories/etc' style='font-size: 106.0%'>Etc(1)</a> <a href='/blog/categories/gem' style='font-size: 106.0%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 106.0%'>Gundam(1)</a> <a href='/blog/categories/jenkins' style='font-size: 106.0%'>Jenkins(1)</a> <a href='/blog/categories/kindle' style='font-size: 106.0%'>kindle(1)</a> <a href='/blog/categories/markdown' style='font-size: 106.0%'>Markdown(1)</a> <a href='/blog/categories/mysql' style='font-size: 106.0%'>MySQL(1)</a> <a href='/blog/categories/octopress' style='font-size: 118.0%'>Octopress(3)</a> <a href='/blog/categories/python' style='font-size: 106.0%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(10)</a> <a href='/blog/categories/ubuntu' style='font-size: 106.0%'>Ubuntu(1)</a> <a href='/blog/categories/vps' style='font-size: 118.0%'>VPS(3)</a> </span>
 </section>
 
 <section>

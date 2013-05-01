@@ -5,13 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>バトルプログラマー＠すま Blog</title>
+  <title>mysql-proxy-cacheを使ってみました - バトルプログラマー＠すま Blog</title>
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="世の中、綺麗事では生きていけません。 Railsを使ったからといって、既存の資産を無視しては生きられない事が多い
-世知辛い世の中です。 今回はプロシジャーをRails3から利用する必要があったので
-ActiveRecordから、接続を頂いて・・・( ´∀｀)bｸﾞｯ! と、機能を追加しました。 1 &hellip;">
+  <meta name="description" content="pg-poolⅡのmysql版
+は無いものか？(特にqueryのキャッシュ目的)と探していた所 mysql-proxy-cache
+なるものを発見しました。 ubuntu1204で、動かしてみましたので、そのメモを まずは、動作に必要なパッケージを導入します。
+パッケージが見つかるものはaptで、 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +21,7 @@ ActiveRecordから、接続を頂いて・・・( ´∀｀)bｸﾞｯ! と、機
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/page/3/">
+  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/2013/05/01/mysql-proxy-cache/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -101,15 +102,12 @@ ActiveRecordから、接続を頂いて・・・( ´∀｀)bｸﾞｯ! と、機
 </nav> -->
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/04/03/active-record-use-mysql-procedure/">ActiveRecord経由でMySQLのプロシジャーを実行</a></h1>
+      <h1 class="entry-title">Mysql-proxy-cacheを使ってみました</h1>
     
     
       <p class="meta">
@@ -125,62 +123,72 @@ ActiveRecordから、接続を頂いて・・・( ´∀｀)bｸﾞｯ! と、機
   
 
 
-<time datetime="2013-04-03T14:10:00+09:00" pubdate data-updated="true">2013年 04月 03日</time>
+<time datetime="2013-05-01T23:57:00+09:00" pubdate data-updated="true">2013年 05月 01日</time>
         
-         | <a href="/blog/2013/04/03/active-record-use-mysql-procedure/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h2>世の中、綺麗事では生きていけません。</h2>
+<div class="entry-content"><p>pg-poolⅡのmysql版
+は無いものか？(特にqueryのキャッシュ目的)と探していた所 <br/>
+<a href="https://github.com/clofresh/mysql-proxy-cache" title="mysql-proxy-cacheのページへ飛びます">mysql-proxy-cache</a>
+なるものを発見しました。</p>
 
-<p>Railsを使ったからといって、既存の資産を無視しては生きられない事が多い<br/>
-<strong>世知辛い世の中</strong>です。</p>
+<p>ubuntu1204で、動かしてみましたので、そのメモを</p>
 
-<p>今回はプロシジャーをRails3から利用する必要があったので<br/>
-ActiveRecordから、接続を頂いて・・・( ´∀｀)bｸﾞｯ!  <br/>
-と、機能を追加しました。</p>
+<p>まずは、動作に必要なパッケージを導入します。<br/>
+パッケージが見つかるものはaptで、えいえいっ！っと</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class ActiveRecord::Base
-</span><span class='line'>  def self.use_connection( &block )
-</span><span class='line'>    block.call(self.connection)
-</span><span class='line'>  end
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo aptitude install mysql-proxy
+</span><span class='line'>sudo aptitude install memcached
+</span><span class='line'>sudo aptitude install luarocks
+</span><span class='line'>sudo aptitude install liblua5.1-md5-0
+</span><span class='line'>sudo aptitude install luasocket</span></code></pre></td></tr></table></div></figure>
 
 
-<p>メソッドを追加して、ホイホイっと実行してみましたが。。。<br/>
-一応動くのですが、一度プロシジャーを実行すると他のクエリーが実行出来なくなってしまいます。</p>
+<p>見つからないものは、debのパッケージがあったのでそちらを<br/>
+debパッケージをxwindowsからダブルクリック！（いいのか！）<br/>
+mysql-proxy-cache.lua はmysql-proxyのluaファイル置き場に配置しました。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Mysql2::Error: Commands out of sync; you can't run this command now: call dummyProc();
-</span><span class='line'>ActiveRecord::StatementInvalid: Mysql2::Error: Commands out of sync; you can't run this command now: call dummyProc();
-</span><span class='line'>from /home/okuno/workspace/QRapi/vendor/bundler/ruby/1.9.1/gems/activerecord-3.2.9/lib/active_record/connection_adapters/abstract_mysql_adapter.rb:245:</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget https://luamemcached.googlecode.com/files/liblua5.1-memcached0.deb
+</span><span class='line'>wget https://raw.github.com/clofresh/mysql-proxy-cache/master/mysql-proxy-cache.lua</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>もう、駄目ぽ  　</h3>
-
-<p>　  <br/>
-　  <br/>
-　  <br/>
-　  <br/>
-　  <br/>
-　</p>
-
-<h2>で、対応</h2>
-
-<p>どうやら、プロシジャーの場合は問い合わせの終了が終わってない扱いになってしまっている、と思われます。<br/>
-このメソッドでは、ブロックを抜けたらクエリーは終了（という前提）で、以下の様にして対応しました。</p>
+<p>それでは、満を持して。。。と、起動すると</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysql-proxy --proxy-lua-script=mysql-proxy-cache.lua</span></code></pre></td></tr></table></div></figure>
+
+
+<p>起動しません。何かが足りないようです。</p>
+
+<p>webサーフィンをして、今は以下のように記述する必要がある事が解りました。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysql-proxy --plugins=proxy --proxy-backend-addresses=localhost:3306</span></code></pre></td></tr></table></div></figure>
+
+
+<p>この段階で、proxy指定でmysqlに接続可能です。</p>
+
+<p>しかしクラ○ン。無駄作業ではないぞ。・・・と、
+mysql-proxy-cacheを指定して起動すると<br/>
+どうやら、パッケージが見つからないようです。<br/>
+<a href="http://siguniang.wordpress.com/2012/04/14/lualuarocks-suck/" title="参考にさせて頂いたluaの技術情報サイトのページへ飛びます">参考にさせて頂いたluaの技術情報サイト</a>
+の情報を元に、環境変数でパッケージの場所を教えます。<br/>
+そして、以下のような起動スクリプトを書くことで、ようやく起動しました！</p>
+
+<figure class='code'><figcaption><span>起動スクリプト - start-mysql-proxy-cache.bash </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -188,38 +196,83 @@ ActiveRecordから、接続を頂いて・・・( ´∀｀)bｸﾞｯ!  <br/>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>class ActiveRecord::Base
-</span><span class='line'>  def self.use_connection( &block )
-</span><span class='line'>    begin
-</span><span class='line'>      block.call(self.connection)
-</span><span class='line'>    ensure
-</span><span class='line'>      self.connection.reconnect! unless connection.active?
-</span><span class='line'>    end
-</span><span class='line'>  end
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">LUA_PATH</span><span class="o">=</span><span class="s2">&quot;./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua&quot;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">LUA_CPATH</span><span class="o">=</span><span class="s2">&quot;./?.so;/usr/local/lib/lua/5.1/?.so;/usr/lib/i386-linux-gnu/lua/5.1/?.so;/usr/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so&quot;</span>
+</span><span class='line'>mysql-proxy <span class="se">\</span>
+</span><span class='line'>  --plugins<span class="o">=</span>proxy <span class="se">\</span>
+</span><span class='line'>  --proxy-backend-addresses<span class="o">=</span>localhost:3306 <span class="se">\</span>
+</span><span class='line'>  --proxy-lua-script<span class="o">=</span>/usr/lib/mysql-proxy/lua/mysql-proxy-cache.lua <span class="se">\</span>
+</span><span class='line'>  --log-level<span class="o">=</span>debug
+</span></code></pre></td></tr></table></div></figure>
 
 
-<p>どやぁ！(￣ー￣)<br/>
-と、したい所ですが、下記のサイトを参考にさせて頂きました。m(__)m <br/>
-<a href="http://ursdiganta.blogspot.jp/2011/07/mysql2-and-stored-procedures-in-rails-3.html" title="参考にさせて頂いたページへ飛びます">参考にさせて頂いたページ</a></p>
+<p>キャッシングされたQueryは当然超高速です。<br/>
+ワーイ♪ゝ(▽｀<em>ゝ)(ノ</em>´▽)ノワーイ♪</p>
 </div>
+
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Mitsuhiro Okuno</span></span>
+
+      
+
+
+
+
+
+
+
+
   
 
 
-    </article>
+<time datetime="2013-05-01T23:57:00+09:00" pubdate data-updated="true">2013年 05月 01日</time>
+      
+
+<span class="categories">
   
-  <div class="pagination">
+    <a class='category' href='/blog/categories/mysql/'>MySQL</a>
+  
+</span>
+
+
+    </p>
     
-      <a class="prev" href="/blog/page/4/">&larr; Older</a>
-    
-    <a href="archives">Blog Archives</a>
-    
-    <a class="next" href="/blog/page/2/">Newer &rarr;</a>
-    
-  </div>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mitsuhirookuno.github.com/blog/2013/05/01/mysql-proxy-cache/" data-via="bugslife" data-counturl="http://mitsuhirookuno.github.com/blog/2013/05/01/mysql-proxy-cache/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
 </div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/04/30/activesupport-datetime/" title="Previous Post: activesupportの日付の最初と最後">&laquo; activesupportの日付の最初と最後</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
 <aside class="sidebar">
   
     <section>
@@ -275,7 +328,7 @@ ActiveRecordから、接続を頂いて・・・( ´∀｀)bｸﾞｯ!  <br/>
 <section>
   <h1>Latest Tweets</h1>
   <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -292,7 +345,7 @@ ActiveRecordから、接続を頂いて・・・( ´∀｀)bｸﾞｯ!  <br/>
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/mitsuhirookuno">@mitsuhirookuno</a> on GitHub
@@ -334,6 +387,7 @@ ActiveRecordから、接続を頂いて・・・( ´∀｀)bｸﾞｯ!  <br/>
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo"><p>
@@ -348,7 +402,10 @@ ActiveRecordから、接続を頂いて・・・( ´∀｀)bｸﾞｯ!  <br/>
       var disqus_shortname = 'rubyprogrammer';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://mitsuhirookuno.github.com/blog/2013/05/01/mysql-proxy-cache/';
+        var disqus_url = 'http://mitsuhirookuno.github.com/blog/2013/05/01/mysql-proxy-cache/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

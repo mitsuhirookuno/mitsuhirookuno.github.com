@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: MySQL | バトルプログラマー＠すま Blog]]></title>
+  <link href="http://mitsuhirookuno.github.com/blog/categories/mysql/atom.xml" rel="self"/>
+  <link href="http://mitsuhirookuno.github.com/"/>
+  <updated>2013-05-02T00:53:34+09:00</updated>
+  <id>http://mitsuhirookuno.github.com/</id>
+  <author>
+    <name><![CDATA[Mitsuhiro Okuno]]></name>
+    <email><![CDATA[mitsuhiro.okuno＠gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[mysql-proxy-cacheを使ってみました]]></title>
+    <link href="http://mitsuhirookuno.github.com/blog/2013/05/01/mysql-proxy-cache/"/>
+    <updated>2013-05-01T23:57:00+09:00</updated>
+    <id>http://mitsuhirookuno.github.com/blog/2013/05/01/mysql-proxy-cache</id>
+    <content type="html"><![CDATA[<p>pg-poolⅡのmysql版
+は無いものか？(特にqueryのキャッシュ目的)と探していた所 <br/>
+<a href="https://github.com/clofresh/mysql-proxy-cache" title="mysql-proxy-cacheのページへ飛びます">mysql-proxy-cache</a>
+なるものを発見しました。</p>
+
+<p>ubuntu1204で、動かしてみましたので、そのメモを</p>
+
+<p>まずは、動作に必要なパッケージを導入します。<br/>
+パッケージが見つかるものはaptで、えいえいっ！っと
+<code>
+sudo aptitude install mysql-proxy
+sudo aptitude install memcached
+sudo aptitude install luarocks
+sudo aptitude install liblua5.1-md5-0
+sudo aptitude install luasocket
+</code></p>
+
+<p>見つからないものは、debのパッケージがあったのでそちらを<br/>
+debパッケージをxwindowsからダブルクリック！（いいのか！）<br/>
+mysql-proxy-cache.lua はmysql-proxyのluaファイル置き場に配置しました。<br/>
+<code>
+wget https://luamemcached.googlecode.com/files/liblua5.1-memcached0.deb
+wget https://raw.github.com/clofresh/mysql-proxy-cache/master/mysql-proxy-cache.lua
+</code></p>
+
+<p>それでは、満を持して。。。と、起動すると
+<code>
+mysql-proxy --proxy-lua-script=mysql-proxy-cache.lua
+</code>
+起動しません。何かが足りないようです。</p>
+
+<p>webサーフィンをして、今は以下のように記述する必要がある事が解りました。<br/>
+<code>
+mysql-proxy --plugins=proxy --proxy-backend-addresses=localhost:3306
+</code>
+この段階で、proxy指定でmysqlに接続可能です。</p>
+
+<p>しかしクラ○ン。無駄作業ではないぞ。・・・と、
+mysql-proxy-cacheを指定して起動すると<br/>
+どうやら、パッケージが見つからないようです。<br/>
+<a href="http://siguniang.wordpress.com/2012/04/14/lualuarocks-suck/" title="参考にさせて頂いたluaの技術情報サイトのページへ飛びます">参考にさせて頂いたluaの技術情報サイト</a>
+の情報を元に、環境変数でパッケージの場所を教えます。<br/>
+そして、以下のような起動スクリプトを書くことで、ようやく起動しました！
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>起動スクリプト - start-mysql-proxy-cache.bash </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;!/bin/bash&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;export <span class="nv">LUA_PATH</span><span class="o">=</span><span class="s2">&quot;./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua&quot;</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">LUA_CPATH</span><span class="o">=</span><span class="s2">&quot;./?.so;/usr/local/lib/lua/5.1/?.so;/usr/lib/i386-linux-gnu/lua/5.1/?.so;/usr/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so&quot;</span>
+</span><span class='line'>mysql-proxy <span class="se">\</span>
+</span><span class='line'>  --plugins<span class="o">=</span>proxy <span class="se">\</span>
+</span><span class='line'>  --proxy-backend-addresses<span class="o">=</span>localhost:3306 <span class="se">\</span>
+</span><span class='line'>  --proxy-lua-script<span class="o">=</span>/usr/lib/mysql-proxy/lua/mysql-proxy-cache.lua <span class="se">\</span>
+</span><span class='line'>  --log-level<span class="o">=</span>debug
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>キャッシングされたQueryは当然超高速です。<br/>
+ワーイ♪ゝ(▽｀<em>ゝ)(ノ</em>´▽)ノワーイ♪</p>
+]]></content>
+  </entry>
+  
+</feed>
