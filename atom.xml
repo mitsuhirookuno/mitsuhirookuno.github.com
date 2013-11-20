@@ -4,7 +4,7 @@
   <title><![CDATA[バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2013-11-20T20:27:19+09:00</updated>
+  <updated>2013-11-20T20:35:29+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -53,14 +53,17 @@
 <p>最後にjenkinsのビルドタスクを実行して・・・<br/>
 Brakemanのプラグインが作成したページを見てみます</p>
 
-<p><em>全体</em><br/>
+<p><strong>全体</strong><br/>
 <img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/result_all.png" title="全体" alt="全体" /></p>
 
-<p><em>警告タブ</em>
-<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/result_warning.png" title="警告" alt="警告" /></p>
+<p><strong>警告タブ</strong></p>
 
-<p><em>詳細タブ</em> コードまで引用されて・・・(*｡◇｡)ﾊｯ!
-<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/result_detail.png" title="詳細" alt="詳細" /></p>
+<p><img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/result_warning.png" title="警告" alt="警告" /></p>
+
+<p><strong>詳細タブ</strong><br/>
+コードまで引用されて・・・(*｡◇｡)ﾊｯ!</p>
+
+<p><img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/result_detail.png" title="詳細" alt="詳細" /></p>
 
 <p>私が作成中のアプリは課題が山積みな様です。(;´д｀)ﾄﾎﾎ…</p>
 
