@@ -4,7 +4,7 @@
   <title><![CDATA[バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2013-05-02T00:53:34+09:00</updated>
+  <updated>2013-11-20T12:24:57+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[jenkinsさんで、brakemanを使ってみました]]></title>
+    <link href="http://mitsuhirookuno.github.com/blog/2013/11/20/jenkins-brakeman/"/>
+    <updated>2013-11-20T05:54:00+09:00</updated>
+    <id>http://mitsuhirookuno.github.com/blog/2013/11/20/jenkins-brakeman</id>
+    <content type="html"><![CDATA[<p>jenkinsさんを活用すべく、<a href="https://wiki.jenkins-ci.org/display/JENKINS/Brakeman+Plugin" title="link to Brakeman">Brakeman plugin</a> を、導入してみました</p>
+
+<p>brakemanは、Webアプリケーションの脆弱性をチェックしてくれるツールです<br/>
+こちらのツール自体は、使って覚えてみます。<br/>
+<a href="http://lmgtfy.com/?q=brakeman" title="search brakeman">brakemanをぐぐるに丸投げ</a></p>
+
+<h3>＠1.jenkinsにプラグインのインストール</h3>
+
+<p>まずは、jenkins側の <br/>
+[Jenkinsの管理] => [プラグインの管理] => [利用可能タブ]<br/>
+からプラグインをインストールします<br/>
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/plugin_install.png" title="Install" alt="Install" /></p>
+
+<h3>＠2.jenkinsでプラグインの設定</h3>
+
+<p>今度は、ビルドのタスクで<br/>
+プラグインに表示して貰う brakeman の出力ファイルの場所を設定します。<br/>
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/plugin_setting.png" title="setting" alt="setting" />
+※プラグインのデフォルトは brakeman-output.tabs でした。</p>
+
+<h3>＠3.ビルドタスクにbrakemanの実行を組み込む</h3>
+
+<p>次に jenkinsでのビルドタスクに brakeman の実行を加えてあげます。</p>
+
+<figure class='code'><figcaption><span>私の場合の記述例 - jenkins-ci.bash </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bundle <span class="nb">exec </span>brakeman -o tmp/brakeman-output.tabs
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>＠4.実行＆確認して( ･´ｰ･｀)どやる</h3>
+
+<p>最後にjenkinsのビルドタスクを実行して・・・<br/>
+Brakemanのプラグインが作成したページを見てみます<br/>
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/result_all.png" title="全体" alt="全体" />
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/result_warning.png" title="警告" alt="警告" />
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/result_detail.png" title="詳細" alt="詳細" /></p>
+
+<p>私が作成中のアプリは課題が山積みな様です。(;´д｀)ﾄﾎﾎ…
+<a href="http://jenkins.rubyprogrammer.info/job/Rails4Tutorial-Build/" title="私のVPS上のjenkinsです">俺々jenkins</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[mysql-proxy-cacheを使ってみました]]></title>
@@ -935,16 +983,6 @@ syntaxhighlighterも併用できるかなぁ
     <content type="html"><![CDATA[<p><em>git</em> の経験値があがるまではと。。。言い訳をして<br />
 暫くは <em>blogger</em> に住んでいようかと思います。<br />
 <a href="http://blogger.rubyprogrammer.info/" title="ココ！">すま＠blogger</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[こんにちは Octopress]]></title>
-    <link href="http://mitsuhirookuno.github.com/blog/2012/09/30/hello-octopress/"/>
-    <updated>2012-09-30T19:48:00+09:00</updated>
-    <id>http://mitsuhirookuno.github.com/blog/2012/09/30/hello-octopress</id>
-    <content type="html"><![CDATA[<p>テーマを色々変えてたら、作り直しになっちゃった。<br/>
- (´；ω；｀)ｳｯ</p>
 ]]></content>
   </entry>
   

@@ -9,10 +9,8 @@
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="娘が生まれました 2013年1月4日 に、娘が生まれました。
-これからは、育児エンジニアになります。
-正直自信はありませんが、赤ちゃんの世話は結構嬉しいものです。
-また、「赤ちゃんが親を育てる」とも聞きます。 これを無理やりにコードにすると 今、父親として求められているお仕事 ( &hellip;">
+  <meta name="description" content="こつこつとgithubとjenkinsの練習をしています。 職場でもjenkinsは導入しているのですが、スケジュールを理由に満足のいく状態を保てません。 仕事は仕事として、個人的なVPS上でどんな事が出来そうなのか？を、試しています。
+現在の進捗は、俺々githubと俺々jenkinsを連携させ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,7 +108,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/01/13/hello-baby/">こんにちは、赤ちゃん</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/01/14/start-github-and-jenkins/">Githubとjenkins、始めの一歩</a></h1>
     
     
       <p class="meta">
@@ -126,55 +124,38 @@
   
 
 
-<time datetime="2013-01-13T16:46:00+09:00" pubdate data-updated="true">2013年 01月 13日</time>
+<time datetime="2013-01-14T00:04:00+09:00" pubdate data-updated="true">2013年 01月 14日</time>
         
-         | <a href="/blog/2013/01/13/hello-baby/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/01/14/start-github-and-jenkins/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><h1>娘が生まれました</h1>
+  <div class="entry-content"><p>こつこつと<a href="http://github.com/" title="github公式へ飛びます">github</a>と<a href="http://jenkins-ci.org/" title="jenkins公式へ飛びます">jenkins</a>の練習をしています。  <br/>
+<strong>職場でもjenkinsは導入している</strong>のですが、スケジュールを理由に<em>満足のいく状態を保てません</em>。</p>
 
-<p><strong>2013年1月4日</strong> に、<em>娘</em>が生まれました。<br/>
-これからは、育児エンジニアになります。<br/>
-正直自信はありませんが、赤ちゃんの世話は結構嬉しいものです。
-また、「赤ちゃんが親を育てる」とも聞きます。</p>
+<p>仕事は仕事として、個人的なVPS上で<strong>どんな事が出来そうなのか？</strong>を、試しています。<br/>
+現在の進捗は、<a href="http://github.com/mitsuhirookuno" title="私のgithubです">俺々github</a>と<a href="http://jenkins.rubyprogrammer.info/" title="私のVPS上のjenkinsです">俺々jenkins</a>を連携させ、テストやコード解析を行う手順のみが完成<br/>
+<em>アプリケーション自体は、ハローワールド的</em>なありさまです。</p>
 
-<p>これを無理やりにコードにすると</p>
+<h3>尚、現在動作している筈の解析ツールは・・・</h3>
 
-<h2>今、父親として求められているお仕事</h2>
-
-<figure class='code'><figcaption><span> (helloworld.rb)</span> <a href='/downloads/code/sample/baby/helloworld.rb'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="k">if</span> <span class="err">赤ちゃん</span><span class="o">.</span><span class="err">泣いている？</span>
-</span><span class='line'><span class="err">　</span><span class="k">if</span> <span class="err">赤ちゃん</span><span class="o">.</span><span class="err">オシメ</span><span class="o">.</span><span class="err">汚れている？</span>
-</span><span class='line'><span class="err">　　赤ちゃん</span><span class="o">.</span><span class="err">オシメ</span> <span class="o">&lt;&lt;</span> <span class="err">オシメ</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'><span class="err">　</span><span class="k">elsif</span> <span class="err">赤ちゃん</span><span class="o">.</span><span class="err">空腹？</span>
-</span><span class='line'><span class="err">　　赤ちゃん</span> <span class="o">&lt;&lt;</span> <span class="err">ミルク</span>
-</span><span class='line'>  <span class="k">elsif</span> <span class="err">赤ちゃん</span><span class="o">.</span><span class="err">不機嫌</span>
-</span><span class='line'><span class="err">　　抱っこする</span><span class="p">(</span><span class="err">赤ちゃん</span><span class="p">)</span>
-</span><span class='line'><span class="err">　</span><span class="k">else</span>
-</span><span class='line'><span class="err">　　</span><span class="k">raise</span> <span class="err">俺には解決できない</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;ギブです&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="err">　</span><span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+<ul>
+<li><a href="http://ruby.sadi.st/Flog.html" title="flogのページへ飛びます">flog</a>でコードの複雑さ</li>
+<li><a href="http://github.com/seattlerb/flay" title="flayのページへ飛びます">flay</a>で類似性</li>
+<li><a href="http://roodi.rubyforge.org/" title="roodiのページへ飛びます">roodi</a>でコードの匂い</li>
+<li><a href="http://brakemanscanner.org/" title="brakemanのページへ飛びます">brakeman</a> でセキュリティ
+をチェック出来る筈です。</li>
+</ul>
 
 
-<p>っていう感じです。</p>
+<p>何か課題をつくり、この構成でどの程度やっていけるのか？が</p>
 
-<p>娘には、自分とは違い本当の天才エンジニアなって貰いたいなぁと妄想しておきます。</p>
+<h1>今年の課題です。</h1>
+
+<p><a href="http://jenkins.rubyprogrammer.info/job/Rails3Tutorial/" title="こんな感じです">jenkinsで視覚化</a>するとモチベーションあがりますね～！</p>
 </div>
   
   
@@ -214,6 +195,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/11/20/jenkins-brakeman/">jenkinsさんで、brakemanを使ってみました</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/05/01/mysql-proxy-cache/">mysql-proxy-cacheを使ってみました</a>
       </li>
     
@@ -229,19 +214,15 @@
         <a href="/blog/2013/03/21/cherryblossom2013/">2013年の桜</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/03/11/mocha-find-each/">Rspecでblockを置き換える(mocha)の場合</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/baby'>Baby (1)</a></li><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/etc'>Etc (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/jenkins'>Jenkins (1)</a></li><li><a href='/blog/categories/kindle'>kindle (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/mysql'>MySQL (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/ruby'>Ruby (10)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/vps'>VPS (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/baby'>Baby (1)</a></li><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/etc'>Etc (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/jenkins'>Jenkins (3)</a></li><li><a href='/blog/categories/kindle'>kindle (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/mysql'>MySQL (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/ruby'>Ruby (10)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/vps'>VPS (3)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/baby' style='font-size: 106.0%'>Baby(1)</a> <a href='/blog/categories/blogger' style='font-size: 106.0%'>blogger(1)</a> <a href='/blog/categories/etc' style='font-size: 106.0%'>Etc(1)</a> <a href='/blog/categories/gem' style='font-size: 106.0%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 106.0%'>Gundam(1)</a> <a href='/blog/categories/jenkins' style='font-size: 106.0%'>Jenkins(1)</a> <a href='/blog/categories/kindle' style='font-size: 106.0%'>kindle(1)</a> <a href='/blog/categories/markdown' style='font-size: 106.0%'>Markdown(1)</a> <a href='/blog/categories/mysql' style='font-size: 106.0%'>MySQL(1)</a> <a href='/blog/categories/octopress' style='font-size: 118.0%'>Octopress(3)</a> <a href='/blog/categories/python' style='font-size: 106.0%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(10)</a> <a href='/blog/categories/ubuntu' style='font-size: 106.0%'>Ubuntu(1)</a> <a href='/blog/categories/vps' style='font-size: 118.0%'>VPS(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/baby' style='font-size: 106.0%'>Baby(1)</a> <a href='/blog/categories/blogger' style='font-size: 106.0%'>blogger(1)</a> <a href='/blog/categories/etc' style='font-size: 106.0%'>Etc(1)</a> <a href='/blog/categories/gem' style='font-size: 106.0%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 106.0%'>Gundam(1)</a> <a href='/blog/categories/jenkins' style='font-size: 118.0%'>Jenkins(3)</a> <a href='/blog/categories/kindle' style='font-size: 106.0%'>kindle(1)</a> <a href='/blog/categories/markdown' style='font-size: 106.0%'>Markdown(1)</a> <a href='/blog/categories/mysql' style='font-size: 106.0%'>MySQL(1)</a> <a href='/blog/categories/octopress' style='font-size: 118.0%'>Octopress(3)</a> <a href='/blog/categories/python' style='font-size: 106.0%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(10)</a> <a href='/blog/categories/ubuntu' style='font-size: 106.0%'>Ubuntu(1)</a> <a href='/blog/categories/vps' style='font-size: 118.0%'>VPS(3)</a> </span>
 </section>
 
 <section>

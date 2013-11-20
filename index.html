@@ -9,10 +9,9 @@
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="pg-poolⅡのmysql版
-は無いものか？(特にqueryのキャッシュ目的)と探していた所 mysql-proxy-cache
-なるものを発見しました。 ubuntu1204で、動かしてみましたので、そのメモを まずは、動作に必要なパッケージを導入します。
-パッケージが見つかるものはaptで、 &hellip;">
+  <meta name="description" content="jenkinsさんを活用すべく、Brakeman plugin を、導入してみました brakemanは、Webアプリケーションの脆弱性をチェックしてくれるツールです
+こちらのツール自体は、使って覚えてみます。
+brakemanをぐぐるに丸投げ ＠1.jenkinsにプラグインのインストール &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -110,7 +109,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/05/01/mysql-proxy-cache/">Mysql-proxy-cacheを使ってみました</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/11/20/jenkins-brakeman/">Jenkinsさんで、brakemanを使ってみました</a></h1>
     
     
       <p class="meta">
@@ -126,92 +125,55 @@
   
 
 
-<time datetime="2013-05-01T23:57:00+09:00" pubdate data-updated="true">2013年 05月 01日</time>
+<time datetime="2013-11-20T05:54:00+09:00" pubdate data-updated="true">2013年 11月 20日</time>
         
-         | <a href="/blog/2013/05/01/mysql-proxy-cache/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/11/20/jenkins-brakeman/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>pg-poolⅡのmysql版
-は無いものか？(特にqueryのキャッシュ目的)と探していた所 <br/>
-<a href="https://github.com/clofresh/mysql-proxy-cache" title="mysql-proxy-cacheのページへ飛びます">mysql-proxy-cache</a>
-なるものを発見しました。</p>
+  <div class="entry-content"><p>jenkinsさんを活用すべく、<a href="https://wiki.jenkins-ci.org/display/JENKINS/Brakeman+Plugin" title="link to Brakeman">Brakeman plugin</a> を、導入してみました</p>
 
-<p>ubuntu1204で、動かしてみましたので、そのメモを</p>
+<p>brakemanは、Webアプリケーションの脆弱性をチェックしてくれるツールです<br/>
+こちらのツール自体は、使って覚えてみます。<br/>
+<a href="http://lmgtfy.com/?q=brakeman" title="search brakeman">brakemanをぐぐるに丸投げ</a></p>
 
-<p>まずは、動作に必要なパッケージを導入します。<br/>
-パッケージが見つかるものはaptで、えいえいっ！っと</p>
+<h3>＠1.jenkinsにプラグインのインストール</h3>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo aptitude install mysql-proxy
-</span><span class='line'>sudo aptitude install memcached
-</span><span class='line'>sudo aptitude install luarocks
-</span><span class='line'>sudo aptitude install liblua5.1-md5-0
-</span><span class='line'>sudo aptitude install luasocket</span></code></pre></td></tr></table></div></figure>
+<p>まずは、jenkins側の <br/>
+[Jenkinsの管理] => [プラグインの管理] => [利用可能タブ]<br/>
+からプラグインをインストールします<br/>
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/plugin_install.png" title="Install" alt="Install" /></p>
 
+<h3>＠2.jenkinsでプラグインの設定</h3>
 
-<p>見つからないものは、debのパッケージがあったのでそちらを<br/>
-debパッケージをxwindowsからダブルクリック！（いいのか！）<br/>
-mysql-proxy-cache.lua はmysql-proxyのluaファイル置き場に配置しました。</p>
+<p>今度は、ビルドのタスクで<br/>
+プラグインに表示して貰う brakeman の出力ファイルの場所を設定します。<br/>
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/plugin_setting.png" title="setting" alt="setting" />
+※プラグインのデフォルトは brakeman-output.tabs でした。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>wget https://luamemcached.googlecode.com/files/liblua5.1-memcached0.deb
-</span><span class='line'>wget https://raw.github.com/clofresh/mysql-proxy-cache/master/mysql-proxy-cache.lua</span></code></pre></td></tr></table></div></figure>
+<h3>＠3.ビルドタスクにbrakemanの実行を組み込む</h3>
 
+<p>次に jenkinsでのビルドタスクに brakeman の実行を加えてあげます。</p>
 
-<p>それでは、満を持して。。。と、起動すると</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mysql-proxy --proxy-lua-script=mysql-proxy-cache.lua</span></code></pre></td></tr></table></div></figure>
-
-
-<p>起動しません。何かが足りないようです。</p>
-
-<p>webサーフィンをして、今は以下のように記述する必要がある事が解りました。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>mysql-proxy --plugins=proxy --proxy-backend-addresses=localhost:3306</span></code></pre></td></tr></table></div></figure>
-
-
-<p>この段階で、proxy指定でmysqlに接続可能です。</p>
-
-<p>しかしクラ○ン。無駄作業ではないぞ。・・・と、
-mysql-proxy-cacheを指定して起動すると<br/>
-どうやら、パッケージが見つからないようです。<br/>
-<a href="http://siguniang.wordpress.com/2012/04/14/lualuarocks-suck/" title="参考にさせて頂いたluaの技術情報サイトのページへ飛びます">参考にさせて頂いたluaの技術情報サイト</a>
-の情報を元に、環境変数でパッケージの場所を教えます。<br/>
-そして、以下のような起動スクリプトを書くことで、ようやく起動しました！</p>
-
-<figure class='code'><figcaption><span>起動スクリプト - start-mysql-proxy-cache.bash </span></figcaption>
+<figure class='code'><figcaption><span>私の場合の記述例 - jenkins-ci.bash </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">LUA_PATH</span><span class="o">=</span><span class="s2">&quot;./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua&quot;</span>
-</span><span class='line'><span class="nb">export </span><span class="nv">LUA_CPATH</span><span class="o">=</span><span class="s2">&quot;./?.so;/usr/local/lib/lua/5.1/?.so;/usr/lib/i386-linux-gnu/lua/5.1/?.so;/usr/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so&quot;</span>
-</span><span class='line'>mysql-proxy <span class="se">\</span>
-</span><span class='line'>  --plugins<span class="o">=</span>proxy <span class="se">\</span>
-</span><span class='line'>  --proxy-backend-addresses<span class="o">=</span>localhost:3306 <span class="se">\</span>
-</span><span class='line'>  --proxy-lua-script<span class="o">=</span>/usr/lib/mysql-proxy/lua/mysql-proxy-cache.lua <span class="se">\</span>
-</span><span class='line'>  --log-level<span class="o">=</span>debug
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bundle <span class="nb">exec </span>brakeman -o tmp/brakeman-output.tabs
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>キャッシングされたQueryは当然超高速です。<br/>
-ワーイ♪ゝ(▽｀<em>ゝ)(ノ</em>´▽)ノワーイ♪</p>
+<h3>＠4.実行＆確認して( ･´ｰ･｀)どやる</h3>
+
+<p>最後にjenkinsのビルドタスクを実行して・・・<br/>
+Brakemanのプラグインが作成したページを見てみます<br/>
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/result_all.png" title="全体" alt="全体" />
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/result_warning.png" title="警告" alt="警告" />
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/result_detail.png" title="詳細" alt="詳細" /></p>
+
+<p>私が作成中のアプリは課題が山積みな様です。(;´д｀)ﾄﾎﾎ…
+<a href="http://jenkins.rubyprogrammer.info/job/Rails4Tutorial-Build/" title="私のVPS上のjenkinsです">俺々jenkins</a></p>
 </div>
   
   
@@ -249,6 +211,10 @@ mysql-proxy-cacheを指定して起動すると<br/>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/11/20/jenkins-brakeman/">jenkinsさんで、brakemanを使ってみました</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/05/01/mysql-proxy-cache/">mysql-proxy-cacheを使ってみました</a>
       </li>
     
@@ -264,19 +230,15 @@ mysql-proxy-cacheを指定して起動すると<br/>
         <a href="/blog/2013/03/21/cherryblossom2013/">2013年の桜</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/03/11/mocha-find-each/">Rspecでblockを置き換える(mocha)の場合</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/baby'>Baby (1)</a></li><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/etc'>Etc (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/jenkins'>Jenkins (1)</a></li><li><a href='/blog/categories/kindle'>kindle (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/mysql'>MySQL (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/ruby'>Ruby (10)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/vps'>VPS (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/baby'>Baby (1)</a></li><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/etc'>Etc (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/jenkins'>Jenkins (3)</a></li><li><a href='/blog/categories/kindle'>kindle (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/mysql'>MySQL (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/ruby'>Ruby (10)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/vps'>VPS (3)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/baby' style='font-size: 106.0%'>Baby(1)</a> <a href='/blog/categories/blogger' style='font-size: 106.0%'>blogger(1)</a> <a href='/blog/categories/etc' style='font-size: 106.0%'>Etc(1)</a> <a href='/blog/categories/gem' style='font-size: 106.0%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 106.0%'>Gundam(1)</a> <a href='/blog/categories/jenkins' style='font-size: 106.0%'>Jenkins(1)</a> <a href='/blog/categories/kindle' style='font-size: 106.0%'>kindle(1)</a> <a href='/blog/categories/markdown' style='font-size: 106.0%'>Markdown(1)</a> <a href='/blog/categories/mysql' style='font-size: 106.0%'>MySQL(1)</a> <a href='/blog/categories/octopress' style='font-size: 118.0%'>Octopress(3)</a> <a href='/blog/categories/python' style='font-size: 106.0%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(10)</a> <a href='/blog/categories/ubuntu' style='font-size: 106.0%'>Ubuntu(1)</a> <a href='/blog/categories/vps' style='font-size: 118.0%'>VPS(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/baby' style='font-size: 106.0%'>Baby(1)</a> <a href='/blog/categories/blogger' style='font-size: 106.0%'>blogger(1)</a> <a href='/blog/categories/etc' style='font-size: 106.0%'>Etc(1)</a> <a href='/blog/categories/gem' style='font-size: 106.0%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 106.0%'>Gundam(1)</a> <a href='/blog/categories/jenkins' style='font-size: 118.0%'>Jenkins(3)</a> <a href='/blog/categories/kindle' style='font-size: 106.0%'>kindle(1)</a> <a href='/blog/categories/markdown' style='font-size: 106.0%'>Markdown(1)</a> <a href='/blog/categories/mysql' style='font-size: 106.0%'>MySQL(1)</a> <a href='/blog/categories/octopress' style='font-size: 118.0%'>Octopress(3)</a> <a href='/blog/categories/python' style='font-size: 106.0%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(10)</a> <a href='/blog/categories/ubuntu' style='font-size: 106.0%'>Ubuntu(1)</a> <a href='/blog/categories/vps' style='font-size: 118.0%'>VPS(3)</a> </span>
 </section>
 
 <section>

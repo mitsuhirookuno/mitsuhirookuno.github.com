@@ -9,8 +9,7 @@
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="ActiveResource でも、 ActiveRecord と同じく複数形ルールを無効にしてみました 既存のテーブルを已む無く利用する為(?) pluralize_table_names が設定出来るActiveRecordと違って
-ActiveResouceは、そんな設定が出来ません &hellip;">
+  <meta name="description" content="ある日から、作成中のアプリが DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -108,7 +107,7 @@ ActiveResouceは、そんな設定が出来ません &hellip;">
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/01/24/unpluralize-activeresource/">ActiveResourceで、複数形のルールを無効にする</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/01/24/activerecord-database-connections-will-not-be-closed/">ActiveRecordは、Threadを分けたら自分でコネクションを閉じないと駄目だった</a></h1>
     
     
       <p class="meta">
@@ -124,50 +123,47 @@ ActiveResouceは、そんな設定が出来ません &hellip;">
   
 
 
-<time datetime="2013-01-24T09:20:00+09:00" pubdate data-updated="true">2013年 01月 24日</time>
+<time datetime="2013-01-24T10:05:00+09:00" pubdate data-updated="true">2013年 01月 24日</time>
         
-         | <a href="/blog/2013/01/24/unpluralize-activeresource/#disqus_thread">Comments</a>
+         | <a href="/blog/2013/01/24/activerecord-database-connections-will-not-be-closed/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p><em>ActiveResource</em> でも、 <em>ActiveRecord</em> と同じく<strong>複数形ルール</strong>を無効にしてみました</p>
+  <div class="entry-content"><p>ある日から、作成中のアプリが</p>
 
-<p>既存のテーブルを已む無く利用する為(?) <strong>pluralize_table_names</strong> が設定出来る<em>ActiveRecord</em>と違って<br/>
-<em>ActiveResouce</em>は、<strong>そんな設定が出来ません</strong></p>
+<pre><code>DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
+DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
+DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
+DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
+DEPRECATION WARNING: Database connections will not be closed automatically, please close your database connection at the end of the thread by calling `close` on your connection.  For example: ActiveRecord::Base.connection.close. (called from mon_synchronize at /home/mdcs/local/bin/ruby/ruby-1.9.3-p194/lib/ruby/1.9.1/monitor.rb:211)
+</code></pre>
 
-<p>そもそも、そんな状況で複数形ルールを無視すんなよ！<strong>(#ﾟДﾟ)ｺﾞﾙｧ!! </strong><br/>
-って、お話もあるでしょうが、大人の事情もありまして</p>
+<p>等と、定期的にワーニングを出力するようになっていました。<br/>
+また、その際にコネクションを全部リフレッシュするのか <em>とっても遅くなる</em> のです。</p>
 
-<p><strong>environment.rb</strong> に追記してみました。</p>
+<p>ぐぐってみても解らず、<strong>(´ε｀；)ｳｰﾝ…</strong> と、悩んでいましたが  <br/>
+ワーニングを見てみると、<strong>『スレッドを実行したら自分でコネクションを閉じてね。』</strong>
+とまんまの答えが・・・</p>
 
-<figure class='code'><figcaption><span> (environment.rb)</span> <a href='/downloads/code/sample/unpluralize-activeresource/20130104/environment.rb'>download</a></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='rb'><span class='line'><span class="c1"># 複数形のルールを無効化</span>
-</span><span class='line'><span class="k">module</span> <span class="nn">ActiveResource</span>
-</span><span class='line'>  <span class="k">class</span> <span class="nc">UnPluralizeBase</span> <span class="o">&lt;</span> <span class="no">ActiveResource</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>    <span class="k">class</span> <span class="o">&lt;&lt;</span> <span class="nb">self</span>
-</span><span class='line'>      <span class="k">def</span> <span class="nf">collection_name</span>
-</span><span class='line'>        <span class="vi">@collection_name</span> <span class="o">||=</span> <span class="n">element_name</span>
-</span><span class='line'>      <span class="k">end</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>はい、閉じます。</p>
 
+<pre><code>Thread.new {
+  begin
+    block.call
+  rescue =&gt; ex
+    logger.info ex
+  ensure
+    ActiveRecord::Base.connection.close
+  end
+}
+</code></pre>
 
-<p>多分、もっとcoolな方法があるとは思います。</p>
+<p>これは、恥ずかしい(；・∀・)   <br/>
+同じようなうっかりさんが、居ないことを願って・・・<br/>
+余談ですが、<strong>ruby</strong>で<strong>ensure</strong>を使うのって余り無いのでトキメキました</p>
 </div>
   
   
@@ -207,6 +203,10 @@ ActiveResouceは、そんな設定が出来ません &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/11/20/jenkins-brakeman/">jenkinsさんで、brakemanを使ってみました</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/05/01/mysql-proxy-cache/">mysql-proxy-cacheを使ってみました</a>
       </li>
     
@@ -222,19 +222,15 @@ ActiveResouceは、そんな設定が出来ません &hellip;">
         <a href="/blog/2013/03/21/cherryblossom2013/">2013年の桜</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/03/11/mocha-find-each/">Rspecでblockを置き換える(mocha)の場合</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/baby'>Baby (1)</a></li><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/etc'>Etc (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/jenkins'>Jenkins (1)</a></li><li><a href='/blog/categories/kindle'>kindle (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/mysql'>MySQL (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/ruby'>Ruby (10)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/vps'>VPS (3)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/baby'>Baby (1)</a></li><li><a href='/blog/categories/blogger'>blogger (1)</a></li><li><a href='/blog/categories/etc'>Etc (1)</a></li><li><a href='/blog/categories/gem'>Gem (1)</a></li><li><a href='/blog/categories/gundam'>Gundam (1)</a></li><li><a href='/blog/categories/jenkins'>Jenkins (3)</a></li><li><a href='/blog/categories/kindle'>kindle (1)</a></li><li><a href='/blog/categories/markdown'>Markdown (1)</a></li><li><a href='/blog/categories/mysql'>MySQL (1)</a></li><li><a href='/blog/categories/octopress'>Octopress (3)</a></li><li><a href='/blog/categories/python'>Python (1)</a></li><li><a href='/blog/categories/ruby'>Ruby (10)</a></li><li><a href='/blog/categories/ubuntu'>Ubuntu (1)</a></li><li><a href='/blog/categories/vps'>VPS (3)</a></li></ul>
 </section>
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><a href='/blog/categories/baby' style='font-size: 106.0%'>Baby(1)</a> <a href='/blog/categories/blogger' style='font-size: 106.0%'>blogger(1)</a> <a href='/blog/categories/etc' style='font-size: 106.0%'>Etc(1)</a> <a href='/blog/categories/gem' style='font-size: 106.0%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 106.0%'>Gundam(1)</a> <a href='/blog/categories/jenkins' style='font-size: 106.0%'>Jenkins(1)</a> <a href='/blog/categories/kindle' style='font-size: 106.0%'>kindle(1)</a> <a href='/blog/categories/markdown' style='font-size: 106.0%'>Markdown(1)</a> <a href='/blog/categories/mysql' style='font-size: 106.0%'>MySQL(1)</a> <a href='/blog/categories/octopress' style='font-size: 118.0%'>Octopress(3)</a> <a href='/blog/categories/python' style='font-size: 106.0%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(10)</a> <a href='/blog/categories/ubuntu' style='font-size: 106.0%'>Ubuntu(1)</a> <a href='/blog/categories/vps' style='font-size: 118.0%'>VPS(3)</a> </span>
+    <span id="tag-cloud"><a href='/blog/categories/baby' style='font-size: 106.0%'>Baby(1)</a> <a href='/blog/categories/blogger' style='font-size: 106.0%'>blogger(1)</a> <a href='/blog/categories/etc' style='font-size: 106.0%'>Etc(1)</a> <a href='/blog/categories/gem' style='font-size: 106.0%'>Gem(1)</a> <a href='/blog/categories/gundam' style='font-size: 106.0%'>Gundam(1)</a> <a href='/blog/categories/jenkins' style='font-size: 118.0%'>Jenkins(3)</a> <a href='/blog/categories/kindle' style='font-size: 106.0%'>kindle(1)</a> <a href='/blog/categories/markdown' style='font-size: 106.0%'>Markdown(1)</a> <a href='/blog/categories/mysql' style='font-size: 106.0%'>MySQL(1)</a> <a href='/blog/categories/octopress' style='font-size: 118.0%'>Octopress(3)</a> <a href='/blog/categories/python' style='font-size: 106.0%'>Python(1)</a> <a href='/blog/categories/ruby' style='font-size: 160.0%'>Ruby(10)</a> <a href='/blog/categories/ubuntu' style='font-size: 106.0%'>Ubuntu(1)</a> <a href='/blog/categories/vps' style='font-size: 118.0%'>VPS(3)</a> </span>
 </section>
 
 <section>

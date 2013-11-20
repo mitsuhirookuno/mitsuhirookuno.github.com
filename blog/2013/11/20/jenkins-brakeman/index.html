@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Gundam - バトルプログラマー＠すま Blog</title>
+  <title>jenkinsさんで、brakemanを使ってみました - バトルプログラマー＠すま Blog</title>
   <meta name="author" content="Mitsuhiro Okuno">
 
   
-  <meta name="description" content="Category: Gundam">
+  <meta name="description" content="jenkinsさんを活用すべく、Brakeman plugin を、導入してみました brakemanは、Webアプリケーションの脆弱性をチェックしてくれるツールです
+こちらのツール自体は、使って覚えてみます。
+brakemanをぐぐるに丸投げ ＠1.jenkinsにプラグインのインストール &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://mitsuhirookuno.github.comblog/categories/gundam/">
+  <link rel="canonical" href="http://mitsuhirookuno.github.com/blog/2013/11/20/jenkins-brakeman/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -100,36 +102,136 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Gundam</h1>
+    
+      <h1 class="entry-title">Jenkinsさんで、brakemanを使ってみました</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-20T05:54:00+09:00" pubdate data-updated="true">2013年 11月 20日</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>jenkinsさんを活用すべく、<a href="https://wiki.jenkins-ci.org/display/JENKINS/Brakeman+Plugin" title="link to Brakeman">Brakeman plugin</a> を、導入してみました</p>
 
-  
-  <h2>2012</h2>
+<p>brakemanは、Webアプリケーションの脆弱性をチェックしてくれるツールです<br/>
+こちらのツール自体は、使って覚えてみます。<br/>
+<a href="http://lmgtfy.com/?q=brakeman" title="search brakeman">brakemanをぐぐるに丸投げ</a></p>
 
-<article>
-  
-<h1><a href="/blog/2012/10/08/zgok-doufu/">ズゴック豆腐を買いました</a></h1>
-<time datetime="2012-10-08T22:39:00+09:00" pubdate><span class='month'>Oct</span> <span class='day'>08</span> <span class='year'>2012</span></time>
+<h3>＠1.jenkinsにプラグインのインストール</h3>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/gundam/'>Gundam</a></span>
-</footer>
+<p>まずは、jenkins側の <br/>
+[Jenkinsの管理] => [プラグインの管理] => [利用可能タブ]<br/>
+からプラグインをインストールします<br/>
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/plugin_install.png" title="Install" alt="Install" /></p>
+
+<h3>＠2.jenkinsでプラグインの設定</h3>
+
+<p>今度は、ビルドのタスクで<br/>
+プラグインに表示して貰う brakeman の出力ファイルの場所を設定します。<br/>
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/plugin_setting.png" title="setting" alt="setting" />
+※プラグインのデフォルトは brakeman-output.tabs でした。</p>
+
+<h3>＠3.ビルドタスクにbrakemanの実行を組み込む</h3>
+
+<p>次に jenkinsでのビルドタスクに brakeman の実行を加えてあげます。</p>
+
+<figure class='code'><figcaption><span>私の場合の記述例 - jenkins-ci.bash </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bundle <span class="nb">exec </span>brakeman -o tmp/brakeman-output.tabs
+</span></code></pre></td></tr></table></div></figure>
 
 
-</article>
+<h3>＠4.実行＆確認して( ･´ｰ･｀)どやる</h3>
 
+<p>最後にjenkinsのビルドタスクを実行して・・・<br/>
+Brakemanのプラグインが作成したページを見てみます<br/>
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/result_all.png" title="全体" alt="全体" />
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/result_warning.png" title="警告" alt="警告" />
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/result_detail.png" title="詳細" alt="詳細" /></p>
+
+<p>私が作成中のアプリは課題が山積みな様です。(;´д｀)ﾄﾎﾎ…
+<a href="http://jenkins.rubyprogrammer.info/job/Rails4Tutorial-Build/" title="私のVPS上のjenkinsです">俺々jenkins</a></p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Mitsuhiro Okuno</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-20T05:54:00+09:00" pubdate data-updated="true">2013年 11月 20日</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/jenkins/'>Jenkins</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://mitsuhirookuno.github.com/blog/2013/11/20/jenkins-brakeman/" data-via="bugslife" data-counturl="http://mitsuhirookuno.github.com/blog/2013/11/20/jenkins-brakeman/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/05/01/mysql-proxy-cache/" title="Previous Post: mysql-proxy-cacheを使ってみました">&laquo; mysql-proxy-cacheを使ってみました</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -262,7 +364,10 @@
       var disqus_shortname = 'rubyprogrammer';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://mitsuhirookuno.github.com/blog/2013/11/20/jenkins-brakeman/';
+        var disqus_url = 'http://mitsuhirookuno.github.com/blog/2013/11/20/jenkins-brakeman/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

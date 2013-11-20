@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Jenkins | バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/blog/categories/jenkins/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2013-05-02T00:53:34+09:00</updated>
+  <updated>2013-11-20T12:24:57+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -12,6 +12,53 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[jenkinsさんで、brakemanを使ってみました]]></title>
+    <link href="http://mitsuhirookuno.github.com/blog/2013/11/20/jenkins-brakeman/"/>
+    <updated>2013-11-20T05:54:00+09:00</updated>
+    <id>http://mitsuhirookuno.github.com/blog/2013/11/20/jenkins-brakeman</id>
+    <content type="html"><![CDATA[<p>jenkinsさんを活用すべく、<a href="https://wiki.jenkins-ci.org/display/JENKINS/Brakeman+Plugin" title="link to Brakeman">Brakeman plugin</a> を、導入してみました</p>
+
+<p>brakemanは、Webアプリケーションの脆弱性をチェックしてくれるツールです<br/>
+こちらのツール自体は、使って覚えてみます。<br/>
+<a href="http://lmgtfy.com/?q=brakeman" title="search brakeman">brakemanをぐぐるに丸投げ</a></p>
+
+<h3>＠1.jenkinsにプラグインのインストール</h3>
+
+<p>まずは、jenkins側の <br/>
+[Jenkinsの管理] => [プラグインの管理] => [利用可能タブ]<br/>
+からプラグインをインストールします<br/>
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/plugin_install.png" title="Install" alt="Install" /></p>
+
+<h3>＠2.jenkinsでプラグインの設定</h3>
+
+<p>今度は、ビルドのタスクで<br/>
+プラグインに表示して貰う brakeman の出力ファイルの場所を設定します。<br/>
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/plugin_setting.png" title="setting" alt="setting" />
+※プラグインのデフォルトは brakeman-output.tabs でした。</p>
+
+<h3>＠3.ビルドタスクにbrakemanの実行を組み込む</h3>
+
+<p>次に jenkinsでのビルドタスクに brakeman の実行を加えてあげます。</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>私の場合の記述例 - jenkins-ci.bash </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bundle <span class="nb">exec </span>brakeman -o tmp/brakeman-output.tabs
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>＠4.実行＆確認して( ･´ｰ･｀)どやる</h3>
+
+<p>最後にjenkinsのビルドタスクを実行して・・・<br/>
+Brakemanのプラグインが作成したページを見てみます<br/>
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/result_all.png" title="全体" alt="全体" />
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/result_warning.png" title="警告" alt="警告" />
+<img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/result_detail.png" title="詳細" alt="詳細" /></p>
+
+<p>私が作成中のアプリは課題が山積みな様です。(;´д｀)ﾄﾎﾎ…
+<a href="http://jenkins.rubyprogrammer.info/job/Rails4Tutorial-Build/" title="私のVPS上のjenkinsです">俺々jenkins</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SVNのhookスクリプト]]></title>
@@ -84,6 +131,37 @@ svnサーバーのrubyが極めて古い場合などに有効です</p>
 <code>
 ${SVN_ROOT}/hooks/svnhook.rb $REPOS $REV ${SVN_ROOT}/hooks/svnhook.yaml
 </code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[githubとjenkins、始めの一歩]]></title>
+    <link href="http://mitsuhirookuno.github.com/blog/2013/01/14/start-github-and-jenkins/"/>
+    <updated>2013-01-14T00:04:00+09:00</updated>
+    <id>http://mitsuhirookuno.github.com/blog/2013/01/14/start-github-and-jenkins</id>
+    <content type="html"><![CDATA[<p>こつこつと<a href="http://github.com/" title="github公式へ飛びます">github</a>と<a href="http://jenkins-ci.org/" title="jenkins公式へ飛びます">jenkins</a>の練習をしています。  <br/>
+<strong>職場でもjenkinsは導入している</strong>のですが、スケジュールを理由に<em>満足のいく状態を保てません</em>。</p>
+
+<p>仕事は仕事として、個人的なVPS上で<strong>どんな事が出来そうなのか？</strong>を、試しています。<br/>
+現在の進捗は、<a href="http://github.com/mitsuhirookuno" title="私のgithubです">俺々github</a>と<a href="http://jenkins.rubyprogrammer.info/" title="私のVPS上のjenkinsです">俺々jenkins</a>を連携させ、テストやコード解析を行う手順のみが完成<br/>
+<em>アプリケーション自体は、ハローワールド的</em>なありさまです。</p>
+
+<h3>尚、現在動作している筈の解析ツールは・・・</h3>
+
+<ul>
+<li><a href="http://ruby.sadi.st/Flog.html" title="flogのページへ飛びます">flog</a>でコードの複雑さ</li>
+<li><a href="http://github.com/seattlerb/flay" title="flayのページへ飛びます">flay</a>で類似性</li>
+<li><a href="http://roodi.rubyforge.org/" title="roodiのページへ飛びます">roodi</a>でコードの匂い</li>
+<li><a href="http://brakemanscanner.org/" title="brakemanのページへ飛びます">brakeman</a> でセキュリティ
+をチェック出来る筈です。</li>
+</ul>
+
+
+<p>何か課題をつくり、この構成でどの程度やっていけるのか？が</p>
+
+<h1>今年の課題です。</h1>
+
+<p><a href="http://jenkins.rubyprogrammer.info/job/Rails3Tutorial/" title="こんな感じです">jenkinsで視覚化</a>するとモチベーションあがりますね～！</p>
 ]]></content>
   </entry>
   
