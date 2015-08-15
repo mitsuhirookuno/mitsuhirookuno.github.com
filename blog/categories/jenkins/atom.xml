@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Jenkins | バトルプログラマー＠すま Blog]]></title>
   <link href="http://mitsuhirookuno.github.com/blog/categories/jenkins/atom.xml" rel="self"/>
   <link href="http://mitsuhirookuno.github.com/"/>
-  <updated>2015-08-14T21:50:09+09:00</updated>
+  <updated>2015-08-15T11:29:58+09:00</updated>
   <id>http://mitsuhirookuno.github.com/</id>
   <author>
     <name><![CDATA[Mitsuhiro Okuno]]></name>
@@ -65,8 +65,6 @@ Brakemanのプラグインが作成したページを見てみます</p>
 <p><img src="https://dl.dropboxusercontent.com/u/15789065/Octopress/20131120/result_detail.png" title="詳細" alt="詳細" /></p>
 
 <p>私が作成中のアプリは課題が山積みな様です。(;´д｀)ﾄﾎﾎ…</p>
-
-<p><a href="http://jenkins.rubyprogrammer.info/job/Rails4Tutorial-Build/" title="私のVPS上のjenkinsです">俺々jenkins</a></p>
 ]]></content>
   </entry>
   
@@ -153,7 +151,7 @@ ${SVN_ROOT}/hooks/svnhook.rb $REPOS $REV ${SVN_ROOT}/hooks/svnhook.yaml
 <strong>職場でもjenkinsは導入している</strong>のですが、スケジュールを理由に<em>満足のいく状態を保てません</em>。</p>
 
 <p>仕事は仕事として、個人的なVPS上で<strong>どんな事が出来そうなのか？</strong>を、試しています。<br/>
-現在の進捗は、<a href="http://github.com/mitsuhirookuno" title="私のgithubです">俺々github</a>と<a href="http://jenkins.rubyprogrammer.info/" title="私のVPS上のjenkinsです">俺々jenkins</a>を連携させ、テストやコード解析を行う手順のみが完成<br/>
+現在の進捗は、俺々githubと俺々jenkinsを連携させ、テストやコード解析を行う手順のみが完成<br/>
 <em>アプリケーション自体は、ハローワールド的</em>なありさまです。</p>
 
 <h3>尚、現在動作している筈の解析ツールは・・・</h3>
@@ -170,8 +168,6 @@ ${SVN_ROOT}/hooks/svnhook.rb $REPOS $REV ${SVN_ROOT}/hooks/svnhook.yaml
 <p>何か課題をつくり、この構成でどの程度やっていけるのか？が</p>
 
 <h1>今年の課題です。</h1>
-
-<p><a href="http://jenkins.rubyprogrammer.info/job/Rails3Tutorial/" title="こんな感じです">jenkinsで視覚化</a>するとモチベーションあがりますね～！</p>
 ]]></content>
   </entry>
   
